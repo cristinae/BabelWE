@@ -340,6 +340,63 @@ public class PoSMaps {
 	    	put("$(", null); 			// other sentence internal punctuation		
 	    }
 	};
+
+
+	/**
+	 * Dutch TreeTagger part-of-speech tagset
+	 * http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/dutch-tagset.txt
+	 */
+	static final Map<String, BabelPOS> BN_POS_NL= new HashMap<String, BabelPOS>(){
+		private static final long serialVersionUID = 1652098132934864036L;
+	    {
+	    	
+	    	put("$.", null);		// sentence-final punctuation
+	    	put("adj", BabelPOS.ADJECTIVE);	// adjective
+	    	put("adj*kop", BabelPOS.ADJECTIVE);		// truncated adjective
+	    	put("adjabbr", BabelPOS.ADJECTIVE);		// abbreviated adjective
+	    	put("adv", BabelPOS.ADVERB);		// adverb
+	    	put("advabbr", BabelPOS.ADVERB);		// abbreviated adverb
+	    	put("conjcoord", BabelPOS.CONJUNCTION);	// coordinating conjunction
+	    	put("conjsubo", BabelPOS.CONJUNCTION);	// subordinating conjunction
+	    	put("det__art", BabelPOS.ARTICLE);	// article
+	    	put("det__demo", BabelPOS.DETERMINER);	// attributively used demonstrative pronoun
+	    	put("det__indef", BabelPOS.DETERMINER);	// attributively used indefinite pronoun
+	    	put("det__poss", BabelPOS.DETERMINER);	// attributively used possessive pronoun
+	    	put("det__quest", BabelPOS.PRONOUN);	// attributively used question pronoun
+	    	put("det__rel", BabelPOS.PRONOUN);	// attributively used relative pronoun
+	    	put("int", BabelPOS.INTERJECTION);		// interjection
+	    	put("noun*kop", BabelPOS.NOUN);	// truncated noun
+	    	put("nounabbr", BabelPOS.NOUN);		// abbreviated noun
+	    	put("nounpl", BabelPOS.NOUN);			// plural noun
+	    	put("nounprop", BabelPOS.NOUN);		// proper name
+	    	put("nounsg", BabelPOS.NOUN);			// singular noun
+	    	put("num__card", BabelPOS.NOUN);	// cardinal number
+	    	put("num__ord", BabelPOS.NOUN);	// ordinal number
+	    	put("partte", null);		// particle "te"
+	    	put("prep", BabelPOS.PREPOSITION);		// preposition
+	    	put("prepabbr", BabelPOS.PREPOSITION);	// abbreviated preposition
+	    	put("pronadv", BabelPOS.ADVERB);		// pronomial adverb
+	    	put("prondemo", BabelPOS.PRONOUN);		// demonstrative pronoun (used substitutively)
+	    	put("pronindef", BabelPOS.PRONOUN);	// indefined pronoun
+	    	put("pronpers", BabelPOS.PRONOUN);		// personal pronoun
+	    	put("pronposs", BabelPOS.PRONOUN);		// possessive pronoun
+	    	put("pronquest", BabelPOS.PRONOUN);		// question pronoun
+	    	put("pronrefl", BabelPOS.PRONOUN);		// reflexive pronoun
+	    	put("pronrel", BabelPOS.PRONOUN);			// relative pronoun
+	    	put("punc", null);		// (non-sentential) punctuation
+	    	put("verbinf", BabelPOS.VERB);		// infinitival verb
+	    	put("verbpapa", BabelPOS.VERB);	// past participle verb
+	    	put("verbpastpl", BabelPOS.VERB);	// plural past tense verb
+	    	put("verbpastsg", BabelPOS.VERB);	// singular past tense verb
+	    	put("verbpresp", BabelPOS.VERB);	// present participle verb
+	    	put("verbprespl", BabelPOS.VERB);	// plural present tense verb
+	    	put("verbpressg", BabelPOS.VERB);	// singular present tense verb
+	    }
+	};
+
+
+
+
 }
 
 
@@ -632,11 +689,9 @@ DET	D	¬int	-
 *  http://paula.petcu.tm.ro/init/default/post/opennlp-part-of-speech-tags
 *  
 *  Table 3. Supposed POS tagset for German (the STTS Stuttgart Tübingen tag set)
-Number
-	
-Tag
-	
-Description
+
+
+Number  Tag   Description
 1. 	ADJA 	attributive adjective
 2. 	ADJD 	adverbial or predicative adjective
 3. 	ADV 	Adverb
@@ -691,4 +746,58 @@ Description
 52. 	$, 	comma
 53. 	$. 	sentence ending punctuation
 54. 	$( 	other sentence internal punctuation
+
+
+
+DUTCH
+http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/dutch-tagset.txt
+
+$.		sentence-final punctuation
+adj		adjective
+adj*kop		truncated adjective
+adjabbr		abbreviated adjective
+adv		adverb
+advabbr		abbreviated adverb
+conjcoord	coordinating conjunction
+conjsubo	subordinating conjunction
+det__art	article
+det__demo	attributively used demonstrative pronoun
+det__indef	attributively used indefinite pronoun
+det__poss	attributively used possessive pronoun
+det__quest	attributively used question pronoun
+det__rel	attributively used relative pronoun
+int		interjection
+noun*kop	truncated noun
+nounabbr	abbreviated noun
+nounpl		plural noun
+nounprop	proper name
+nounsg		singular noun
+num__card	cardinal number
+num__ord	ordinal number
+partte		particle "te"
+prep		preposition
+prepabbr	abbreviated preposition
+pronadv		pronomial adverb
+prondemo	demonstrative pronoun (used substitutively)
+pronindef	indefined pronoun
+pronpers	personal pronoun
+pronposs	possessive pronoun
+pronquest	question pronoun
+pronrefl	reflexive pronoun
+pronrel		relative pronoun
+punc		(non-sentential) punctuation
+verbinf		infinitival verb
+verbpapa	past participle verb
+verbpastpl	plural past tense verb
+verbpastsg	singular past tense verb
+verbpresp	present participle verb
+verbprespl	plural present tense verb
+verbpressg	singular present tense verb
+
+
+
+
+*
 */
+
+

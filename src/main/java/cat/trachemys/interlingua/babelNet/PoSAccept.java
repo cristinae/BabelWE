@@ -122,7 +122,7 @@ public class PoSAccept {
 	 * Negations in Turkish. (from google translate!)
 	 */
 	static final Set<String> NEG_TR= new HashSet<String>(){
-		private static final long serialVersionUID = 2652098132934864041L;
+		private static final long serialVersionUID = 2652098132934864042L;
 	    {
 	    	add("hayır");
 	    	add("yok");
@@ -160,7 +160,7 @@ public class PoSAccept {
 	 * Negations in French. 
 	 */
 	static final Set<String> NEG_FR= new HashSet<String>(){
-		private static final long serialVersionUID = 2652098132934864042L;
+		private static final long serialVersionUID = 2652098132934864043L;
 	    {
 	    	add("non");
 	    	add("ne");
@@ -201,6 +201,33 @@ public class PoSAccept {
 	};
 
 	
+	/**
+	 * Selected PoS tags from the Dutch tagset for which we want the BabelNet ID.
+	 * Only the first characters of the tag are considered.
+	 */
+	static final Set<String> POS_NL_ACC= new HashSet<String>(){
+		private static final long serialVersionUID = 2652098132934864036L;
+	    {
+	    	add("adj");	// adjective
+	    	add("adv");	// adverb
+	    	add("nou");	//  noun
+	    	add("num");	// cardinal/ordinal number
+	    	add("ver"); // verbs
+		}
+	};
+
+	/**
+	 * Negations in Dutch.
+	 * From  http://www.dutchgrammar.com/en/?n=WordOrder.45
+	 */
+	static final Set<String> NEG_NL= new HashSet<String>(){
+		private static final long serialVersionUID = 2652098132934864044L;
+	    {
+	    	add("niet");
+	    	add("geen");
+		}
+	};
+
 	
 }
 

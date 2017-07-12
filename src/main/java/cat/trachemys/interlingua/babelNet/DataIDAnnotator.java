@@ -71,7 +71,7 @@ public class DataIDAnnotator {
 		CommandLineParser parser = new BasicParser();
 
 		options.addOption("l", "language", true, 
-					"Language of the input text (ar/en/es/tr)");		
+					"Language of the input text (ar/en/es/tr/de/fr/ro/nl/it)");		
 		options.addOption("i", "input", true, 
 					"Input file to annotate (in Annotator format wpl)");		
 		options.addOption("h", "help", false, "This help");
@@ -191,6 +191,8 @@ public class DataIDAnnotator {
 	    				id = getBNID_fr(bn, lemma, pos);	
 	    			} else if (language.equalsIgnoreCase("de")) {
 	    				id = getBNID_de(bn, lemma, pos);	
+	    			}  else if (language.equalsIgnoreCase("nl")) {
+	    				id = getBNID_nl(bn, lemma, pos);	
 	    			}  
 	        		bw.append(word+"|"+pos+"|"+lemma+"|"+id+" ");
 		        }
@@ -450,6 +452,44 @@ public class DataIDAnnotator {
 		return id;
 	}
 
+
+	/**
+	 * Given a lemma and a PoS the method retrieves the BN id for a subset of selected PoS
+	 * in Dutch
+	 * 
+	 * @param lemma
+	 * @param pos
+	 * @return
+	 */
+	private String getBNID_nl(BabelNet bn, String lemma, String pos) {
+ 
+		String id = "-";
+		boolean ne = false;
+		String NEG = "NEG";
+		Language lang = Language.NL;
+		
+		String pos3chars = "";
+		if (pos.length() > 1){
+	    	pos3chars = pos.substring(0, 3).toLowerCase(); 			
+		} else {
+	   		return id;			
+		}
+		
+		if(PoSAccept.NEG_NL.contains(lemma)){                     		//Negation      		
+    		return NEG;
+    	} else if(!PoSAccept.POS_NL_ACC.contains(pos3chars)) {          //Non-content PoS
+    		return id;
+    	}
+
+		BabelPOS bnPos = posMapping.get(pos3chars); 
+
+    	if (bnPos == null){
+    		return id;
+    	} else {
+    	    id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang);
+    	}
+		return id;
+	}
 
 
 
