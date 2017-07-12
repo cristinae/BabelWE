@@ -492,6 +492,36 @@ public class DataIDAnnotator {
 	}
 
 
+	/**
+	 * Given a lemma and a PoS the method retrieves the BN id for a subset of selected PoS
+	 * in Italian
+	 * 
+	 * @param lemma
+	 * @param pos
+	 * @return
+	 */
+	private String getBNID_it(BabelNet bn, String lemma, String pos) {
+ 
+		String id = "-";
+		boolean ne = false;
+		String NEG = "NEG";
+		Language lang = Language.IT;
+
+		if(PoSAccept.NEG_IT.contains(lemma)){         			//Negation
+    		return NEG;
+    	} else if(!PoSAccept.POS_IT_ACC.contains(pos)) {        //Non-content PoS
+    		return id;
+    	}
+		
+		BabelPOS bnPos = posMapping.get(pos); 
+    	if (bnPos == null){
+    		return id;
+    	} else {
+    	    id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang);
+    	}
+		return id;
+	}
+
 
 	/**
 	 * Get the top translation of a lemma

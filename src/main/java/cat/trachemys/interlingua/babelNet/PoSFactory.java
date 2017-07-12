@@ -41,8 +41,8 @@ public class PoSFactory {
 			return PoSMaps.BN_POS_DE;
 		} else if (language.equalsIgnoreCase("nl")) {
 			return PoSMaps.BN_POS_NL;
-		//} else if (language.equalsIgnoreCase("it")) {
-			//	return PoSMaps.BN_POS_IT;
+		} else if (language.equalsIgnoreCase("it")) {
+			return PoSMaps.BN_POS_IT;
 			//} else if (language.equalsIgnoreCase("ro")) {
 			//	return PoSMaps.BN_POS_RO;
 		} else {

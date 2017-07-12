@@ -395,7 +395,55 @@ public class PoSMaps {
 	};
 
 
-
+	/**
+	 * Italian TreeTagger part-of-speech tagset
+	 * http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/italian-tagset.txt
+	 * (Copyright Prof. Achim Stein, University of Stuttgart)
+	 */
+	static final Map<String, BabelPOS> BN_POS_IT= new HashMap<String, BabelPOS>(){
+		private static final long serialVersionUID = 1652098132934864037L;
+	    {
+	    	put("ABR", null);		//abbreviation
+	    	put("ADJ", BabelPOS.ADJECTIVE);		//adjective
+	    	put("ADV", BabelPOS.ADVERB);		//adverb
+	    	put("CON", BabelPOS.CONJUNCTION);		//conjunction
+	    	put("DET:def", BabelPOS.DETERMINER);	//definite article
+	    	put("DET:indef", BabelPOS.DETERMINER);	//indefinite article
+	    	put("FW", BabelPOS.NOUN);		//foreign word
+	    	put("INT", BabelPOS.INTERJECTION);		//interjection
+	    	put("LS", null);		//list symbol
+	    	put("NOM", BabelPOS.NOUN);		//noun
+	    	put("NPR", BabelPOS.NOUN);		//name
+	    	put("NUM", BabelPOS.NOUN);		//numeral
+	    	put("PON", null);		//punctuation
+	    	put("PRE", BabelPOS.PREPOSITION);	//preposition
+	    	put("PRE:det", BabelPOS.PREPOSITION);		//preposition+article
+	    	put("PRO", BabelPOS.PRONOUN);		//pronoun
+	    	put("PRO:demo", BabelPOS.PRONOUN);		//demonstrative pronoun
+	    	put("PRO:indef", BabelPOS.PRONOUN);		//indefinite pronoun
+	    	put("PRO:inter", BabelPOS.PRONOUN);		//interrogative pronoun
+	    	put("PRO:pers", BabelPOS.PRONOUN);		//personal pronoun
+	    	put("PRO:poss", BabelPOS.PRONOUN);		//possessive pronoun
+	    	put("PRO:refl", BabelPOS.PRONOUN);		//reflexive pronoun
+	    	put("PRO:rela", BabelPOS.PRONOUN);		//relative pronoun
+	    	put("SENT", null);		//sentence marker
+	    	put("SYM", null);		//symbol
+	    	put("VER:cimp", BabelPOS.VERB);		//verb conjunctive imperfect
+	    	put("VER:cond", BabelPOS.VERB);		//verb conditional
+	    	put("VER:cpre", BabelPOS.VERB);		//verb conjunctive present
+	    	put("VER:futu", BabelPOS.VERB);		//verb future tense
+	    	put("VER:geru", BabelPOS.VERB);		//verb gerund
+	    	put("VER:impe", BabelPOS.VERB);		//verb imperative
+	    	put("VER:impf", BabelPOS.VERB);		//verb imperfect
+	    	put("VER:infi", BabelPOS.VERB);		//verb infinitive
+	    	put("VER:pper", BabelPOS.VERB);		//verb participle perfect
+	    	put("VER:ppre", BabelPOS.VERB);		//verb participle present
+	    	put("VER:pres", BabelPOS.VERB);		//verb present
+	    	put("VER:refl:infi", BabelPOS.VERB);		//verb reflexive infinitive
+	    	put("VER:remo", BabelPOS.VERB);		//verb simple past
+	    }   
+	};      
+                
 
 }
 
@@ -794,6 +842,50 @@ verbpresp	present participle verb
 verbprespl	plural present tense verb
 verbpressg	singular present tense verb
 
+
+
+
+Italian tagset used in the TreeTagger parameter file
+(Copyright Prof. Achim Stein, University of Stuttgart)
+
+ABR	abbreviation
+ADJ	adjective
+ADV	adverb
+CON	conjunction
+DET:def	definite article
+DET:indef	indefinite article
+FW	foreign word
+INT	interjection
+LS	list symbol
+NOM	noun
+NPR	name
+NUM	numeral
+PON	punctuation
+PRE	preposition
+PRE:det	preposition+article
+PRO	pronoun
+PRO:demo	demonstrative pronoun
+PRO:indef	indefinite pronoun
+PRO:inter	interrogative pronoun
+PRO:pers	personal pronoun
+PRO:poss	possessive pronoun
+PRO:refl	reflexive pronoun
+PRO:rela	relative pronoun
+SENT	sentence marker
+SYM	symbol
+VER:cimp	verb conjunctive imperfect
+VER:cond	verb conditional
+VER:cpre	verb conjunctive present
+VER:futu	verb future tense
+VER:geru	verb gerund
+VER:impe	verb imperative
+VER:impf	verb imperfect
+VER:infi	verb infinitive
+VER:pper	verb participle perfect
+VER:ppre	verb participle present
+VER:pres	verb present
+VER:refl:infi	verb reflexive infinitive
+VER:remo	verb simple past
 
 
 

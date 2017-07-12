@@ -7,8 +7,8 @@ import it.uniroma1.lcl.babelnet.data.BabelPOS;
 
 
 /**
- * Subset of PoS tags for Arabic, English and Spanish for which we extract the 
- * BabelNet ID.
+ * Subset of PoS tags for Arabic, English, Spanish, Turkish, French, German, Italian, Dutch and Romanian  
+ * for which we extract the BabelNet ID.
  * 
  * @author cristina
  * @since Dec 27, 2016
@@ -104,7 +104,7 @@ public class PoSAccept {
 	};
 
 	/**
-	 * PoS tags from the Trukish tag set for which we want the BabelNet ID.
+	 * PoS tags from the Turkish tag set for which we want the BabelNet ID.
 	 */
 	static final Set<String> POS_TR_ACC= new HashSet<String>(){
 		private static final long serialVersionUID = 2652098132934864033L;
@@ -225,6 +225,44 @@ public class PoSAccept {
 	    {
 	    	add("niet");
 	    	add("geen");
+		}
+	};
+
+	/**
+	 * Selected PoS tags from the Italian tagset for which we want the BabelNet ID.
+	 */
+	static final Set<String> POS_IT_ACC= new HashSet<String>(){
+		private static final long serialVersionUID = 2652098132934864037L;
+	    {
+	    	add("ADJ");		//adjective
+	    	add("ADV");		//adverb
+	    	add("FW");		//foreign word
+	    	add("NOM");		//noun
+	    	add("NPR");		//name
+	    	add("NUM");		//numeral
+	    	add("VER:cimp");	//verb conjunctive imperfect
+	    	add("VER:cond");	//verb conditional
+	    	add("VER:cpre");	//verb conjunctive present
+	    	add("VER:futu");	//verb future tense
+	    	add("VER:geru");	//verb gerund
+	    	add("VER:impe");	//verb imperative
+	    	add("VER:impf");	//verb imperfect
+	    	add("VER:infi");	//verb infinitive
+	    	add("VER:pper");	//verb participle perfect
+	    	add("VER:ppre");	//verb participle present
+	    	add("VER:pres");	//verb present
+	    	add("VER:refl:infi");	//verb reflexive infinitive
+	    	add("VER:remo");	//verb simple past               
+	    }
+	};
+
+	/**
+	 * Negations in Italian.
+	 */
+	static final Set<String> NEG_IT= new HashSet<String>(){
+		private static final long serialVersionUID = 2652098132934864045L;
+	    {
+	    	add("non");
 		}
 	};
 
