@@ -349,7 +349,6 @@ public class PoSMaps {
 	static final Map<String, BabelPOS> BN_POS_NL= new HashMap<String, BabelPOS>(){
 		private static final long serialVersionUID = 1652098132934864036L;
 	    {
-	    	
 	    	put("$.", null);		// sentence-final punctuation
 	    	put("adj", BabelPOS.ADJECTIVE);	// adjective
 	    	put("adj*kop", BabelPOS.ADJECTIVE);		// truncated adjective
@@ -444,6 +443,65 @@ public class PoSMaps {
 	    }   
 	};      
                 
+
+
+	/**
+	 * Romanian TreeTagger part-of-speech tagset
+	 * Only the first three characters are relevant for the Babelnet mapping, we use five
+	 * http://nl.ijs.si/ME/V4/msd/tables/msd-human-ro.tbl
+	 */
+	static final Map<String, BabelPOS> BN_POS_RO= new HashMap<String, BabelPOS>(){
+		private static final long serialVersionUID = 1652098132934864038L;
+	    {
+	    	put("01N01", BabelPOS.NOUN);	//Noun common -Definiteness
+	    	put("01N02", BabelPOS.NOUN);	//Noun proper
+	    	put("02V01", BabelPOS.VERB);	//Vmip1s	Verb main 
+	    	put("02V02", BabelPOS.VERB);	//Vmip1s	Verb auxiliary
+	    	put("03A01", BabelPOS.ADJECTIVE);	//Adjective qualificative positive
+	    	put("04P01", BabelPOS.PRONOUN);	//Pp1-sn--------s	Pronoun personal 
+	    	put("04P02", BabelPOS.PRONOUN);	//Pd3-po	Pronoun demonstrative t
+	    	put("04P03", BabelPOS.PRONOUN);	//Pi3	Pronoun indefinite 
+	    	put("04P04", BabelPOS.PRONOUN);	//Ps1ms-s	Pronoun possessive 
+	    	put("04P05", BabelPOS.PRONOUN);	//Px3--d--------s	Pronoun reflexive
+	    	put("04P06", BabelPOS.PRONOUN);	//Pz3-sr	Pronoun negative
+	    	put("04P07", BabelPOS.PRONOUN);	//Pw3--r	Pronoun int-rel 
+	    	put("05D01", BabelPOS.DETERMINER);	//Dd3-po---e	Determiner demonstrative 
+	    	put("05D02", BabelPOS.DETERMINER);	//Di3	Determiner indefinite 
+	    	put("05D03", BabelPOS.DETERMINER);	//Ds1ms-s	Determiner possessive first masculine singular singular
+	    	put("05D04", BabelPOS.DETERMINER);	//Dw3--r---e	Determiner int-rel third direct prenomin
+	    	put("05D05", BabelPOS.DETERMINER);	//Dz3-po---e	Determiner negative third plural oblique prenomin
+	    	put("05D06", BabelPOS.DETERMINER);	//Dh1ms	Determiner emphatic first masculine singular
+	    	put("06T01", BabelPOS.ARTICLE);	//Article definite singular oblique
+	    	put("06T02", BabelPOS.ARTICLE);	//Article indefinite plural oblique
+	    	put("06T03", BabelPOS.ARTICLE);	//Article possessive plural oblique
+	    	put("06T04", BabelPOS.ARTICLE);	//Article demonstrative plural oblique
+	    	put("07R01", BabelPOS.ADVERB);	//Adverb general positive
+	    	put("07R02", BabelPOS.ADVERB);	//Adverb particle
+	    	put("07R03", BabelPOS.ADVERB);	//Adverb negative
+	    	put("07R05", BabelPOS.ADVERB);	//Adverb int-rel +Clitic
+	    	put("07R06", BabelPOS.ADVERB);	//Adverb portmanteau08S01010100	Spsg	Adposition preposition simple genitive
+	    	put("09C01", BabelPOS.CONJUNCTION);	//Conjunction coordinating simple simple positive
+	    	put("09C02", BabelPOS.CONJUNCTION);	//Conjunction subordinating simple simple positive
+	    	put("09C03", BabelPOS.CONJUNCTION);	//Conjunction portmanteau simple simple positive
+	    	put("10M01", BabelPOS.NOUN);	//Numeral cardinal singular digit
+	    	put("10M02", BabelPOS.NOUN);	//Numeral ordinal letter
+	    	put("10M03", BabelPOS.NOUN);	//Numeral fractal feminine singular direct letter -Definiteness
+	    	put("10M04", BabelPOS.NOUN);	//Numeral multiple masculine singular direct -Definiteness
+	    	put("10M05", BabelPOS.NOUN);	//Numeral collect plural direct
+	    	put("11Q01", null);	//Particle negative
+	    	put("11Q02", null);	//Particle infinitive
+	    	put("11Q03", null);	//Particle subjunctive
+	    	put("11Q05", null);	//Particle future
+	    	put("12I", BabelPOS.INTERJECTION);		//Iterjection
+	    	put("13Y00", null);	//Abbreviation
+	    	put("13Y01", null);	//Abbreviation nominal
+	    	put("13Y02", null);	//Abbreviation verbal
+	    	put("13Y03", null);	//Abbreviation adjectival
+	    	put("13Y04", null);	//Abbreviation adverbial
+	    	put("13Y05", null);	//Abbreviation pronominal
+	    }           
+	};              
+                        
 
 }
 
@@ -888,6 +946,67 @@ VER:refl:infi	verb reflexive infinitive
 VER:remo	verb simple past
 
 
+Reduced tagset list for rumanian where only the first 5 characters are supposed to be used
+(I removed the other ones!)
+http://nl.ijs.si/ME/V4/msd/tables/msd-human-ro.tbl
+
+
+01N010000000100	Nc---n	Noun common -Definiteness
+01N020000000000	Np	Noun proper
+02V01010101010000000000	Vmip1s	Verb main 
+02V02000001000000000000	Va--1	Verb auxiliary 
+03A01010000000000	Afp	Adjective qualificative positive
+04P0101000101000000000000000001	Pp1-sn--------s	Pronoun personal 
+04P0203000207000000000000000000	Pd3-po	Pronoun demonstrative t
+04P0303000000000000000000000000	Pi3	Pronoun indefinite 
+04P0401010100010000000000000000	Ps1ms-s	Pronoun possessive 
+04P0503000003000000000000000001	Px3--d--------s	Pronoun reflexive
+04P0603000106000000000000000000	Pz3-sr	Pronoun negative
+04P0703000006000000000000000000	Pw3--r	Pronoun int-rel 
+
+05D010300020200000001	Dd3-po---e	Determiner demonstrative 
+05D020300000000000000	Di3	Determiner indefinite 
+05D030101010001000000	Ds1ms-s	Determiner possessive first masculine singular singular
+05D040300000100000001	Dw3--r---e	Determiner int-rel third direct prenomin
+05D050300020200000001	Dz3-po---e	Determiner negative third plural oblique prenomin
+05D060101010000000000	Dh1ms	Determiner emphatic first masculine singular
+
+06T0100010200	Tf-so	Article definite singular oblique
+06T0200020200	Ti-po	Article indefinite plural oblique
+06T0300020200	Ts-po	Article possessive plural oblique
+06T0400020200	Td-po	Article demonstrative plural oblique
+
+07R010100	Rgp	Adverb general positive
+07R020000	Rp	Adverb particle
+07R020002	Rp-y	Adverb particle +Clitic
+07R030000	Rz	Adverb negative
+07R050000	Rw	Adverb int-rel
+07R050002	Rw-y	Adverb int-rel +Clitic
+07R060000	Rc	Adverb portmanteau08S01010100	Spsg	Adposition preposition simple genitive
+
+09C0101010200	Ccssp	Conjunction coordinating simple simple positive
+09C0201010200	Csssp	Conjunction subordinating simple simple positive
+09C0301010200	Crssp	Conjunction portmanteau simple simple positive
+
+10M01000100010000	Mc-s-d	Numeral cardinal singular digit
+10M02000000030000	Mo---l	Numeral ordinal letter
+10M03020101030100	Mffsrln	Numeral fractal feminine singular direct letter -Definiteness
+10M04010101000100	Mmmsr-n	Numeral multiple masculine singular direct -Definiteness
+10M05000201000000	Ml-pr	Numeral collect plural direct
+11Q010000	Qz	Particle negative
+11Q010002	Qz-y	Particle negative +Clitic
+11Q020000	Qn	Particle infinitive
+11Q020002	Qn-y	Particle infinitive +Clitic
+11Q030000	Qs	Particle subjunctive
+11Q050000	Qf	Particle future
+12I	I	Interjection
+13Y0000000000	Y	Abbreviation
+13Y0100000000	Yn	Abbreviation nominal
+13Y0200000000	Yv	Abbreviation verbal
+13Y0300000000	Ya	Abbreviation adjectival
+13Y0400000000	Yr	Abbreviation adverbial
+13Y0500000000	Yp	Abbreviation pronominal
+14X	X	Residual
 
 *
 */

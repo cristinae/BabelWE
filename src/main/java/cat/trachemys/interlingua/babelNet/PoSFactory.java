@@ -43,8 +43,8 @@ public class PoSFactory {
 			return PoSMaps.BN_POS_NL;
 		} else if (language.equalsIgnoreCase("it")) {
 			return PoSMaps.BN_POS_IT;
-			//} else if (language.equalsIgnoreCase("ro")) {
-			//	return PoSMaps.BN_POS_RO;
+		} else if (language.equalsIgnoreCase("ro")) {
+			return PoSMaps.BN_POS_RO;
 		} else {
 			logger.error("There is no PoS mapping implemented for language "+language+".");
 		}

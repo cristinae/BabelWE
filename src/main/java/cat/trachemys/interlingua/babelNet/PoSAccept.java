@@ -3,8 +3,6 @@ package cat.trachemys.interlingua.babelNet;
 import java.util.HashSet;
 import java.util.Set;
 
-import it.uniroma1.lcl.babelnet.data.BabelPOS;
-
 
 /**
  * Subset of PoS tags for Arabic, English, Spanish, Turkish, French, German, Italian, Dutch and Romanian  
@@ -266,6 +264,39 @@ public class PoSAccept {
 		}
 	};
 
+	
+	/**
+	 * Selected PoS tags from the Romanian tagset for which we want the BabelNet ID.
+	 */
+	static final Set<String> POS_RO_ACC= new HashSet<String>(){
+		private static final long serialVersionUID = 2652098132934864038L;
+	    {
+	    	add("01N01");	//Noun common -Definiteness
+	    	add("01N02");	//Noun proper
+	    	add("02V01");	//Vmip1s	Verb main 
+	    	add("03A01");	//Adjective qualificative positive
+	    	add("07R01");	//Adverb general positive
+	    	add("07R03");	//Adverb negative
+	    	add("07R05");	//Adverb int-rel +Clitic
+	    	add("07R06");	//Adverb portmanteau08S01010100	Spsg	Adposition preposition simple genitive
+	    	add("10M01");	//Numeral cardinal singular digit
+	    	add("10M02");	//Numeral ordinal letter
+	    	add("10M03");	//Numeral fractal feminine singular direct letter -Definiteness
+	    	add("10M04");	//Numeral multiple masculine singular direct -Definiteness
+	    	add("10M05");	//Numeral collect plural direct
+	    }
+	};
+
+
+	/**
+	 * Negations in Romanian.
+	 */
+	static final Set<String> NEG_RO= new HashSet<String>(){
+		private static final long serialVersionUID = 2652098132934864046L;
+	    {
+	    	add("nu");
+		}
+	};
 	
 }
 

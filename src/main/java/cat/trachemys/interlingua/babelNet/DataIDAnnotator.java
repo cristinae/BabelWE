@@ -524,6 +524,44 @@ public class DataIDAnnotator {
 
 
 	/**
+	 * Given a lemma and a PoS the method retrieves the BN id for a subset of selected PoS
+	 * in Romanian
+	 * 
+	 * @param lemma
+	 * @param pos
+	 * @return
+	 */
+	private String getBNID_ro(BabelNet bn, String lemma, String pos) {
+ 
+		String id = "-";
+		boolean ne = false;
+		String NEG = "NEG";
+		Language lang = Language.RO;
+		
+		String pos5chars = "";
+		if (pos.length() > 1){
+	    	pos5chars = pos.substring(0, 5); 			
+		} else {
+	   		return id;			
+		}
+
+		if(pos5chars.equalsIgnoreCase("11Q01") || PoSAccept.NEG_RO.contains(lemma) ){         //Negation
+    		return NEG;
+    	} else if(!PoSAccept.POS_RO_ACC.contains(pos5chars.toUpperCase())) {          //Non-content PoS
+    		return id;
+    	}
+		
+		BabelPOS bnPos = posMapping.get(pos5chars.toUpperCase()); 
+    	if (bnPos == null){
+    		return id;
+    	} else {
+     	    id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang);
+    	}
+		return id;
+	}
+
+
+	/**
 	 * Get the top translation of a lemma
 	 * DON'T USE
 	 * 
