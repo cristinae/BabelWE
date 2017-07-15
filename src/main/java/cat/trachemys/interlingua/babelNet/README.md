@@ -30,15 +30,15 @@ Output: w1|p1|l1|b1 w2|p1|l2|b2 ... wn|pn|ln|bn
 
 conll-like format without headers as output by TreeTagger, one word per line and sentences separated by blank lines.
 
-w1   p1   l1 
-w2   p1   l2 
-... 
-wn   pn   ln
+w1   p1   l1 </br>
+w2   p1   l2 </br>
+... </br>
+wn   pn   ln </br>
 
-w1   p1   l1 
-w2   p1   l2 
-... 
-wm   pm   lm
+w1   p1   l1 </br>
+w2   p1   l2 </br>
+... </br>
+wm   pm   lm </br>
 
 
 
