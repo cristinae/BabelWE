@@ -1,6 +1,6 @@
 # Corpora Annotation with BabelNet IDs
 
-Include the BabelNet IDs into a file with already annotated data with cat.lump.sts2017.babelNet.DataIDAnnotator class:
+Include the BabelNet IDs into a file with already annotated data with the cat.trachemys.interlingua.babelNet.DataIDAnnotator class of this project or with TreeTagger:
 
 ```
 java -cp BabelWE-0.0.1-SNAPSHOT-jar-with-dependencies.jar cat.trachemys.interlingua.babelNet.DataIDAnnotator -h
