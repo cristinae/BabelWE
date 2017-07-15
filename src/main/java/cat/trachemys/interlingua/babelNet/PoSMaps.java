@@ -202,7 +202,7 @@ public class PoSMaps {
 
 	
 	/**
-	 * Mapping TS Wikipedia Data Set for Turkish which is the one used by the TS tagget
+	 * Mapping TS Wikipedia Data Set for Turkish which is the one used by the TS tagset
 	 */
 	static final Map<String, BabelPOS> BN_POS_TR= new HashMap<String, BabelPOS>(){
 		private static final long serialVersionUID = 1652098132934864033L;
@@ -273,6 +273,8 @@ public class PoSMaps {
 	    	put("PRO", BabelPOS.PRONOUN);
 	    	put("DETWH", BabelPOS.DETERMINER);	
 	    	put("DET", BabelPOS.DETERMINER);
+	    	put("joker", BabelPOS.NOUN); //artificially added
+	    	put("JOKER", BabelPOS.NOUN); //artificially added
 	    }
 	};
 		
@@ -338,6 +340,8 @@ public class PoSMaps {
 	    	put("$,", null); 			// comma
 	    	put("$.", null); 			// sentence ending punctuation
 	    	put("$(", null); 			// other sentence internal punctuation		
+	    	put("joker", BabelPOS.NOUN); //artificially added
+	    	put("JOKER", BabelPOS.NOUN); //artificially added
 	    }
 	};
 
@@ -390,6 +394,7 @@ public class PoSMaps {
 	    	put("verbpresp", BabelPOS.VERB);	// present participle verb
 	    	put("verbprespl", BabelPOS.VERB);	// plural present tense verb
 	    	put("verbpressg", BabelPOS.VERB);	// singular present tense verb
+	    	put("joker", BabelPOS.NOUN); //artificially added
 	    }
 	};
 
@@ -440,6 +445,8 @@ public class PoSMaps {
 	    	put("VER:pres", BabelPOS.VERB);		//verb present
 	    	put("VER:refl:infi", BabelPOS.VERB);		//verb reflexive infinitive
 	    	put("VER:remo", BabelPOS.VERB);		//verb simple past
+	    	put("joker", BabelPOS.NOUN); //artificially added
+	    	put("JOKER", BabelPOS.NOUN); //artificially added
 	    }   
 	};      
                 
@@ -499,6 +506,7 @@ public class PoSMaps {
 	    	put("13Y03", null);	//Abbreviation adjectival
 	    	put("13Y04", null);	//Abbreviation adverbial
 	    	put("13Y05", null);	//Abbreviation pronominal
+	    	put("joker", BabelPOS.NOUN); //artificially added
 	    }           
 	};              
                         

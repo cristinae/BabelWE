@@ -20,7 +20,7 @@ import cat.trachemys.interlingua.lumpConfig;
 
 /**
  * Class to annotate raw text. Currently supports tokenisation and lemmatisation of
- * Arabic, English, Spanish
+ * Arabic, English, Spanish, French and German
  *   
  * @author cristina
  * @since Nov 28, 2016
@@ -73,14 +73,14 @@ public class Annotator {
 		CommandLineParser parser = new BasicParser();
 
 		options.addOption("l", "language", true, 
-					"Language of the input text (ar/en/es/tr)");		
+					"Language of the input text (ar/en/es/tr/fr/de)");		
 		options.addOption("a", "annotation", true, 
 					"Annotation layer (tok, lem)");		
 		options.addOption("i", "input", true, 
 					"Input file to annotate -one sentence per line-");		
 		options.addOption("h", "help", false, "This help");
 		options.addOption("c", "config", true,
-		        	"Configuration file for the lumpSTS project");
+		        	"Configuration file for the BabelWE project");
 
 		try {			
 		    cLine = parser.parse( options, args );

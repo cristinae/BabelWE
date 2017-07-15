@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -48,6 +50,8 @@ public class DataIDAnnotator {
 	// This is somewhere else
 	public final static String lineSeparator = System.lineSeparator();
 
+	/** BufferedWriter */
+    private BufferedWriter bw = null;
 
 	/** Constructor */
 	public DataIDAnnotator (String language) {
@@ -71,9 +75,13 @@ public class DataIDAnnotator {
 		CommandLineParser parser = new BasicParser();
 
 		options.addOption("l", "language", true, 
-					"Language of the input text (ar/en/es/tr/de/fr/ro/nl/it)");		
+					"Language of the input text "
+					+ "[ar|en|es|tr|de|fr|ro|nl|it]");		
 		options.addOption("i", "input", true, 
-					"Input file to annotate (in Annotator format wpl)");		
+					"Input file to annotate");		
+		options.addOption("f", "format", true, 
+					"Format of the input file "
+					+ "[wpl|conll]");		
 		options.addOption("h", "help", false, "This help");
 		//options.addOption("c", "config", true,
 		//        	"Configuration file for the lumpSTS project");
@@ -81,11 +89,11 @@ public class DataIDAnnotator {
 		try {			
 		    cLine = parser.parse( options, args );
 		} catch( ParseException exp ) {
-			logger.error( "Unexpected exception :" + exp.getMessage() );			
+			logger.error( "Unexpected exception:" + exp.getMessage() );			
 		}	
 		
 		if (cLine == null || !(cLine.hasOption("l")) ) {
-			logger.error("Please, set the language\n");
+			logger.error("Please, set the language.\n");
 			formatter.printHelp(DataIDAnnotator.class.getSimpleName(),options );
 			System.exit(1);
 		}		
@@ -93,7 +101,12 @@ public class DataIDAnnotator {
 			formatter.printHelp(DataIDAnnotator.class.getSimpleName(),options );
 			System.exit(0);
 		}
-
+		if (!cLine.getOptionValue("f").equalsIgnoreCase("wpl") 
+				&& !cLine.getOptionValue("f").equalsIgnoreCase("conll")){
+			logger.error(cLine.getOptionValue("f")+" is a non-recognised data format.\n");
+			formatter.printHelp(DataIDAnnotator.class.getSimpleName(),options );
+			System.exit(1);			
+		}
 		return cLine;		
 	}
 
@@ -102,8 +115,11 @@ public class DataIDAnnotator {
 	 * Main function to run the class, serves as example
 	 * 
 	 * @param args
-	 * 		-l Language of the input text (Arabic, English, Spanish, Turkish)
-	 *      -i Input file (in Annotator format wpl)
+	 * 		-l Language of the input text 
+	 * 			(Arabic, English, Spanish, Turkish, French, German, Dutch, Italian, Romanian)
+	 *      -i Input file 
+	 *      -f Format of the input file 
+	 *      	(wpl|conll)
 	 * 		-c Configuration file
 	 */
 
@@ -115,6 +131,9 @@ public class DataIDAnnotator {
 
 		// Input file
 		File input = new File(cLine.getOptionValue("i"));
+	
+		// Format of the input file
+		String format = cLine.getOptionValue("f");
 		
 		// Config file
 		// Guessing if its an absolute or a relative path
@@ -128,7 +147,7 @@ public class DataIDAnnotator {
 
 		// Run
 		DataIDAnnotator ann = new DataIDAnnotator (language);
-		ann.annotate(input, language);
+		ann.annotate(input, language, format);
 
 	}
 
@@ -139,7 +158,7 @@ public class DataIDAnnotator {
 	 * 			input file to annotate
 	 * 
 	 */
-	private void annotate(File input, String language) {
+	private void annotate(File input, String language, String format) {
 
 		BabelNet bn = BabelNet.getInstance();
 
@@ -147,7 +166,6 @@ public class DataIDAnnotator {
 		File output = new File(input+"b");
 		output.delete();
 	    FileWriter fw = null;
-	    BufferedWriter bw = null;
 		try {
 			fw = new FileWriter(output, true);
 			bw = new BufferedWriter(fw);
@@ -165,44 +183,17 @@ public class DataIDAnnotator {
 		    int i = 0;
 		    while (sc.hasNext()) {
 		        String line = sc.nextLine();
-		        String[] tokens = line.split("\\s+");
-		        for (String token:tokens) {  
-		        	String id = "-";
-		        	String lemma = DataProcessor.readFactor3(token, 3);
-		        	String pos = DataProcessor.readFactor3(token, 2);
-		        	String word = DataProcessor.readFactor3(token, 1);
-		        	// This is a patch to solve the cases where a token has not been annotated
-		        	// "joker" is a toy PoS available in all the mappings as a BabelPOS.NOUN
-		        	// but is not present in the PoSAccept lists
-		        	if (lemma==null || pos==null){
-		        		lemma = token;
-		        		pos = "joker";
-		        		word = token;
-		        	}
-		    		if (language.equalsIgnoreCase("en")) {
-		    		    id = getBNID_en(bn, lemma, pos);	
-		    		} else if (language.equalsIgnoreCase("es")) {
-		    		    id = getBNID_es(bn, lemma, pos);	
-		    		} else if (language.equalsIgnoreCase("ar")) {
-		    		    id = getBNID_ar(bn, lemma, pos);	
-		    		} else if (language.equalsIgnoreCase("tr")) {
-		    		    id = getBNID_tr(bn, lemma, pos);	 
-	    			} else if (language.equalsIgnoreCase("fr")) {
-	    				id = getBNID_fr(bn, lemma, pos);	
-	    			} else if (language.equalsIgnoreCase("de")) {
-	    				id = getBNID_de(bn, lemma, pos);	
-	    			}  else if (language.equalsIgnoreCase("nl")) {
-	    				id = getBNID_nl(bn, lemma, pos);	
-	    			}  
-	        		bw.append(word+"|"+pos+"|"+lemma+"|"+id+" ");
+		        // Taking care of the input format
+		        if (format.equalsIgnoreCase("wpl")){
+			        i = annotateLineBufferWPL(line, language, bn, i);		        	
+		        } else if (format.equalsIgnoreCase("conll")) {
+			        i = annotateLineBufferCONLL(line, language, bn, i);		        			        	
 		        }
-	        	bw.newLine();
+		        		        
 		        // Write every 10000 lines
 		        if (i%10000==0){
 		        	bw.flush();
 		        }
-		        i++;
-
 		    }
 		    if (sc.ioException() != null) {
 		        throw sc.ioException();
@@ -231,6 +222,79 @@ public class DataIDAnnotator {
 		    }
 		}
 
+	}
+
+	private int annotateLineBufferWPL(String line, String language, BabelNet bn, int i) throws IOException {
+        String[] tokens = line.split("\\s+");
+        for (String token:tokens) {  
+        	String id = "-";
+        	String lemma = DataProcessor.readFactor3(token, 3);
+        	String pos = DataProcessor.readFactor3(token, 2);
+        	String word = DataProcessor.readFactor3(token, 1);
+        	// This is a patch to solve the cases where a token has not been annotated
+        	// "joker" is a toy PoS available in all the mappings as a BabelPOS.NOUN
+        	// but is not present in the PoSAccept lists
+        	if (lemma==null || pos==null){
+        		lemma = token;
+        		pos = "joker";
+        		word = token;
+        	}
+        	id = getBNID(language, bn, lemma, pos);
+    		bw.append(word+"|"+pos+"|"+lemma+"|"+id+" ");
+        }
+    	bw.newLine();
+    	return i++;
+	}
+
+
+	private int annotateLineBufferCONLL(String line, String language, BabelNet bn, int i) throws IOException {
+    	String id = "-";
+        Matcher m = Pattern.compile("^(.+)\t(.+)\t(.+)").matcher(line);
+        if (m.find()){
+          	String lemma = m.group(3);
+        	String pos = m.group(2);
+        	String word = m.group(1);
+        	if (lemma.equals("<unknown>")){ 
+        		lemma = word;
+        	}
+        	id = getBNID(language, bn, lemma, pos);
+    		bw.append(word+"|"+pos+"|"+lemma+"|"+id+" ");
+        } else {
+        	bw.newLine();
+        	i++;
+        }
+        return i;
+	}
+
+	/**
+	 * Kind of factory method to call the appropriate function to retrieve a BabelNet ID
+	 * according to the input language
+	 * 
+	 * @param language
+	 * @param bn
+	 * @param lemma
+	 * @param pos
+	 * @return
+	 */
+	private String getBNID(String language, BabelNet bn, String lemma, String pos) {
+
+		String id = "-";
+		if (language.equalsIgnoreCase("en")) {
+		    id = getBNID_en(bn, lemma, pos);	
+		} else if (language.equalsIgnoreCase("es")) {
+		    id = getBNID_es(bn, lemma, pos);	
+		} else if (language.equalsIgnoreCase("ar")) {
+		    id = getBNID_ar(bn, lemma, pos);	
+		} else if (language.equalsIgnoreCase("tr")) {
+		    id = getBNID_tr(bn, lemma, pos);	 
+		} else if (language.equalsIgnoreCase("fr")) {
+			id = getBNID_fr(bn, lemma, pos);	
+		} else if (language.equalsIgnoreCase("de")) {
+			id = getBNID_de(bn, lemma, pos);	
+		}  else if (language.equalsIgnoreCase("nl")) {
+			id = getBNID_nl(bn, lemma, pos);	
+		}  
+		return id;
 	}
 
 	/**
