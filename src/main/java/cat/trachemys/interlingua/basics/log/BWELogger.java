@@ -34,7 +34,7 @@ public class BWELogger {
 		String logConfigurationFile =  "log4j_console.xml";
 		source.setLocation(logConfigurationFile);
 		source.setFile(new File(logConfigurationFile));		
-		source.setInputStream(getClass().getResourceAsStream(logConfigurationFile));
+		source.setInputStream(getClass().getClassLoader().getResourceAsStream(logConfigurationFile));
 		
 		Configurator.initialize(null, source);
 		
