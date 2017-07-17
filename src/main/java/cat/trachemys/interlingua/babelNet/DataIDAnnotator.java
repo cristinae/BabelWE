@@ -47,9 +47,6 @@ public class DataIDAnnotator {
 	/** Conversion into BabelNet tags*/
 	private static Map<String, BabelPOS> posMapping = null;
 	
-	// This is somewhere else
-	public final static String lineSeparator = System.lineSeparator();
-
 	/** BufferedWriter */
     private BufferedWriter bw = null;
 
@@ -92,15 +89,15 @@ public class DataIDAnnotator {
 			logger.error( "Unexpected exception:" + exp.getMessage() );			
 		}	
 		
+		if (cLine.hasOption("h")) {
+			formatter.printHelp(DataIDAnnotator.class.getSimpleName(),options );
+			System.exit(0);
+		}
 		if (cLine == null || !(cLine.hasOption("l")) ) {
 			logger.error("Please, set the language.\n");
 			formatter.printHelp(DataIDAnnotator.class.getSimpleName(),options );
 			System.exit(1);
 		}		
-		if (cLine.hasOption("h")) {
-			formatter.printHelp(DataIDAnnotator.class.getSimpleName(),options );
-			System.exit(0);
-		}
 		if (!cLine.getOptionValue("f").equalsIgnoreCase("wpl") 
 				&& !cLine.getOptionValue("f").equalsIgnoreCase("conll")){
 			logger.error(cLine.getOptionValue("f")+" is a non-recognised data format.\n");
@@ -120,13 +117,12 @@ public class DataIDAnnotator {
 	 *      -i Input file 
 	 *      -f Format of the input file 
 	 *      	(wpl|conll)
-	 * 		-c Configuration file
 	 */
 
 	public static void main(String[] args) {
 		CommandLine cLine = parseArguments(args);
 		
-		// Language and layer
+		// Language
 		String language = cLine.getOptionValue("l");
 
 		// Input file
@@ -135,16 +131,6 @@ public class DataIDAnnotator {
 		// Format of the input file
 		String format = cLine.getOptionValue("f");
 		
-		// Config file
-		// Guessing if its an absolute or a relative path
-		/*String conf = cLine.getOptionValue("c");
-		String confFile;
-		if (conf.startsWith(FileIO.separator)){
-			confFile = conf;
-		} else {
-			confFile = System.getProperty("user.dir")+FileIO.separator+conf;
-		}*/
-
 		// Run
 		DataIDAnnotator ann = new DataIDAnnotator (language);
 		ann.annotate(input, language, format);
@@ -158,11 +144,12 @@ public class DataIDAnnotator {
 	 * 			input file to annotate
 	 * 
 	 */
-	private void annotate(File input, String language, String format) {
+	public void annotate(File input, String language, String format) {
 
 		BabelNet bn = BabelNet.getInstance();
 
 		// Initilise the writer
+		logger.info("Starting BN ID's annotation...");
 		File output = new File(input+"b");
 		output.delete();
 	    FileWriter fw = null;
@@ -193,6 +180,7 @@ public class DataIDAnnotator {
 		        // Write every 10000 lines
 		        if (i%10000==0){
 		        	bw.flush();
+		        	logger.info("Sentence "+i);
 		        }
 		    }
 		    if (sc.ioException() != null) {
@@ -224,6 +212,17 @@ public class DataIDAnnotator {
 
 	}
 
+	/**
+	 * Retrieves the BN ID for all the tokens in an input sentence in wpl format.
+	 * Actualises the number of sentences i.
+	 * 
+	 * @param line
+	 * @param language
+	 * @param bn
+	 * @param i
+	 * @return
+	 * @throws IOException
+	 */
 	private int annotateLineBufferWPL(String line, String language, BabelNet bn, int i) throws IOException {
         String[] tokens = line.split("\\s+");
         for (String token:tokens) {  
@@ -247,6 +246,17 @@ public class DataIDAnnotator {
 	}
 
 
+	/**
+	 * Retrieves the BN ID for all the tokens in an input sentence in conll format.
+	 * Actualises the number of sentences i.
+	 * 
+	 * @param line
+	 * @param language
+	 * @param bn
+	 * @param i
+	 * @return
+	 * @throws IOException
+	 */
 	private int annotateLineBufferCONLL(String line, String language, BabelNet bn, int i) throws IOException {
     	String id = "-";
         Matcher m = Pattern.compile("^(.+)\t(.+)\t(.+)").matcher(line);
@@ -266,6 +276,7 @@ public class DataIDAnnotator {
         return i;
 	}
 
+	
 	/**
 	 * Kind of factory method to call the appropriate function to retrieve a BabelNet ID
 	 * according to the input language

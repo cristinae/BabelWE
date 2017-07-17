@@ -28,31 +28,31 @@ public class PoSFactory {
 	 */
 	public Map<String, BabelPOS> getPoSMapper(String language) {
 		if (language.equalsIgnoreCase("en")) {
-			logger.info("Penn TreeBank PoS tags are expected for English.");
+			logger.warn("Penn TreeBank PoS tags are expected for English.");
 			return PoSMaps.BN_POS_EN;
 		} else if (language.equalsIgnoreCase("es")) {
-			logger.info("Ancora PoS tags are expected for Spanish.");
+			logger.warn("Ancora PoS tags are expected for Spanish.");
 			return PoSMaps.BN_POS_ES;
 		} else if (language.equalsIgnoreCase("ar")) {
-			logger.info("Arabic Mada 2.1 PoS tags are expected for Arabic.");
+			logger.warn("Arabic Mada 2.1 PoS tags are expected for Arabic.");
 			return PoSMaps.BN_POS_AR;
 		} else if (language.equalsIgnoreCase("tr")) {
-			logger.info("TS Wikipedia Data Set PoS tags are expected for Turkish.");
+			logger.warn("TS Wikipedia Data Set PoS tags are expected for Turkish.");
 			return PoSMaps.BN_POS_TR;
 		} else if (language.equalsIgnoreCase("fr")) {
-			logger.info("The reduced Penn TreeBank PoS tags are expected for French.");
+			logger.warn("The reduced Penn TreeBank PoS tags are expected for French.");
 			return PoSMaps.BN_POS_FR;
 		} else if (language.equalsIgnoreCase("de")) {
-			logger.info("STTS Stuttgart Tübingen PoS tags are expected for German.");
+			logger.warn("STTS Stuttgart Tübingen PoS tags are expected for German.");
 			return PoSMaps.BN_POS_DE;
 		} else if (language.equalsIgnoreCase("nl")) {
-			logger.info("Dutch TreeTagger PoS tags are expected for Dutch.");
+			logger.warn("Dutch TreeTagger PoS tags are expected for Dutch.");
 			return PoSMaps.BN_POS_NL;
 		} else if (language.equalsIgnoreCase("it")) {
-			logger.info("Italian TreeTagger PoS tags are expected for Italian.");
+			logger.warn("Italian TreeTagger PoS tags are expected for Italian.");
 			return PoSMaps.BN_POS_IT;
 		} else if (language.equalsIgnoreCase("ro")) {
-			logger.info("Romanian TreeTagger PoS tags are expected for Romanian.");
+			logger.warn("Romanian TreeTagger PoS tags are expected for Romanian.");
 			return PoSMaps.BN_POS_RO;
 		} else {
 			logger.error("There is no PoS mapping implemented for language "+language+".");
