@@ -1,7 +1,8 @@
 package cat.trachemys.interlingua.prepro;
 
+
 /**
- * Creates an annotation object (tokeniser or lemmatiser) for a given language.
+ * Creates an annotation object (tokeniser, stemmer, lemmatiser) for a given language.
  * The tool depends on the language and the task.
  *   
  * @author cristina
@@ -53,4 +54,42 @@ public class AnnotatorFactory {
 		}	
 		return null;
 	}
+	
+	
+	/**
+	 * Returns the correct stemmer according to the input language.
+	 * Currently only Snowball is used.
+	 * 
+	 * @param language
+	 * @return
+	 */
+	public Stemmer getStemmer(String language){
+		if (language.equalsIgnoreCase("en")) {
+			return new SBStemmer();
+		} else if (language.equalsIgnoreCase("es")) {
+			return new SBStemmer();
+		} else if (language.equalsIgnoreCase("fr")) {
+			return new SBStemmer();
+		} else if (language.equalsIgnoreCase("de")) {
+			return new SBStemmer();
+//		} else if (language.equalsIgnoreCase("ar")) {
+//			return new SnowballStemmer();
+		} else if (language.equalsIgnoreCase("tr")) {
+			return new SBStemmer();
+		} else if (language.equalsIgnoreCase("ro")) {
+			return new SBStemmer();
+		} else if (language.equalsIgnoreCase("it")) {
+			return new SBStemmer();
+		} else if (language.equalsIgnoreCase("nl")) {
+			return new SBStemmer();
+		} else if (language.equalsIgnoreCase("da")) {
+			return new SBStemmer();
+		} else if (language.equalsIgnoreCase("ca")) {
+			return new SBStemmer();
+		} else if (language.equalsIgnoreCase("pt")) {
+			return new SBStemmer();
+		}
+		return null;	
+	}
+
 }
