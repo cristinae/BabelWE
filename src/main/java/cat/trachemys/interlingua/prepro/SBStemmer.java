@@ -18,7 +18,7 @@ import org.tartarus.snowball.ext.spanishStemmer;
 import org.tartarus.snowball.ext.swedishStemmer;
 import org.tartarus.snowball.ext.turkishStemmer;
 
-import cat.trachemys.interlingua.basics.log.BWELogger;
+//import cat.trachemys.interlingua.basics.log.BWELogger;
 
 /**
  * Implements the Stemmer class calling the Snowball stemmer
@@ -29,8 +29,8 @@ import cat.trachemys.interlingua.basics.log.BWELogger;
 public class SBStemmer implements Stemmer {
 
 	/** Logger */
-	private static BWELogger logger = 
-			new BWELogger(SBStemmer.class.getSimpleName());
+	//private static BWELogger logger = 
+	//		new BWELogger(SBStemmer.class.getSimpleName());
 
 	/** 
 	 * Runs the stemmer on an input file.
