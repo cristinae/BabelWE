@@ -16,6 +16,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import cat.trachemys.interlingua.basics.log.BWELogger;
+import cat.trachemys.interlingua.prepro.SBStemmer;
 import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.data.BabelPOS;
 
@@ -198,8 +199,7 @@ public class DataAnnotator4IWSLT {
 	private void annotateLineBufferWPL(String line, String language, BabelNet bn) throws IOException {
         String[] tokens = line.split("\\s+");
         for (String token:tokens) {  
-        	String id = "-";
-        	String posBN = "-";
+        	String noResult = "-";
         	String lemma = DataProcessor.readFactor3(token, 3);
         	String pos = DataProcessor.readFactor3(token, 2);
         	String word = DataProcessor.readFactor3(token, 1);
@@ -214,9 +214,21 @@ public class DataAnnotator4IWSLT {
            	if (lemma==null){
         		lemma = token;
         	}
-          	id = getBNID(language, bn, lemma, pos);
-          	posBN = getBNpos(language, pos);
-    		bw.append(word+"|"+pos+"|"+posBN+"|"+lemma+"|"+id+" ");
+           	
+          	SBStemmer st = new SBStemmer();
+           	String stem = st.execute(word, language);
+           	if (stem == null){
+           		stem = noResult;
+           	}
+           	String posBN = getBNpos(language, pos);
+           	if (posBN == null){
+           		posBN = noResult;
+           	}
+        	String id = getBNID(language, bn, lemma, pos);
+           	if (id == null){
+           		id = noResult;
+           	}
+     		bw.append(word+"|"+pos+"|"+posBN+"|"+stem+"|"+lemma+"|"+id+" ");
         }
     	bw.newLine();
     	return;
