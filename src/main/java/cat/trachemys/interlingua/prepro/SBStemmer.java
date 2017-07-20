@@ -2,6 +2,7 @@ package cat.trachemys.interlingua.prepro;
 
 import java.io.File;
 import org.tartarus.snowball.SnowballStemmer;
+import org.tartarus.snowball.Among;
 import org.tartarus.snowball.ext.danishStemmer;
 import org.tartarus.snowball.ext.dutchStemmer;
 import org.tartarus.snowball.ext.englishStemmer;

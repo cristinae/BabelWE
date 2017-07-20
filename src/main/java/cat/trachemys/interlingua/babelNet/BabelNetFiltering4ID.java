@@ -8,8 +8,8 @@ import it.uniroma1.lcl.babelnet.data.BabelPOS;
 import it.uniroma1.lcl.jlt.util.Language;
 
 /**
- * Methods to filter tokens according to its PoS before querying BabelNet. All languages must have
- * its own method
+ * Methods for retrieving the BabelPos and to filter tokens according to its PoS before querying BabelNet. 
+ * All languages must implement its own method.
  * 
  * @author cristina
  * @since Jul 20, 2017
@@ -64,7 +64,11 @@ public class BabelNetFiltering4ID {
 	protected static String getBNpos_en(Map<String, BabelPOS> posMapping, String pos) {
  
 		BabelPOS bnPos = posMapping.get(pos);	
-		return bnPos.toString();
+		if (bnPos == null){
+			return null;
+		} else {
+			return bnPos.toString();			
+		}
 	}
 
 	
@@ -130,7 +134,11 @@ public class BabelNetFiltering4ID {
 		}
     	
 		BabelPOS bnPos = posMapping.get(pos2chars); 
-		return bnPos.toString();
+		if (bnPos == null){
+			return null;
+		} else {
+			return bnPos.toString();			
+		}
 	}
 
 	
@@ -188,7 +196,11 @@ public class BabelNetFiltering4ID {
 	protected static String getBNpos_ar(Map<String, BabelPOS> posMapping, String pos) {
 		     	    	    	
 		BabelPOS bnPos = posMapping.get(pos); 
-		return bnPos.toString();
+		if (bnPos == null){
+			return null;
+		} else {
+			return bnPos.toString();			
+		}
 	}
 
 
@@ -237,7 +249,11 @@ public class BabelNetFiltering4ID {
 	protected static String getBNpos_tr(Map<String, BabelPOS> posMapping, String pos) {
 		 
 		BabelPOS bnPos = posMapping.get(pos);
-		return bnPos.toString();
+		if (bnPos == null){
+			return null;
+		} else {
+			return bnPos.toString();			
+		}
 	}
 
 	
@@ -285,7 +301,11 @@ public class BabelNetFiltering4ID {
 	protected static String getBNpos_fr(Map<String, BabelPOS> posMapping, String pos) {
 		     	
 		BabelPOS bnPos = posMapping.get(pos.toUpperCase()); 
-		return bnPos.toString();
+		if (bnPos == null){
+			return null;
+		} else {
+			return bnPos.toString();			
+		}
 	}
 
 	
@@ -333,7 +353,11 @@ public class BabelNetFiltering4ID {
 	protected static String getBNpos_de(Map<String, BabelPOS> posMapping, String pos) {
 		 		
 		BabelPOS bnPos = posMapping.get(pos.toUpperCase()); 
-		return bnPos.toString();
+		if (bnPos == null){
+			return null;
+		} else {
+			return bnPos.toString();			
+		}
 	}
 
 	/**
@@ -393,7 +417,11 @@ public class BabelNetFiltering4ID {
 		}
 
 		BabelPOS bnPos = posMapping.get(pos3chars); 
-		return bnPos.toString();
+		if (bnPos == null){
+			return null;
+		} else {
+			return bnPos.toString();			
+		}
 	}
 
 
@@ -440,7 +468,11 @@ public class BabelNetFiltering4ID {
 	protected static String getBNpos_it(Map<String, BabelPOS> posMapping, String pos) {
 		 
 		BabelPOS bnPos = posMapping.get(pos); 
-		return bnPos.toString();
+		if (bnPos == null){
+			return null;
+		} else {
+			return bnPos.toString();			
+		}
 	}
 
 	/**
@@ -499,7 +531,11 @@ public class BabelNetFiltering4ID {
 		}
 		
 		BabelPOS bnPos = posMapping.get(pos5chars.toUpperCase()); 
-		return bnPos.toString();
+		if (bnPos == null){
+			return null;
+		} else {
+			return bnPos.toString();			
+		}
 	}
 
 }

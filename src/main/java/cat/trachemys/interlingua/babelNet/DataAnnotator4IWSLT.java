@@ -219,7 +219,10 @@ public class DataAnnotator4IWSLT {
            	String stem = st.execute(word, language);
            	if (stem == null){
            		stem = noResult;
+           	} else {
+           		stem = stem.toLowerCase();
            	}
+           	String pseudocog = stem.substring(0, 4);
            	String posBN = getBNpos(language, pos);
            	if (posBN == null){
            		posBN = noResult;
