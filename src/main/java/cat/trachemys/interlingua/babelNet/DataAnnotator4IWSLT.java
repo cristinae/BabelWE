@@ -16,6 +16,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import cat.trachemys.interlingua.basics.log.BWELogger;
+import cat.trachemys.interlingua.prepro.Metaphone3;
 import cat.trachemys.interlingua.prepro.SBStemmer;
 import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.data.BabelPOS;
@@ -145,7 +146,7 @@ public class DataAnnotator4IWSLT {
 		try {
 		    inputStream = new FileInputStream(input);
 		    sc = new Scanner(inputStream, "UTF-8");
-		    int i = 0;
+		    int i = 1;
 		    while (sc.hasNext()) {
 		        String line = sc.nextLine();
 			    annotateLineBufferWPL(line, language, bn);		        			        		        
@@ -222,7 +223,12 @@ public class DataAnnotator4IWSLT {
            	} else {
            		stem = stem.toLowerCase();
            	}
-           	String pseudocog = stem.substring(0, 4);
+           	
+    		Metaphone3 m3 = new Metaphone3();
+    		m3.SetWord(word);
+    		m3.Encode();
+           	String metaphone =  m3.GetMetaph();
+           	
            	String posBN = getBNpos(language, pos);
            	if (posBN == null){
            		posBN = noResult;
@@ -231,7 +237,7 @@ public class DataAnnotator4IWSLT {
            	if (id == null){
            		id = noResult;
            	}
-     		bw.append(word+"|"+pos+"|"+posBN+"|"+stem+"|"+lemma+"|"+id+" ");
+     		bw.append(word+"|"+pos+"|"+posBN+"|"+stem+"|"+lemma+"|"+metaphone+"|"+id+" ");
         }
     	bw.newLine();
     	return;
