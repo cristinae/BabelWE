@@ -6,13 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -20,28 +15,23 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.google.common.collect.Multimap;
-
 import cat.trachemys.interlingua.basics.log.BWELogger;
 import it.uniroma1.lcl.babelnet.BabelNet;
-import it.uniroma1.lcl.babelnet.BabelNetUtils;
 import it.uniroma1.lcl.babelnet.data.BabelPOS;
-import it.uniroma1.lcl.jlt.util.Language;
-import it.uniroma1.lcl.jlt.util.ScoredItem;
 
 /**
  * 
- * Main class of the babelNet package devoted to include babelNet IDs in an
- * input corpus.
+ * Main class to include additional factors to [token|PoS|lemma] including 
+ * stems, "pseudocognates", and babelNet PoS and ID in an input corpus.
  * 
  * @author cristina
- * @since Dec 15, 2016
+ * @since Jul 20, 2017
  */
-public class DataIDAnnotator {
+public class DataAnnotator4IWSLT {
 	
 	/** Logger */
 	private static BWELogger logger = 
-			new BWELogger (DataIDAnnotator.class.getSimpleName());
+			new BWELogger (DataAnnotator4IWSLT.class.getSimpleName());
 
 	/** Conversion into BabelNet tags*/
 	private static Map<String, BabelPOS> posMapping = null;
@@ -50,7 +40,7 @@ public class DataIDAnnotator {
     private BufferedWriter bw = null;
 
 	/** Constructor */
-	public DataIDAnnotator (String language) {
+	public DataAnnotator4IWSLT (String language) {
 		PoSFactory pf= new PoSFactory();
 		posMapping = pf.getPoSMapper(language);
 	
@@ -75,9 +65,6 @@ public class DataIDAnnotator {
 					+ "[ar|en|es|tr|de|fr|ro|nl|it]");		
 		options.addOption("i", "input", true, 
 					"Input file to annotate");		
-		options.addOption("f", "format", true, 
-					"Format of the input file "
-					+ "[wpl|conll]");		
 		options.addOption("h", "help", false, "This help");
 		//options.addOption("c", "config", true,
 		//        	"Configuration file for the lumpSTS project");
@@ -89,20 +76,14 @@ public class DataIDAnnotator {
 		}	
 		
 		if (cLine.hasOption("h")) {
-			formatter.printHelp(DataIDAnnotator.class.getSimpleName(),options );
+			formatter.printHelp(DataAnnotator4IWSLT.class.getSimpleName(),options );
 			System.exit(0);
 		}
 		if (cLine == null || !(cLine.hasOption("l")) ) {
 			logger.error("Please, set the language.\n");
-			formatter.printHelp(DataIDAnnotator.class.getSimpleName(),options );
+			formatter.printHelp(DataAnnotator4IWSLT.class.getSimpleName(),options );
 			System.exit(1);
 		}		
-		if (!cLine.getOptionValue("f").equalsIgnoreCase("wpl") 
-				&& !cLine.getOptionValue("f").equalsIgnoreCase("conll")){
-			logger.error(cLine.getOptionValue("f")+" is a non-recognised data format.\n");
-			formatter.printHelp(DataIDAnnotator.class.getSimpleName(),options );
-			System.exit(1);			
-		}
 		return cLine;		
 	}
 
@@ -127,12 +108,9 @@ public class DataIDAnnotator {
 		// Input file
 		File input = new File(cLine.getOptionValue("i"));
 	
-		// Format of the input file
-		String format = cLine.getOptionValue("f");
-		
 		// Run
-		DataIDAnnotator ann = new DataIDAnnotator (language);
-		ann.annotate(input, language, format);
+		DataAnnotator4IWSLT ann = new DataAnnotator4IWSLT (language);
+		ann.annotate(input, language);
 
 	}
 
@@ -143,7 +121,7 @@ public class DataIDAnnotator {
 	 * 			input file to annotate
 	 * 
 	 */
-	public void annotate(File input, String language, String format) {
+	public void annotate(File input, String language) {
 
 		BabelNet bn = BabelNet.getInstance();
 
@@ -169,18 +147,13 @@ public class DataIDAnnotator {
 		    int i = 0;
 		    while (sc.hasNext()) {
 		        String line = sc.nextLine();
-		        // Taking care of the input format
-		        if (format.equalsIgnoreCase("wpl")){
-			        i = annotateLineBufferWPL(line, language, bn, i);		        	
-		        } else if (format.equalsIgnoreCase("conll")) {
-			        i = annotateLineBufferCONLL(line, language, bn, i);		        			        	
-		        }
-		        		        
+			    annotateLineBufferWPL(line, language, bn);		        			        		        
 		        // Write every 10000 lines
 		        if (i%10000==0){
 		        	bw.flush();
 		        	logger.info("Sentence "+i);
 		        }
+		        i++;
 		    }
 		    if (sc.ioException() != null) {
 		        throw sc.ioException();
@@ -222,7 +195,7 @@ public class DataIDAnnotator {
 	 * @return
 	 * @throws IOException
 	 */
-	private int annotateLineBufferWPL(String line, String language, BabelNet bn, int i) throws IOException {
+	private void annotateLineBufferWPL(String line, String language, BabelNet bn) throws IOException {
         String[] tokens = line.split("\\s+");
         for (String token:tokens) {  
         	String id = "-";
@@ -232,48 +205,22 @@ public class DataIDAnnotator {
         	// This is a patch to solve the cases where a token has not been annotated
         	// "joker" is a toy PoS available in all the mappings as a BabelPOS.NOUN
         	// but is not present in the PoSAccept lists
-        	if (lemma==null || pos==null){
+        	if (pos==null){
         		lemma = token;
         		pos = "joker";
         		word = token;
         	}
-        	id = getBNID(language, bn, lemma, pos);
+           	if (lemma==null){
+        		lemma = token;
+        	}
+          	id = getBNID(language, bn, lemma, pos);
     		bw.append(word+"|"+pos+"|"+lemma+"|"+id+" ");
         }
     	bw.newLine();
-    	return i++;
+    	return;
 	}
 
 
-	/**
-	 * Retrieves the BN ID for all the tokens in an input sentence in conll format.
-	 * Actualises the number of sentences i.
-	 * 
-	 * @param line
-	 * @param language
-	 * @param bn
-	 * @param i
-	 * @return
-	 * @throws IOException
-	 */
-	private int annotateLineBufferCONLL(String line, String language, BabelNet bn, int i) throws IOException {
-    	String id = "-";
-        Matcher m = Pattern.compile("^(.+)\t(.+)\t(.+)").matcher(line);
-        if (m.find()){
-          	String lemma = m.group(3);
-        	String pos = m.group(2);
-        	String word = m.group(1);
-        	if (lemma.equals("<unknown>")){ 
-        		lemma = word;
-        	}
-        	id = getBNID(language, bn, lemma, pos);
-    		bw.append(word+"|"+pos+"|"+lemma+"|"+id+" ");
-        } else {
-        	bw.newLine();
-        	i++;
-        }
-        return i;
-	}
 
 	
 	/**
@@ -312,34 +259,5 @@ public class DataIDAnnotator {
 	}
 
 
-
-	/**
-	 * Get the top translation of a lemma
-	 * DON'T USE
-	 * 
-	 * @param lemma
-	 * @return
-	 */
-	private String get1stTrad_en(String lemma) {
-		
-		Multimap<Language, ScoredItem<String>> tradsAll = null;
-		try {
-			tradsAll = BabelNetUtils.getTranslations(Language.EN, lemma);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Collection<ScoredItem<String>> trads = tradsAll.get(Language.ES);
-   
-		//System.out.println(trads);
-		TreeMap<Double, String> mapTrads = new TreeMap<Double, String>();
-		for (ScoredItem<String> trad : trads){
-			if (!mapTrads.containsKey(-trad.getScore())) {
-				mapTrads.put(-trad.getScore(), trad.getItem());}
-		}
-		//System.out.println(mapTrads.lastKey());
-		//System.out.println(mapTrads.firstKey());
-		return mapTrads.firstEntry().toString();
-	}
 	
 }

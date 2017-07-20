@@ -264,7 +264,12 @@ public class TreeTagger2BabelWE {
 			        Matcher m = Pattern.compile("^(.+)\t(.+)\t(.+)").matcher(lineTT);
 			        if (m.find()){
 				        //lineFactors = line.replace("\t", "|");	
-				        bw.append(m.group(1)+"|"+m.group(2)+"|"+m.group(3)+" ");
+			        	String lemma = m.group(3);
+			        	String word = m.group(1);
+			        	// Issues with treetagger
+			        	lemma = lemma.replace("<unknown>", word);
+			        	lemma = lemma.replace("@card@", word);
+				        bw.append(word+"|"+m.group(2)+"|"+lemma+" ");
 			        }
 		        }
 		        // Write every 10000 lines
