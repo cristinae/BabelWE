@@ -199,6 +199,7 @@ public class DataAnnotator4IWSLT {
         String[] tokens = line.split("\\s+");
         for (String token:tokens) {  
         	String id = "-";
+        	String posBN = "-";
         	String lemma = DataProcessor.readFactor3(token, 3);
         	String pos = DataProcessor.readFactor3(token, 2);
         	String word = DataProcessor.readFactor3(token, 1);
@@ -214,7 +215,8 @@ public class DataAnnotator4IWSLT {
         		lemma = token;
         	}
           	id = getBNID(language, bn, lemma, pos);
-    		bw.append(word+"|"+pos+"|"+lemma+"|"+id+" ");
+          	posBN = getBNpos(language, pos);
+    		bw.append(word+"|"+pos+"|"+posBN+"|"+lemma+"|"+id+" ");
         }
     	bw.newLine();
     	return;
@@ -254,6 +256,41 @@ public class DataAnnotator4IWSLT {
 			id = BabelNetFiltering4ID.getBNID_it(posMapping, bn, lemma, pos);	
 		} else if (language.equalsIgnoreCase("ro")) {
 			id = BabelNetFiltering4ID.getBNID_ro(posMapping, bn, lemma, pos);	
+		}  
+		return id;
+	}
+
+	/**
+	 * Kind of factory method to call the appropriate function to retrieve a BabelNet PoS
+	 * according to the input language
+	 * 
+	 * @param language
+	 * @param bn
+	 * @param lemma
+	 * @param pos
+	 * @return
+	 */
+	private String getBNpos(String language, String pos) {
+
+		String id = "-";
+		if (language.equalsIgnoreCase("en")) {
+		    id = BabelNetFiltering4ID.getBNpos_en(posMapping, pos);	
+		} else if (language.equalsIgnoreCase("es")) {
+		    id = BabelNetFiltering4ID.getBNpos_es(posMapping, pos);	
+		} else if (language.equalsIgnoreCase("ar")) {
+		    id = BabelNetFiltering4ID.getBNpos_ar(posMapping, pos);	
+		} else if (language.equalsIgnoreCase("tr")) {
+		    id = BabelNetFiltering4ID.getBNpos_tr(posMapping, pos);	 
+		} else if (language.equalsIgnoreCase("fr")) {
+			id = BabelNetFiltering4ID.getBNpos_fr(posMapping, pos);	
+		} else if (language.equalsIgnoreCase("de")) {
+			id = BabelNetFiltering4ID.getBNpos_de(posMapping, pos);	
+		} else if (language.equalsIgnoreCase("nl")) {
+			id = BabelNetFiltering4ID.getBNpos_nl(posMapping, pos);	
+		} else if (language.equalsIgnoreCase("it")) {
+			id = BabelNetFiltering4ID.getBNpos_it(posMapping, pos);	
+		} else if (language.equalsIgnoreCase("ro")) {
+			id = BabelNetFiltering4ID.getBNpos_ro(posMapping, pos);	
 		}  
 		return id;
 	}

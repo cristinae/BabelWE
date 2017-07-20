@@ -20,6 +20,8 @@ public class BabelNetFiltering4ID {
 	 * Given a lemma and a PoS the method retrieves the BN id for a subset of selected PoS
 	 * in English
 	 * 
+	 * @param posMapping
+	 * @param bn
 	 * @param lemma
 	 * @param pos
 	 * @return
@@ -53,9 +55,25 @@ public class BabelNetFiltering4ID {
 
 	
 	/**
+	 * Given a PoS (PTB tagset) the method retrieves the BN PoS reduced tagset 
+	 * 
+	 * @param posMapping
+	 * @param pos
+	 * @return
+	 */
+	protected static String getBNpos_en(Map<String, BabelPOS> posMapping, String pos) {
+ 
+		BabelPOS bnPos = posMapping.get(pos);	
+		return bnPos.toString();
+	}
+
+	
+	/**
 	 * Given a lemma and a PoS the method retrieves the BN id for a subset of selected PoS
 	 * in Spanish
 	 * 
+	 * @param posMapping
+	 * @param bn
 	 * @param lemma
 	 * @param pos
 	 * @return
@@ -96,9 +114,32 @@ public class BabelNetFiltering4ID {
 
 	
 	/**
+	 * Given a PoS (ancora tagset) the method retrieves the BN PoS reduced tagset 
+	 * 
+	 * @param posMapping
+	 * @param pos
+	 * @return
+	 */
+	protected static String getBNpos_es(Map<String, BabelPOS> posMapping, String pos) {
+		 
+		String pos2chars = "";
+		if (pos.length() > 1){
+	    	pos2chars = pos.substring(0, 2).toLowerCase(); 			
+		} else {
+	   		return null;			
+		}
+    	
+		BabelPOS bnPos = posMapping.get(pos2chars); 
+		return bnPos.toString();
+	}
+
+	
+	/**
 	 * Given a lemma and a PoS the method retrieves the BN id for a subset of selected PoS
 	 * in Arabic
 	 * 
+	 * @param posMapping
+	 * @param bn
 	 * @param lemma
 	 * @param pos
 	 * @return
@@ -138,9 +179,25 @@ public class BabelNetFiltering4ID {
 
 
 	/**
+	 * Given a PoS (MADAMIRA tagset) the method retrieves the BN PoS reduced tagset 
+	 * 
+	 * @param posMapping
+	 * @param pos
+	 * @return
+	 */
+	protected static String getBNpos_ar(Map<String, BabelPOS> posMapping, String pos) {
+		     	    	    	
+		BabelPOS bnPos = posMapping.get(pos); 
+		return bnPos.toString();
+	}
+
+
+	/**
 	 * Given a lemma and a PoS the method retrieves the BN id for a subset of selected PoS
 	 * in Turkish
 	 * 
+	 * @param posMapping
+	 * @param bn
 	 * @param lemma
 	 * @param pos
 	 * @return
@@ -170,11 +227,26 @@ public class BabelNetFiltering4ID {
 		return id;
 	}
 
+	/**
+	 * Given a PoS () the method retrieves the BN PoS reduced tagset 
+	 * 
+	 * @param posMapping
+	 * @param pos
+	 * @return
+	 */
+	protected static String getBNpos_tr(Map<String, BabelPOS> posMapping, String pos) {
+		 
+		BabelPOS bnPos = posMapping.get(pos);
+		return bnPos.toString();
+	}
+
 	
 	/**
 	 * Given a lemma and a PoS the method retrieves the BN id for a subset of selected PoS
 	 * in French
 	 * 
+	 * @param posMapping
+	 * @param bn
 	 * @param lemma
 	 * @param pos
 	 * @return
@@ -204,9 +276,25 @@ public class BabelNetFiltering4ID {
 	}
 
 	/**
+	 * Given a PoS (treetagger tagset) the method retrieves the BN PoS reduced tagset 
+	 * 
+	 * @param posMapping
+	 * @param pos
+	 * @return
+	 */
+	protected static String getBNpos_fr(Map<String, BabelPOS> posMapping, String pos) {
+		     	
+		BabelPOS bnPos = posMapping.get(pos.toUpperCase()); 
+		return bnPos.toString();
+	}
+
+	
+	/**
 	 * Given a lemma and a PoS the method retrieves the BN id for a subset of selected PoS
 	 * in German
 	 * 
+	 * @param posMapping
+	 * @param bn
 	 * @param lemma
 	 * @param pos
 	 * @return
@@ -235,11 +323,25 @@ public class BabelNetFiltering4ID {
 		return id;
 	}
 
+	/**
+	 * Given a PoS (treetagger && IXA tagset) the method retrieves the BN PoS reduced tagset 
+	 * 
+	 * @param posMapping
+	 * @param pos
+	 * @return
+	 */
+	protected static String getBNpos_de(Map<String, BabelPOS> posMapping, String pos) {
+		 		
+		BabelPOS bnPos = posMapping.get(pos.toUpperCase()); 
+		return bnPos.toString();
+	}
 
 	/**
 	 * Given a lemma and a PoS the method retrieves the BN id for a subset of selected PoS
 	 * in Dutch
 	 * 
+	 * @param posMapping
+	 * @param bn
 	 * @param lemma
 	 * @param pos
 	 * @return
@@ -274,11 +376,33 @@ public class BabelNetFiltering4ID {
 		return id;
 	}
 
+	/**
+	 * Given a PoS (treetagger) the method retrieves the BN PoS reduced tagset 
+	 * 
+	 * @param posMapping
+	 * @param pos
+	 * @return
+	 */
+	protected static String getBNpos_nl(Map<String, BabelPOS> posMapping, String pos) {
+		 
+		String pos3chars = "";
+		if (pos.length() > 1){
+	    	pos3chars = pos.substring(0, 3).toLowerCase(); 			
+		} else {
+	   		return null;			
+		}
+
+		BabelPOS bnPos = posMapping.get(pos3chars); 
+		return bnPos.toString();
+	}
+
 
 	/**
 	 * Given a lemma and a PoS the method retrieves the BN id for a subset of selected PoS
 	 * in Italian
 	 * 
+	 * @param posMapping
+	 * @param bn
 	 * @param lemma
 	 * @param pos
 	 * @return
@@ -305,11 +429,26 @@ public class BabelNetFiltering4ID {
 		return id;
 	}
 
+	
+	/**
+	 * Given a PoS (treetagger) the method retrieves the BN PoS reduced tagset 
+	 * 
+	 * @param posMapping
+	 * @param pos
+	 * @return
+	 */
+	protected static String getBNpos_it(Map<String, BabelPOS> posMapping, String pos) {
+		 
+		BabelPOS bnPos = posMapping.get(pos); 
+		return bnPos.toString();
+	}
 
 	/**
 	 * Given a lemma and a PoS the method retrieves the BN id for a subset of selected PoS
 	 * in Romanian
 	 * 
+	 * @param posMapping
+	 * @param bn
 	 * @param lemma
 	 * @param pos
 	 * @return
@@ -343,5 +482,24 @@ public class BabelNetFiltering4ID {
 		return id;
 	}
 
+	/**
+	 * Given a PoS (treetagger) the method retrieves the BN PoS reduced tagset 
+	 * 
+	 * @param posMapping
+	 * @param pos
+	 * @return
+	 */
+	protected static String getBNpos_ro(Map<String, BabelPOS> posMapping, String pos) {
+		 		
+		String pos5chars = "";
+		if (pos.length() > 1){
+	    	pos5chars = pos.substring(0, 5); 			
+		} else {
+	   		return null;			
+		}
+		
+		BabelPOS bnPos = posMapping.get(pos5chars.toUpperCase()); 
+		return bnPos.toString();
+	}
 
 }
