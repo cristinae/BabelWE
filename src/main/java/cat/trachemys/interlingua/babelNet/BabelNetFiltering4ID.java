@@ -390,7 +390,7 @@ public class BabelNetFiltering4ID {
     		return id;
     	}
 
-		BabelPOS bnPos = posMapping.get(pos3chars); 
+		BabelPOS bnPos = posMapping.get(pos); 
 
     	if (bnPos == null){
     		return id;
@@ -416,7 +416,7 @@ public class BabelNetFiltering4ID {
 	   		return null;			
 		}
 
-		BabelPOS bnPos = posMapping.get(pos3chars); 
+		BabelPOS bnPos = posMapping.get(pos); 
 		if (bnPos == null){
 			return null;
 		} else {
@@ -492,8 +492,9 @@ public class BabelNetFiltering4ID {
 		String NEG = "NEG";
 		Language lang = Language.RO;
 		
+		pos = PoSAccept.COMPUTER_FRIENDLY_ROTAG.get(pos);
 		String pos5chars = "";
-		if (pos.length() > 4){
+		if (pos!=null && pos.length() > 4){
 	    	pos5chars = pos.substring(0, 5); 			
 		} else {
 	   		return id;			
@@ -523,8 +524,9 @@ public class BabelNetFiltering4ID {
 	 */
 	protected static String getBNpos_ro(Map<String, BabelPOS> posMapping, String pos) {
 		 		
+		pos = PoSAccept.COMPUTER_FRIENDLY_ROTAG.get(pos);
 		String pos5chars = "";
-		if (pos.length() > 4){
+		if (pos!=null && pos.length() > 4){
 	    	pos5chars = pos.substring(0, 5); 			
 		} else {
 	   		return null;			

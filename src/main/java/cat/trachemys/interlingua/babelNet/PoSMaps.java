@@ -506,10 +506,11 @@ public class PoSMaps {
 	    	put("13Y03", null);	//Abbreviation adjectival
 	    	put("13Y04", null);	//Abbreviation adverbial
 	    	put("13Y05", null);	//Abbreviation pronominal
-	    	put("joker", BabelPOS.NOUN); //artificially added
+	    	put("JOKER", BabelPOS.NOUN); //artificially added
 	    }           
 	};              
                         
+
 
 }
 
