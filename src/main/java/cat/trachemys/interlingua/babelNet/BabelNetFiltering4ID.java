@@ -378,7 +378,7 @@ public class BabelNetFiltering4ID {
 		Language lang = Language.NL;
 		
 		String pos3chars = "";
-		if (pos.length() > 1){
+		if (pos.length() > 3){
 	    	pos3chars = pos.substring(0, 3).toLowerCase(); 			
 		} else {
 	   		return id;			
@@ -410,7 +410,7 @@ public class BabelNetFiltering4ID {
 	protected static String getBNpos_nl(Map<String, BabelPOS> posMapping, String pos) {
 		 
 		String pos3chars = "";
-		if (pos.length() > 1){
+		if (pos.length() > 3){
 	    	pos3chars = pos.substring(0, 3).toLowerCase(); 			
 		} else {
 	   		return null;			
@@ -493,7 +493,7 @@ public class BabelNetFiltering4ID {
 		Language lang = Language.RO;
 		
 		String pos5chars = "";
-		if (pos.length() > 1){
+		if (pos.length() > 4){
 	    	pos5chars = pos.substring(0, 5); 			
 		} else {
 	   		return id;			
@@ -524,7 +524,7 @@ public class BabelNetFiltering4ID {
 	protected static String getBNpos_ro(Map<String, BabelPOS> posMapping, String pos) {
 		 		
 		String pos5chars = "";
-		if (pos.length() > 1){
+		if (pos.length() > 4){
 	    	pos5chars = pos.substring(0, 5); 			
 		} else {
 	   		return null;			
