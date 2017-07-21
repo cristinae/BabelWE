@@ -128,8 +128,8 @@ public class DataAnnotator4IWSLT {
 		BabelNet bn = BabelNet.getInstance();
 
 		// Initilise the writer
-		logger.info("Starting BN ID's annotation...");
-		File output = new File(input+"b");
+		logger.info("Starting with factor annotation (stems/metaphone3/BNpos&ids)...");
+		File output = new File(input+"mb");
 		output.delete();
 	    FileWriter fw = null;
 		try {
@@ -228,7 +228,10 @@ public class DataAnnotator4IWSLT {
     		m3.SetWord(word);
     		m3.Encode();
            	String metaphone =  m3.GetMetaph();
-           	
+           	if (metaphone == null || metaphone == ""){
+           		metaphone = noResult;
+           	}
+          	
            	String posBN = getBNpos(language, pos);
            	if (posBN == null){
            		posBN = noResult;

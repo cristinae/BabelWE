@@ -118,8 +118,8 @@ public class TreeTagger2BabelWE {
 		rawTok.delete();
 
 		// Extra to complete the pipeline
-		DataIDAnnotator ann = new DataIDAnnotator (language);
-		ann.annotate(new File(input.toString().concat(".wpl")), language, "wpl");
+		// DataIDAnnotator ann = new DataIDAnnotator (language);
+		// ann.annotate(new File(input.toString().concat(".wpl")), language, "wpl");
 
 	}
 
@@ -300,7 +300,6 @@ public class TreeTagger2BabelWE {
 		        sc.close();
 		        scRaw.close();
 		        try {
-		        	bw.newLine();
 					bw.close();
 					fw.close();
 				} catch (IOException e) {
