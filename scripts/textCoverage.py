@@ -47,16 +47,20 @@ def getLanguage(inputFile):
 
 def main(inputFile):
 
+    # Reads the main file and counts the frequecies of words
     with open(inputFile) as f:
 	words = f.read().split()
         wordcount = Counter(words)
 
+    # Reads the list of words and sums its frequencies in the main file
     with open(getCommonFileName(inputFile)) as f:
 	commonWords=0
         for line in f:
   	     commonWords = commonWords + wordcount[line.rstrip()]
+  	     #print wordcount[line.rstrip()]
     #for item in wordcount.items(): print("{}\t{}".format(*item))
 
+    # prints the results
     percentage = float(commonWords)/float(len(words))
     print("{}.{}: {} out of {} (a {:.1%})".format(getLanguagePair(inputFile),getLanguage(inputFile),commonWords,len(words),percentage)) 
 
