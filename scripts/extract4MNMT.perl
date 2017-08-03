@@ -23,9 +23,10 @@ while(my $line = <INFILE>)
 	# currently, the corpora for NMT is lowercased and I always forget it
         #print lc($factorLine);
 	# this version is for Babelnet
-        $factorLine =~ s/-//g;
+        #$factorLine =~ s/-//g;
         $factorLine =~ s/\s+/ /g;
         $factorLine =~ s/^\s//;
-        print lc($factorLine)."\n";
+        #print lc($factorLine)."\n";
+        print $factorLine."\n";
 }
 close(INFILE);
