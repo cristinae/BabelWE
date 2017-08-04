@@ -228,7 +228,7 @@ public class DataAnnotator4IWSLT {
     		m3.SetWord(word);
     		m3.Encode();
            	String metaphone =  m3.GetMetaph();
-           	if (metaphone == null || metaphone == ""){
+           	if (metaphone.equalsIgnoreCase("")){
            		metaphone = noResult;
            	}
           	
@@ -236,11 +236,11 @@ public class DataAnnotator4IWSLT {
            	if (posBN == null){
            		posBN = noResult;
            	}
-        	String id = getBNID(language, bn, lemma, pos);
-           	if (id == null){
-           		id = noResult;
+        	String idBN = getBNID(language, bn, lemma, pos);
+           	if (idBN == null){
+           		idBN = noResult;
            	}
-     		bw.append(word+"|"+pos+"|"+posBN+"|"+stem+"|"+lemma+"|"+metaphone+"|"+id+" ");
+     		bw.append(word+"|"+pos+"|"+posBN+"|"+stem+"|"+lemma+"|"+metaphone+"|"+idBN+" ");
         }
     	bw.newLine();
     	return;

@@ -274,9 +274,9 @@ public class BabelNetFiltering4ID {
 		String NEG = "NEG";
 		Language lang = Language.FR;
 
-		if(PoSAccept.NEG_FR.contains(lemma)){                     	//Negation      		
+		if(PoSAccept.NEG_FR.contains(lemma)){                     			//Negation      		
     		return NEG;
-    	} else if(!PoSAccept.POS_FR_ACC.contains(pos.toUpperCase())) {          //Non-content PoS
+    	} else if(!PoSAccept.POS_FR_ACC.contains(pos.toUpperCase())) {      //Non-content PoS
     		return id;
     	}
     		    	

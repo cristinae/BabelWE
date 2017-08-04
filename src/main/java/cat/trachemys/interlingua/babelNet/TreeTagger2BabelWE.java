@@ -1,6 +1,5 @@
 package cat.trachemys.interlingua.babelNet;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -269,6 +267,10 @@ public class TreeTagger2BabelWE {
 			        	// Issues with treetagger
 			        	lemma = lemma.replace("<unknown>", word);
 			        	lemma = lemma.replace("@card@", word);
+			        	// Sometimes more than one lemma is available, we ad hoc keep the 1st one
+			        	if (lemma.contains("|")){
+			        		lemma = lemma.substring(0,lemma.indexOf("|"));
+			        	}
 				        bw.append(word+"|"+m.group(2)+"|"+lemma+" ");
 			        }
 		        }
