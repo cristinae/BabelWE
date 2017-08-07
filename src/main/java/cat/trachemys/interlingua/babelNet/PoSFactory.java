@@ -31,7 +31,7 @@ public class PoSFactory {
 			logger.warn("Penn TreeBank PoS tags are expected for English.");
 			return PoSMaps.BN_POS_EN;
 		} else if (language.equalsIgnoreCase("es")) {
-			logger.warn("Ancora PoS tags are expected for Spanish.");
+			logger.warn("Ancora PoS tags are expected for Spanish, you must use IXA processing.");
 			return PoSMaps.BN_POS_ES;
 		} else if (language.equalsIgnoreCase("ar")) {
 			logger.warn("Arabic Mada 2.1 PoS tags are expected for Arabic.");
@@ -40,7 +40,7 @@ public class PoSFactory {
 			logger.warn("TS Wikipedia Data Set PoS tags are expected for Turkish.");
 			return PoSMaps.BN_POS_TR;
 		} else if (language.equalsIgnoreCase("fr")) {
-			logger.warn("The reduced Penn TreeBank PoS tags are expected for French.");
+			logger.warn("The reduced Penn TreeBank PoS tags are expected for French, you must use IXA processing.");
 			return PoSMaps.BN_POS_FR;
 		} else if (language.equalsIgnoreCase("de")) {
 			logger.warn("STTS Stuttgart Tübingen PoS tags are expected for German.");

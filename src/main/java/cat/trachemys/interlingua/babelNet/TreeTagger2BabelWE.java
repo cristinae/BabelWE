@@ -125,6 +125,9 @@ public class TreeTagger2BabelWE {
 	/**
 	 * Tokenises a file using TreeTagger scripts for compatibility
 	 * 
+	 * TODO: treetagger has a eos option, maybe it is useful
+	 * COMMENT: TT tokeniser and splitter have been modified
+	 * 
 	 * @param raw
 	 * @param lang
 	 * @return
@@ -192,7 +195,6 @@ public class TreeTagger2BabelWE {
 		
 		// Run the tokeniser in a separate system process
 		ProcessBuilder builder = new ProcessBuilder(commandTok);	
-		//System.out.println(builder.command());
 		builder.redirectInput(new File(raw));
 		File output = new File(raw.concat(".tok"));
 		builder.redirectOutput(output);
@@ -211,10 +213,46 @@ public class TreeTagger2BabelWE {
 			"of file "+input.toString()+" with TreeTagger tokeniser.");
 		} 
 		
-		//logger.info("Tokenisation done.");
 		tokeniser.delete();
 		tmpAbbr.delete();
 
+		
+		// Romanian needs an additional processing (also portuguese if done)
+		if (lang.equalsIgnoreCase("ro")){
+	    	InputStream roTokens = classLoader.getResourceAsStream("abbreviationsTT/romanian-tokens");
+			File tmpToks = getResourceAsFile(roTokens);
+			String roToks = tmpToks.toString();
+		   	InputStream input2 = classLoader.getResourceAsStream("split-romanian.perl");
+	    	File spliter = getResourceAsFile(input2);
+			String exeSplit = spliter.toString();
+			String[] commandSplit = {"perl", exeSplit, roToks};
+			// Run the splitter in a separate system process
+			ProcessBuilder builderSplit = new ProcessBuilder(commandSplit);	
+
+			builderSplit.redirectInput(output);
+			String newOutput = output.toString().concat("2");
+			File splitedOutput = new File(newOutput);
+			builderSplit.redirectOutput(splitedOutput);
+			logger.info("Starting romanian splitting...");
+			try {
+				Process process = builderSplit.start();
+				//Wait to get exit value
+			    int exitValue = process.waitFor();
+			} catch (IOException e) {
+				e.printStackTrace();
+				logger.error("Some error occurred when starting the ProcessBuilder for splitting Romanian "+
+				"of file "+input2.toString()+" with TreeTagger tokeniser.");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				logger.error("Some error occurred waiting for the splitting ProcessBuilder "+
+				"of file "+input2.toString()+" with TreeTagger tokeniser.");
+			} 
+			spliter.delete();
+			tmpToks.delete();
+			output.delete();
+			return splitedOutput;
+		} 
+		
         return output;
 	}
 
