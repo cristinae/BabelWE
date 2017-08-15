@@ -16,7 +16,7 @@ import sys
 def main(inputFile, trg):
 
     # Output file
-    output = inputFile+'.source'
+    output = inputFile+'.2trad'
     try:
        os.remove(output)
     except OSError:

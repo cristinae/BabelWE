@@ -22,16 +22,20 @@ def readDictionary(inputFile):
 
 def getCommonFileName(inputFile):
     #ex: train.en-it.it.wplmb.lema
-    m = re.search('(\w+\.\w\w-\w\w.)\w\w.wplmb\.(\w+)', inputFile)
+    m = re.search('\w+\.(\w\w-\w\w.)lema.\w\w.wplmb\.(\w+)', inputFile)
     if m:
        prefix = m.group(1)
        extension = m.group(2)
-    return prefix+extension
+       #name = prefix+extension
+       name = 'commons.'+prefix+extension
+    #name = 'train.commonAll.m3'
+
+    return name
 
 
 def getLanguagePair(inputFile):
     #ex: train.en-it.it.wplmb.lema
-    m = re.search('\w+\.(\w\w-\w\w).\w\w.wplmb\.\w+', inputFile)
+    m = re.search('\w+\.(\w\w-\w\w).lema.\w\w.wplmb\.\w+', inputFile)
     if m:
        pair = m.group(1)
     return pair
@@ -39,7 +43,7 @@ def getLanguagePair(inputFile):
 
 def getLanguage(inputFile):
     #ex: train.en-it.it.wplmb.lema
-    m = re.search('\w+\.\w\w-\w\w.(\w\w).wplmb\.\w+', inputFile)
+    m = re.search('\w+\.\w\w-\w\w.lema.(\w\w).wplmb\.\w+', inputFile)
     if m:
        lang = m.group(1)
     return lang
