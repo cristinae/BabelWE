@@ -72,6 +72,8 @@ for j in "en" "de" "ro" "it" "nl" "fr" "es";  do for i in "en" "de" "ro" "it" "n
 for j in "en" "de" "ro" "it" "nl" "fr" "es";  do for i in "en" "de" "ro" "it" "nl" "fr" "es"; do python /home/cristinae/pln/git/BabelWE/scripts/prepare4MNMT.py IWSLT17.TED.tst2010.$i-$j.raw.$j.wplmb $i; done; done;
 find . -size 0 -delete
 
+
+
 # send to translate!
 mkdir simetrics
 mv *de-en* *it-de* *it-en* *nl-de* *nl-en* *nl-it* *ro-de* *ro-en* *ro-it* *ro-nl* ./simetrics
