@@ -3,13 +3,16 @@
 
 ## Usage:
 ## Script to assign a topic from a previously estimated BTM model
-## https://github.com/xiaohuiyan/BTM
+## (using https://github.com/xiaohuiyan/BTM)
 ## to TED documents in parallel corpora according to their keywords
+##
+## TODO: remove hardcoded paths
 
 
 import re
 import os
 import sys, getopt
+import random
 import subprocess
 from itertools import izip
 
@@ -22,14 +25,19 @@ def keywords2IDs(keywords, dictionary):
         IDs = IDs + dictionary[word] + " "       
     return IDs
 
+## Mapping between the number of topic learned and the number according to its relevance
+#0.0394893 0.0419456 0.0273464 0.0526821 0.0725704 0.0180757 0.0119944 0.0466206 0.0996296 0.0399845 0.01245 0.0373698 0.0404203 0.0824155 0.0208292 0.106186 0.0661721 0.0597342 0.0655382 0.0585456 
+#1,  2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+#14,11,16, 9, 4,18,20,10, 2, 13, 19, 15, 12,  3, 17,  1,  5,  7,  6, 8                
 
 def estimateTopic(keywords, d):
     btm = '/home/cristinae/soft/BTM/src/btm'
     outputPath = '/media/cristinae/DATA1/pln/experiments/IWSLT/TEDtopic/BTM/label/'
     docIDs = keywords2IDs(keywords, d)
-    docFile = outputPath+"tmpDoc.txt"
+    rand = random.random()
+    docFile = outputPath+str(rand)+"tmpDoc.txt"
     with open(docFile, "w") as doc:
-         doc.write(docIDs)
+         doc.write(docIDs+"\n")
     # Executing BTM
     # ../src/btm inf sum_b $K $dwid_pt $model_dir
     command = btm + ' inf sum_b 20 ' + docFile +' '+ outputPath
@@ -38,11 +46,14 @@ def estimateTopic(keywords, d):
     #p = subprocess.call([btm, 'inf', 'sum_b', '20', docFile, outputPath], shell=True)
     resultFile = outputPath+"k20.pz_d"
     percentages = ''
+    mapping = [14,11,16,9,4,18,20,10,2,13,19,15,12,3,17,1,5,7,6,8]
     with open(resultFile, "r") as topics:
 	 for percentagesLine in topics:
              continue
          percentages = percentagesLine.split()
-    topic = 't'+str(percentages.index(max(percentages)))
+	 percentages = [float(i) for i in percentages]
+    topic = 't'+str(mapping[percentages.index(max(percentages))])
+    os.remove(docFile)
     return topic
 
 
@@ -116,7 +127,7 @@ def main(argv):
 	     keywords = patternKeywords.match(ss).group(1)
 	     if not patternKeywords.match(ts):
 		print 'Some error occurred: IDs are not aligned'
-             topic = estimateTopic(keywords, d) 
+             topic = estimateTopic(keywords, d)
 	elif patternTitle.match(ss): 
 	     sourceSentences = topic + "\n"
 	     if patternTitle.match(ts):
