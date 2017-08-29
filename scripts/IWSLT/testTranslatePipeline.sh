@@ -35,3 +35,15 @@ for i in ${files[@]}; do
     perl  extract4MNMT.perl submission/test2010/$i.bped 0 1 3 4 5 > submission/test2010/$i.wplmb.bpe
 done
 
+# nomes per als casos de la submission de moment                                                                       
+for i in ${files[@]}; do
+    #IWSLT17.TED.tst2010.en-nl.raw.en.wplmb.2trad                                                                      
+    fileTags=${i/raw/t}
+    fileTags=${fileTags/.wplmb.2trad/}
+    perl enrichFile.perl submission/test2010/$fileTags  submission/test2010/$i.wpsm.bpe > submission/test2010/$i.wpsmt.bpe
+    perl enrichFile.perl submission/test2010/$fileTags  submission/test2010/$i.wpsmb.bpe > submission/test2010/$i.wpsmbt.bpe
+    perl enrichFile.perl submission/test2010/$fileTags  submission/test2010/$i.w.bpe > submission/test2010/$i.wt.bpe
+done
+
+
+
