@@ -41,12 +41,10 @@ my $xml= $set.'.'.$task.'.'.$userID.'.'.$submission.'.xml';
 #    get the language
 print "$trads\n";
 
-$trads =~ /\.\w\w2(\w\w)$/;
-my $lan = $1;
-print $lan;
-
-
-my $command = "perl ../detokenizer.perl -l $lan -u < $trads > $trads.rc ";
+$trads =~ /\.(\w\w)2(\w\w)$/;
+my $lanSRC = $1;
+my $lanTGT = $2;
+my $command = "perl ../detokenizer.perl -l $lanTGT -u < $trads > $trads.rc ";
 system($command) ;
 
 my %languages = (
@@ -71,18 +69,26 @@ while (<SRC>) {
     chomp($template);
     if ($template =~ /^<srcset/) {
 	$template =~ s/<srcset/<tstset/;
-        $template =~ s/\">\s*$/\" trglang=\"$languages{$lan}\" sysid=\"$sysID\">/;
-    }   
-    elsif ($template =~ /srcset/) {
+        $template =~ s/\">\s*$/\" trglang=\"$languages{$lanTGT}\" sysid=\"$sysID\">/;
+    } elsif ($template =~ /^<refset/) {
+	$template =~ s/<refset/<tstset/;
+    } elsif ($template =~ /<\/srcset/) {
 	$template =~ s/<\/srcset>/<\/tstset>/;
+    } elsif ($template =~ /<\/refset/) {
+	$template =~ s/<\/refset>/<\/tstset>/;
     }   
+    # Let's be sure all cases are covered
+    if ($template =~ /trglang/) {
+        $template =~ s/trglang=\".+?\"/trglang=\"$languages{$lanTGT}\"/;
+    }
+    if ($template =~ /srclang/) {
+        $template =~ s/srclang=\".+?\"/srclang=\"$languages{$lanSRC}\"/;
+    }
     if ($template =~ /refid=\"ref\"/) {
 	$template =~ s/refid=\"ref\"/sysid=\"$sysID\"/;
     } elsif ($template =~ /^<seg id=/){
         my $line = <TRD>;
-          print $line; print "\n\n\n";
-
-        chomp($line);
+         chomp($line);
         # the input has not xml encoding, but these two would break it
         $line =~ s/</&lt;/;
         $line =~ s/>/&gt;/;
