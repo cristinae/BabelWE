@@ -83,19 +83,23 @@ def main(argv):
    #srcFile = folder + 'train.tags.'+pair+'.'+srcLang
    #trgFile = folder + 'train.tags.'+pair+'.'+trgLang
    #IWSLT17.TED.dev2010.nl-ro.nl.xml
-   srcFile = folder + 'IWSLT17.TED.dev2010.'+pair+'.'+srcLang+'.xml'
-   trgFile = folder + 'IWSLT17.TED.dev2010.'+pair+'.'+trgLang+'.xml'
-   folder = folder+'/'+pair
+   prefix = 'IWSLT17.TED.tst2010.'
+   srcFile = folder + prefix +pair+'.'+srcLang+'.xml'
+   trgFile = folder + prefix +pair+'.'+trgLang+'.xml'
+   name = prefix + pair + '.t'
+   #folder = folder
 
    # Load BTM dictionary
    d = {}
    with open(dictBTM) as f:
       d = dict([line.split() for line in f])
 
-   fileName = 'None'
    sourceSentences = ''
    targetSentences = ''
+   topic = ''
    i = 10000  #so that they are listed in the same order
+   fileBase = folder+'/'+name+'.'
+   print fileBase
 
    patternIni = re.compile("^\s*<url>(.+)</url>")
    patternTitle = re.compile("^\s*<title>(.+)</title>")
@@ -106,25 +110,14 @@ def main(argv):
    if not os.path.exists(folder):
        os.makedirs(folder)
 
-   topic = ''
    with open(srcFile) as src, open(trgFile) as trg: 
       for ss, ts in izip(src, trg):
         ss=ss.lstrip()
         ts=ts.lstrip()
  	if patternIni.match(ss):
- 	     if i>10000:
- 	        #fileBase = folder+'/'+str(i)+'_'+name
-	        fileBase = folder+'/'+name+'.'
-		print fileBase
- 	        with open(fileBase+srcLang,'wb') as fs:
-                  fs.write(sourceSentences)
-	        with open(fileBase+trgLang,'wb') as ft:
-   	          ft.write(targetSentences)
-		sourceSentences = ''
-		targetSentences = ''
 	     i += 1
 	elif patternID.match(ss): 
-	     name = 't'+patternID.match(ss).group(1)
+	     #name = 't'+patternID.match(ss).group(1)
 	     if not patternID.match(ts):
 		print 'Some error occurred: IDs are not aligned'
 	elif patternKeywords.match(ss): 
@@ -133,18 +126,22 @@ def main(argv):
 		print 'Some error occurred: IDs are not aligned'
              topic = estimateTopic(keywords, d)
 	elif patternTitle.match(ss): 
-	     sourceSentences = topic + "\n"
+	     sourceSentences = sourceSentences + topic + "\n"
 	     if patternTitle.match(ts):
-	        targetSentences = topic + "\n"
+	        targetSentences = sourceSentences + topic + "\n"
 	     else:
 		print 'Some error occurred: Titles are not aligned'
- 	elif not ss.startswith("<"): 
+ 	elif ss.startswith("<seg"): 
 	     sourceSentences = sourceSentences + topic + "\n"
-	     if not ts.startswith("<"):
+	     if ts.startswith("<seg"):
 	        targetSentences = targetSentences + topic + "\n"
 	     else:
 		print 'Some error occurred: Texts are not aligned'
 
+   with open(fileBase+srcLang,'wb') as fs:
+          fs.write(sourceSentences)
+   with open(fileBase+trgLang,'wb') as ft:
+          ft.write(targetSentences)
 
 
 if __name__ == "__main__":

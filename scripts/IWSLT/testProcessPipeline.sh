@@ -1,5 +1,11 @@
 # FOR THE FINAL SUBMISSION REMOVE fr AND es; CHANGE FILENAMES
 
+# Topic, new version labels
+cd ~/pln/git/BabelWE/scripts/IWSLT 
+# edit topic4TEDdocs4tests.py with the new test
+bash launchTestsTopics.sh 
+mv  /media/cristinae/DATA1/pln/experiments/IWSLT/DeEnItNlRo-DeEnItNlRo/sets/IWSLT17.TED.*.t* /media/cristinae/DATA1/pln/experiments/IWSLT/submit/test2010/.
+
 # separa per doc
 # We do this because of the topic
 for i in *xml; do csplit $i -f $i.doc '/<doc docid=/' '{*}'; done
@@ -79,5 +85,5 @@ mkdir simetrics
 mv *de-en* *it-de* *it-en* *nl-de* *nl-en* *nl-it* *ro-de* *ro-en* *ro-it* *ro-nl* ./simetrics
 # els que traduim en els dos sentits
 # de-it de-nl de-ro en-de en-fr en-it en-nl en-ro es-en it-nl it-ro nl-ro
-tar -cvf test2trad.tar *2trad
+tar -cvf test2trad.tar *2trad *.t.??
 
