@@ -14,6 +14,10 @@ use HTML::Entities;
 #binmode(STDIN, ":utf8");
 #binmode(STDOUT, ":utf8");
 
+# In case is an n-best list start with this
+# for i in *; do sed -n '1~10p'  $i | sed "s/||| /|/g" | cut -f2 -d'|' > $i.1best; done
+
+
 # Command line arguments
 my $num_args = $#ARGV + 1;
 if ($num_args != 2) {
