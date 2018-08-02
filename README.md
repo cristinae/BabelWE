@@ -39,10 +39,10 @@ Finally: <br />
 ### External resources
 1. Download the IXA pipes for tokenisation and lemmatisation of English, Spanish, French and German. They are used as an external executable, no need for installation.<br />
 [Download page](http://ixa2.si.ehu.es/ixa-pipes/download.html)<br />
-Include their path in the configuration file lumpSTS.ini<br />
+Include their path in the configuration file babelWE.ini<br />
 
 2. Use the Moses tokeniser included in the ./scripts folder<br />
-Include its path in the configuration file lumpSTS.ini<br /><br />
+Include its path in the configuration file babelWE.ini<br /><br />
 
 
 ```
