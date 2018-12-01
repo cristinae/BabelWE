@@ -14,7 +14,7 @@ import java.util.Properties;
  * @since Nov 27, 2016
  */
 
-public class lumpConfig {
+public class ReadConfig {
 	/**Configuration file */
 	protected static Properties p;
 	

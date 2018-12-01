@@ -9,14 +9,11 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.HelpFormatter;
-import org.ini4j.Ini;
-import org.ini4j.Profile.Section;
 
 import cat.trachemys.interlingua.basics.Check;
 import cat.trachemys.interlingua.basics.FileIO;
 import cat.trachemys.interlingua.basics.log.BWELogger;
-import cat.trachemys.interlingua.LumpIni;
-import cat.trachemys.interlingua.lumpConfig;
+import cat.trachemys.interlingua.ReadConfig;
 
 /**
  * Class to annotate raw text. Currently supports tokenisation and lemmatisation of
@@ -52,7 +49,7 @@ public class Annotator {
 		Check.notNull(iniFile);
 		this.lang = language;
 		this.layer = layer;
-		p = lumpConfig.getProperties(iniFile);
+		p = ReadConfig.getProperties(iniFile);
 		//section = LumpIni.getProperties(iniFile);
 		logger = new BWELogger(this.getClass().getCanonicalName());
 		annFactory = new AnnotatorFactory();		
