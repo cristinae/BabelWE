@@ -1,8 +1,7 @@
 package cat.trachemys.interlingua.prepro;
 
 import java.io.File;
-
-import org.ini4j.Profile.Section;
+import java.util.Properties;
 
 /**
  * Interface to lemmatise raw text
@@ -24,7 +23,7 @@ public interface Lemmatiser {
 	 * @param output
 	 * 			File where to store the lemmas
 	 */
-	public void execute(Section p, File input, String lang, File output);
+	public void execute(Properties p, File input, String lang, File output);
 
 	
 	/** 
@@ -41,6 +40,6 @@ public interface Lemmatiser {
 	 * 			String with the lemmas
 	 */
 	//public String execute(String exeTok, String exeLem, String input, String lang);
-	public String execute(Section p, String input, String lang);
+	public String execute(Properties p, String input, String lang);
 
 }

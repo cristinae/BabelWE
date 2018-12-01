@@ -33,10 +33,10 @@ public class Annotator {
 	private final String layer;
 	
 	/** Configuration file */
-//	private static Properties p;
+	private static Properties p;
 
 	/** Configuration file section */
-	private static Section section;
+	//private static Section section;
 
 	/** Annotation object*/
 	private final AnnotatorFactory annFactory;
@@ -52,8 +52,8 @@ public class Annotator {
 		Check.notNull(iniFile);
 		this.lang = language;
 		this.layer = layer;
-//		p = lumpConfig.getProperties(iniFile);
-		section = LumpIni.getProperties(iniFile);
+		p = lumpConfig.getProperties(iniFile);
+		//section = LumpIni.getProperties(iniFile);
 		logger = new BWELogger(this.getClass().getCanonicalName());
 		annFactory = new AnnotatorFactory();		
 	}
@@ -161,12 +161,12 @@ public class Annotator {
 		if(layer.equalsIgnoreCase("tok")){
 			File output = new File(input+".tok");
 			Tokeniser tok = annFactory.getTokeniser(lang);
-			tok.execute(section, input, lang, output);
+			tok.execute(p, input, lang, output);
 		// Lemmatisation	
 		} else if (layer.equalsIgnoreCase("lem")){
 			File output = new File(input+".wpl");
 			Lemmatiser lem = annFactory.getLemmatiser(lang);
-			lem.execute(section, input, lang, output);
+			lem.execute(p, input, lang, output);
 		}
 	}
 
@@ -187,11 +187,11 @@ public class Annotator {
 		// Tokenisation
 		if(layer.equalsIgnoreCase("tok")){
 			Tokeniser tok = annFactory.getTokeniser(lang);
-			annOutput = tok.execute(section, input, lang);
+			annOutput = tok.execute(p, input, lang);
 		// Lemmatisation	
 		} else if (layer.equalsIgnoreCase("lem")){
 			Lemmatiser lem = annFactory.getLemmatiser(lang);
-			annOutput = lem.execute(section, input, lang);
+			annOutput = lem.execute(p, input, lang);
 		}
 		return annOutput;
 	}
@@ -212,11 +212,11 @@ public class Annotator {
 	 * Getters 
 	 */
 	//TODO albarron, Dec 20. Not sure why we need these getters here;
-	public int getPropertyInt(String key){
+	/*public int getPropertyInt(String key){
 		return Integer.valueOf(section.get(key));
 	} 
 	
 	public String getPropertyStr(String key){
 		return section.get(key);
-	} 
+	} */
 }

@@ -5,8 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.util.Properties;
+
 import org.apache.commons.io.IOUtils;
-import org.ini4j.Profile.Section;
 
 import cat.trachemys.interlingua.basics.log.BWELogger;
 
@@ -30,7 +31,7 @@ public class MOSESturkishLemmatiser implements Lemmatiser {
 	 * Runs the lemmatiser on an input file.
 	 * 
 	 * @param p
-	 * 			Properties object with the config file's proper section loaded
+	 * 			Properties object with the config file
 	 * @param input
 	 * 			Input file
 	 * @param lang
@@ -38,7 +39,7 @@ public class MOSESturkishLemmatiser implements Lemmatiser {
 	 * @param output
 	 * 			File where to store the annotated source
 	 */
-	public void execute(Section p, File input, String lang, File output) {
+	public void execute(Properties p, File input, String lang, File output) {
 
 		logger.error("Lemmatisation is not implemented for Turkish.");
 
@@ -51,7 +52,7 @@ public class MOSESturkishLemmatiser implements Lemmatiser {
 		// TODO: Moses tokenisation should have its own class as it is generic for several languages
         // Parameters needed to tokenise raw text into raw text for the languages in STS
 		String language = "-l"+lang;
-		String exe = p.get("mosesTok");
+		String exe = p.getProperty("mosesTok");
 		Annotator.checkExists(exe, "The moses tokenisation script cannot be found at ");
 		
 		String[] commandTok = {"perl", exe, language};
@@ -114,7 +115,7 @@ public class MOSESturkishLemmatiser implements Lemmatiser {
 	 * @return 
 	 * 			String with the lemmas
 	 */
-	public String execute(Section p, String input, String lang) {
+	public String execute(Properties p, String input, String lang) {
 		
 		logger.error("Lemmatisation on strings is not implemented for Turkish. "
 				+ "Please, put your text in a file.");

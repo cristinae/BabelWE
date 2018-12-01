@@ -1,8 +1,7 @@
 package cat.trachemys.interlingua.prepro;
 
 import java.io.File;
-
-import org.ini4j.Profile.Section;
+import java.util.Properties;
 
 /**
  * Interface to tokenise raw text
@@ -17,7 +16,7 @@ public interface Tokeniser {
 	 * Runs the tokeniser on an input file.
 	 * 
 	 * @param section
-	 * 			Properties object with the config file's proper section loaded
+	 * 			Properties object with the config file
 	 * @param input
 	 * 			Input file
 	 * @param lang
@@ -25,7 +24,7 @@ public interface Tokeniser {
 	 * @param output
 	 * 			File where to store the tokenisation
 	 */
-	public void execute(Section section, File input, String lang, File output);
+	public void execute(Properties p, File input, String lang, File output);
 
 	
 	/** 
@@ -41,6 +40,6 @@ public interface Tokeniser {
 	 * @return 
 	 * 			Tokenised string
 	 */
-	public String execute(Section section, String input, String lang);
+	public String execute(Properties p, String input, String lang);
 
 }

@@ -3,6 +3,7 @@ package cat.trachemys.interlingua.prepro;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
 import org.ini4j.Profile.Section;
@@ -35,7 +36,7 @@ public class IXATokeniser implements Tokeniser {
 	 * @param output
 	 * 			File where to store the tokenisation
 	 */
-	public void execute(Section section, File input, String lang, File output) {
+	public void execute(Properties p, File input, String lang, File output) {
 
         // Parameters needed to tokenise raw text into raw text for the languages in STS
 		String language = "-l"+lang;
@@ -43,7 +44,7 @@ public class IXATokeniser implements Tokeniser {
 		if (lang.equalsIgnoreCase("es")) {
 			normalisation = "-nancora";
 		}
-		String jar = section.get("ixaTok");
+		String jar = p.getProperty("ixaTok");
 		String[] commandIxa = { "java", "-jar", jar, "tok", language, "-ooneline", normalisation};
 
 		// IXA only recognises a sentence if it ends with a punctuation token
@@ -82,7 +83,7 @@ public class IXATokeniser implements Tokeniser {
 	 * @return tokOutput
 	 * 			Tokenised string
 	 */
-	public String execute(Section section, String input, String lang) {
+	public String execute(Properties p, String input, String lang) {
 		// Default output
 		String tokOutput = "NON TOKENISED";
 
@@ -92,7 +93,7 @@ public class IXATokeniser implements Tokeniser {
 		if (lang.equalsIgnoreCase("es")) {
 			normalisation = "-nancora";
 		}
-	    String jar = section.get("ixaTok");
+	    String jar = p.getProperty("ixaTok");
 		String[] commandIxa = { "java", "-jar", jar, "tok", language, "-ooneline", normalisation};
 
 		// IXA only recognises a sentence if it ends with a punctuation token

@@ -2,7 +2,7 @@ package cat.trachemys.interlingua.prepro;
 
 import java.io.File;
 import java.io.IOException;
-import org.ini4j.Profile.Section;
+import java.util.Properties;
 
 import cat.trachemys.interlingua.basics.FileIO;
 import cat.trachemys.interlingua.basics.log.BWELogger;
@@ -33,35 +33,35 @@ public class IXALemmatiser implements Lemmatiser {
 	 * @param output
 	 * 			File where to store the annotated source
 	 */
-	public void execute(Section p, File input, String lang, File output) {
+	public void execute(Properties p, File input, String lang, File output) {
 
 		// Loading paths from the config file
-		String jarTok = p.get("ixaTok");
+		String jarTok = p.getProperty("ixaTok");
 		Annotator.checkExists(jarTok, "The IXA tokeniser cannot be found at ");
-		String jarLem = p.get("ixaLem");
+		String jarLem = p.getProperty("ixaLem");
 		Annotator.checkExists(jarLem, "The IXA lemmatiser cannot be found at ");
 
 		String posM = "";
 		String lemM = "";
 		if (lang.equalsIgnoreCase("es")) {
-			posM = p.get("posEs");
+			posM = p.getProperty("posEs");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemEs");
+			lemM = p.getProperty("lemEs");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else if (lang.equalsIgnoreCase("en")) {
-			posM = p.get("posEn");
+			posM = p.getProperty("posEn");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemEn");
+			lemM = p.getProperty("lemEn");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else if (lang.equalsIgnoreCase("fr")) {
-			posM = p.get("posFr");
+			posM = p.getProperty("posFr");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemFr");
+			lemM = p.getProperty("lemFr");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else if (lang.equalsIgnoreCase("de")) {
-			posM = p.get("posDe");
+			posM = p.getProperty("posDe");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemDe");
+			lemM = p.getProperty("lemDe");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else {
 			
@@ -160,37 +160,37 @@ public class IXALemmatiser implements Lemmatiser {
 	 * @return 
 	 * 			String with the lemmas
 	 */
-	public String execute(Section p, String input, String lang) {
+	public String execute(Properties p, String input, String lang) {
 		// Default output
 		String lemOutput = "NON ANNOTATED";
 
 		// Loading paths from the config file
-		String jarTok = p.get("ixaTok");
+		String jarTok = p.getProperty("ixaTok");
 		Annotator.checkExists(jarTok, "The IXA tokeniser cannot be found at ");
-		String jarLem = p.get("ixaLem");
+		String jarLem = p.getProperty("ixaLem");
 		Annotator.checkExists(jarLem, "The IXA lemmatiser cannot be found at ");
 
 		String posM = "";
 		String lemM = "";
 		if (lang.equalsIgnoreCase("es")) {
-			posM = p.get("posEs");
+			posM = p.getProperty("posEs");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemEs");
+			lemM = p.getProperty("lemEs");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else if (lang.equalsIgnoreCase("en")) {
-			posM = p.get("posEn");
+			posM = p.getProperty("posEn");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemEn");
+			lemM = p.getProperty("lemEn");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else if (lang.equalsIgnoreCase("fr")) {
-			posM = p.get("posFr");
+			posM = p.getProperty("posFr");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemFr");
+			lemM = p.getProperty("lemFr");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else if (lang.equalsIgnoreCase("de")) {
-			posM = p.get("posDe");
+			posM = p.getProperty("posDe");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemDe");
+			lemM = p.getProperty("lemDe");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else {
 			logger.error("Your language " + lang + 

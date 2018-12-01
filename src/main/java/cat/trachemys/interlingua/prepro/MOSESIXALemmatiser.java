@@ -8,8 +8,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringReader;
+import java.util.Properties;
+
 import org.apache.commons.io.IOUtils;
-import org.ini4j.Profile.Section;
 
 import cat.trachemys.interlingua.basics.log.BWELogger;
 import ixa.kaflib.KAFDocument;
@@ -31,7 +32,7 @@ public class MOSESIXALemmatiser implements Lemmatiser {
 	 * Runs the lemmatiser on an input file.
 	 * 
 	 * @param p
-	 * 			Properties object with the config file's proper section loaded
+	 * 			Properties object with the config file
 	 * @param input
 	 * 			Input file
 	 * @param lang
@@ -39,33 +40,33 @@ public class MOSESIXALemmatiser implements Lemmatiser {
 	 * @param output
 	 * 			File where to store the annotated source
 	 */
-	public void execute(Section p, File input, String lang, File output) {
+	public void execute(Properties p, File input, String lang, File output) {
 
 		// Loading paths from the config file
-		String jarLem = p.get("ixaLem");
+		String jarLem = p.getProperty("ixaLem");
 		Annotator.checkExists(jarLem, "The IXA lemmatiser cannot be found at ");
 
 		String posM = "";
 		String lemM = "";
 		if (lang.equalsIgnoreCase("es")) {
-			posM = p.get("posEs");
+			posM = p.getProperty("posEs");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemEs");
+			lemM = p.getProperty("lemEs");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else if (lang.equalsIgnoreCase("en")) {
-			posM = p.get("posEn");
+			posM = p.getProperty("posEn");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemEn");
+			lemM = p.getProperty("lemEn");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else if (lang.equalsIgnoreCase("fr")) {
-			posM = p.get("posFr");
+			posM = p.getProperty("posFr");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemFr");
+			lemM = p.getProperty("lemFr");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else if (lang.equalsIgnoreCase("de")) {
-			posM = p.get("posDe");
+			posM = p.getProperty("posDe");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemDe");
+			lemM = p.getProperty("lemDe");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else {
 			logger.error("Your language " + lang + 
@@ -80,7 +81,7 @@ public class MOSESIXALemmatiser implements Lemmatiser {
 		
         // Parameters needed to tokenise raw text into raw text for the languages in STS
 		String language = "-l"+lang;
-		String exe = p.get("mosesTok");
+		String exe = p.getProperty("mosesTok");
 		Annotator.checkExists(exe, "The moses tokenisation script cannot be found at ");
 		
 		String[] commandTok = {"perl", exe, language};
@@ -177,7 +178,7 @@ public class MOSESIXALemmatiser implements Lemmatiser {
 	 * Runs the lemmatiser on an input string. Returns the string with the lemmas.
 	 * 
 	 * @param p
-	 * 			Properties object with the config file's proper section loaded
+	 * 			Properties object with the config file
 	 * @param input
 	 * 			Input string text
 	 * @param lang
@@ -186,35 +187,35 @@ public class MOSESIXALemmatiser implements Lemmatiser {
 	 * @return 
 	 * 			String with the lemmas
 	 */
-	public String execute(Section p, String input, String lang) {
+	public String execute(Properties p, String input, String lang) {
 		// Default output
 		String lemOutput = "NON ANNOTATED";
 
 		// Loading paths from the config file
-		String jarLem = p.get("ixaLem");
+		String jarLem = p.getProperty("ixaLem");
 		Annotator.checkExists(jarLem, "The IXA lemmatiser cannot be found at ");
 
 		String posM = "";
 		String lemM = "";
 		if (lang.equalsIgnoreCase("es")) {
-			posM = p.get("posEs");
+			posM = p.getProperty("posEs");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemEs");
+			lemM = p.getProperty("lemEs");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else if (lang.equalsIgnoreCase("en")) {
-			posM = p.get("posEn");
+			posM = p.getProperty("posEn");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemEn");
+			lemM = p.getProperty("lemEn");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else if (lang.equalsIgnoreCase("fr")) {
-			posM = p.get("posFr");
+			posM = p.getProperty("posFr");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemFr");
+			lemM = p.getProperty("lemFr");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else if (lang.equalsIgnoreCase("de")) {
-			posM = p.get("posDe");
+			posM = p.getProperty("posDe");
 			Annotator.checkExists(posM, "The IXA models for PoS tagging cannot be found at ");
-			lemM = p.get("lemDe");
+			lemM = p.getProperty("lemDe");
 			Annotator.checkExists(lemM, "The IXA models for lemmatising cannot be found at ");
 		} else {
 			logger.error("Your language " + lang + 
@@ -227,7 +228,7 @@ public class MOSESIXALemmatiser implements Lemmatiser {
 		
         // Parameters needed to tokenise raw text into raw text for the languages in STS
 		String language = "-l"+lang;
-		String exe = p.get("mosesTok");
+		String exe = p.getProperty("mosesTok");
 		Annotator.checkExists(exe, "The moses tokenisation script cannot be found at ");
 		
 		String[] commandTok = {"perl", exe, language};

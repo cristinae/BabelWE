@@ -13,6 +13,7 @@ import javax.xml.bind.Unmarshaller;
 
 import org.ini4j.Profile.Section;
 
+import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -47,7 +48,7 @@ public class MADATokeniser implements Tokeniser {
 	 * @param output
 	 * 			File where to store the annotated source
 	 */
-	public void execute(Section section, File inputRaw, String lang, File outputF) {
+	public void execute(Properties p, File inputRaw, String lang, File outputF) {
 		
 		
 		logger.info("Tokenising input text with MADAMIRA...");
@@ -132,7 +133,7 @@ public class MADATokeniser implements Tokeniser {
 	 * @return 
 	 * 			String with the lemmas
 	 */
-	public String execute(Section section, String input, String lang) {
+	public String execute(Properties p, String input, String lang) {
 
 		// Default output
 		String lemOutput = "NON ANNOTATED";
