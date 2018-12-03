@@ -20,7 +20,8 @@ use Time::HiRes;
 use Thread;
 
 #my $mydir = "$RealBin/../share/nonbreaking_prefixes";
-my $mydir = "/home/cristinae/pln/LumpSTS/scripts/nonbreaking_prefixes";
+my $mydir = "./nonbreaking_prefixes";
+#my $mydir = "/home/cristinae/pln/LumpSTS/scripts/nonbreaking_prefixes";
 
 my %NONBREAKING_PREFIX = ();
 my $language = "en";
