@@ -3,7 +3,7 @@
 
 Current implemented languages:
 
-Complete pipeline available for Arabic, German, English, French, Spanish, Turkish (no lemmatisation done for tk). A previous lemmatisation with Tree tagger is expected for Italian, Romanian and Dutch.
+Complete pipeline available for Arabic, German, English, French, Spanish, Turkish (no lemmatisation done for tk). A previous lemmatisation with TreeTagger is expected for Italian, Romanian and Dutch.
 
 ___
 ### Set-up and installation
@@ -53,15 +53,15 @@ Include its path in the configuration file babelWE.ini<br /><br />
 ```
 ### External software and models
 # IXA pipe
-ixaTok=/home/cristinae/soft/processors/ixa/ixa-pipe-tok-1.8.5-exec.jar
-ixaLem=/home/cristinae/soft/processors/ixa/ixa-pipe-pos-1.5.1-exec.jar
-posEs=/home/cristinae/soft/processors/ixa/morph-models-1.5.0/es/es-pos-perceptron-autodict01-ancora-2.0.bin
-lemEs=/home/cristinae/soft/processors/ixa/morph-models-1.5.0/es/es-lemma-perceptron-ancora-2.0.bin
-posEn=/home/cristinae/soft/processors/ixa/morph-models-1.5.0/en/en-pos-perceptron-autodict01-conll09.bin
-lemEn=/home/cristinae/soft/processors/ixa/morph-models-1.5.0/en/en-lemma-perceptron-conll09.bin
+ixaTok=/fullPath/ixa/ixa-pipe-tok-1.8.5-exec.jar
+ixaLem=/fullPath/ixa/ixa-pipe-pos-1.5.1-exec.jar
+posEs=/fullPath/ixa/morph-models-1.5.0/es/es-pos-perceptron-autodict01-ancora-2.0.bin
+lemEs=/fullPath/ixa/morph-models-1.5.0/es/es-lemma-perceptron-ancora-2.0.bin
+posEn=/fullPath/ixa/morph-models-1.5.0/en/en-pos-perceptron-autodict01-conll09.bin
+lemEn=/fullPaths/ixa/morph-models-1.5.0/en/en-lemma-perceptron-conll09.bin
 
 # Moses
-mosesTok=/home/cristinae/soft/processors/moses/tokenizerNO2html.perl
+mosesTok=/fullPath/moses/tokenizerNO2html.perl
 ```
 
-3. For Italian, Romanian and Dutch we expect input to be already lemmatised using Treetagger, but the lemmatisation pipeline with TreeTagger is not included yet.
+3. For Italian, Romanian and Dutch we expect input to be already lemmatised using TreeTagger, but the lemmatisation pipeline with TreeTagger is not included yet.
