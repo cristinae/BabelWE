@@ -3,7 +3,9 @@ package cat.trachemys.interlingua.babelNet;
 import java.util.Map;
 
 import cat.trachemys.interlingua.basics.log.BWELogger;
-import it.uniroma1.lcl.babelnet.data.BabelPOS;
+// import it.uniroma1.lcl.babelnet.data.BabelPOS;   // BabelNet v3.7
+import com.babelscape.util.UniversalPOS;  // BabelNet v4.0
+
 
 /**
  * Creates a PoSMaps object depending on the language. Currently a language has only
@@ -26,7 +28,7 @@ public class PoSFactory {
 	 * @param language
 	 * @return
 	 */
-	public Map<String, BabelPOS> getPoSMapper(String language) {
+	public Map<String, UniversalPOS> getPoSMapper(String language) {
 		if (language.equalsIgnoreCase("en")) {
 			logger.warn("Penn TreeBank PoS tags are expected for English.");
 			return PoSMaps.BN_POS_EN;

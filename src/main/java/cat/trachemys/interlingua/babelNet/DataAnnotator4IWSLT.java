@@ -19,7 +19,8 @@ import cat.trachemys.interlingua.basics.log.BWELogger;
 import cat.trachemys.interlingua.prepro.Metaphone3;
 import cat.trachemys.interlingua.prepro.SBStemmer;
 import it.uniroma1.lcl.babelnet.BabelNet;
-import it.uniroma1.lcl.babelnet.data.BabelPOS;
+//import it.uniroma1.lcl.babelnet.data.BabelPOS;   // BabelNet v3.7
+import com.babelscape.util.UniversalPOS;  // BabelNet v4.0
 
 /**
  * 
@@ -36,7 +37,7 @@ public class DataAnnotator4IWSLT {
 			new BWELogger (DataAnnotator4IWSLT.class.getSimpleName());
 
 	/** Conversion into BabelNet tags*/
-	private static Map<String, BabelPOS> posMapping = null;
+	private static Map<String,UniversalPOS> posMapping = null;
 	
 	/** BufferedWriter */
     private BufferedWriter bw = null;

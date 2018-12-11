@@ -25,7 +25,8 @@ import com.google.common.collect.Multimap;
 import cat.trachemys.interlingua.basics.log.BWELogger;
 import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.BabelNetUtils;
-import it.uniroma1.lcl.babelnet.data.BabelPOS;
+//import it.uniroma1.lcl.babelnet.data.BabelPOS;   // BabelNet v3.7
+import com.babelscape.util.UniversalPOS;  // BabelNet v4.0
 import it.uniroma1.lcl.jlt.util.Language;
 import it.uniroma1.lcl.jlt.util.ScoredItem;
 
@@ -44,7 +45,7 @@ public class DataIDAnnotator {
 			new BWELogger (DataIDAnnotator.class.getSimpleName());
 
 	/** Conversion into BabelNet tags*/
-	private static Map<String, BabelPOS> posMapping = null;
+	private static Map<String, UniversalPOS> posMapping = null;
 	
 	/** BufferedWriter */
     private BufferedWriter bw = null;
@@ -230,7 +231,7 @@ public class DataIDAnnotator {
         	String pos = DataProcessor.readFactor3(token, 2);
         	String word = DataProcessor.readFactor3(token, 1);
         	// This is a patch to solve the cases where a token has not been annotated
-        	// "joker" is a toy PoS available in all the mappings as a BabelPOS.NOUN
+        	// "joker" is a toy PoS available in all the mappings as a UniversalPOS.NOUN
         	// but is not present in the PoSAccept lists
         	if (lemma==null || pos==null){
         		lemma = token;
@@ -323,12 +324,7 @@ public class DataIDAnnotator {
 	private String get1stTrad_en(String lemma) {
 		
 		Multimap<Language, ScoredItem<String>> tradsAll = null;
-		try {
-			tradsAll = BabelNetUtils.getTranslations(Language.EN, lemma);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		tradsAll = BabelNetUtils.getTranslations(Language.EN, lemma);
 		Collection<ScoredItem<String>> trads = tradsAll.get(Language.ES);
    
 		//System.out.println(trads);

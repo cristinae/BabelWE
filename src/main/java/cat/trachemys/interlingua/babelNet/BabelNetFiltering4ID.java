@@ -4,11 +4,13 @@ import java.util.Map;
 
 import cat.trachemys.interlingua.prepro.Normaliser;
 import it.uniroma1.lcl.babelnet.BabelNet;
-import it.uniroma1.lcl.babelnet.data.BabelPOS;
+
+//import it.uniroma1.lcl.babelnet.data.BabelPOS;   // BabelNet v3.7
+import com.babelscape.util.UniversalPOS;  // BabelNet v4.0
 import it.uniroma1.lcl.jlt.util.Language;
 
 /**
- * Methods for retrieving the BabelPos and to filter tokens according to its PoS before querying BabelNet. 
+ * Methods for retrieving the UniversalPOS and to filter tokens according to its PoS before querying BabelNet. 
  * All languages must implement its own method.
  * 
  * @author cristina
@@ -26,7 +28,7 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_en(Map<String, BabelPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_en(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
  
 		String id = "-";
 		boolean ne = false;
@@ -41,7 +43,7 @@ public class BabelNetFiltering4ID {
     		return id;
     	}
      	
-		BabelPOS bnPos = posMapping.get(pos);
+		UniversalPOS bnPos = posMapping.get(pos);
 		
     	if (bnPos == null){
     		return id;
@@ -61,9 +63,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNpos_en(Map<String, BabelPOS> posMapping, String pos) {
+	protected static String getBNpos_en(Map<String, UniversalPOS> posMapping, String pos) {
  
-		BabelPOS bnPos = posMapping.get(pos);	
+		UniversalPOS bnPos = posMapping.get(pos);	
 		if (bnPos == null){
 			return null;
 		} else {
@@ -82,7 +84,7 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static  String getBNID_es(Map<String, BabelPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static  String getBNID_es(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
  
 		String id = "-";
 		boolean ne = false;
@@ -104,7 +106,7 @@ public class BabelNetFiltering4ID {
     		return id;
     	}
     	
-		BabelPOS bnPos = posMapping.get(pos2chars); 
+		UniversalPOS bnPos = posMapping.get(pos2chars); 
 
     	if (bnPos == null){
     		return id;
@@ -124,7 +126,7 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNpos_es(Map<String, BabelPOS> posMapping, String pos) {
+	protected static String getBNpos_es(Map<String, UniversalPOS> posMapping, String pos) {
 		 
 		String pos2chars = "";
 		if (pos.length() > 1){
@@ -133,7 +135,7 @@ public class BabelNetFiltering4ID {
 	   		return null;			
 		}
     	
-		BabelPOS bnPos = posMapping.get(pos2chars); 
+		UniversalPOS bnPos = posMapping.get(pos2chars); 
 		if (bnPos == null){
 			return null;
 		} else {
@@ -152,7 +154,7 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_ar(Map<String, BabelPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_ar(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
  
 		String id = "-";
 		boolean ne = false;
@@ -170,7 +172,7 @@ public class BabelNetFiltering4ID {
     		pos = "noun";
     	}
     	    	    	
-		BabelPOS bnPos = posMapping.get(pos); 
+		UniversalPOS bnPos = posMapping.get(pos); 
     	if (bnPos == null){
     		return id;
     	} else {
@@ -193,9 +195,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNpos_ar(Map<String, BabelPOS> posMapping, String pos) {
+	protected static String getBNpos_ar(Map<String, UniversalPOS> posMapping, String pos) {
 		     	    	    	
-		BabelPOS bnPos = posMapping.get(pos); 
+		UniversalPOS bnPos = posMapping.get(pos); 
 		if (bnPos == null){
 			return null;
 		} else {
@@ -214,7 +216,7 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_tr(Map<String, BabelPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_tr(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
  
 		String id = "-";
 		boolean ne = false;
@@ -227,7 +229,7 @@ public class BabelNetFiltering4ID {
     		return id;
     	}
      	
-		BabelPOS bnPos = posMapping.get(pos);
+		UniversalPOS bnPos = posMapping.get(pos);
 		
     	if (bnPos == null){
     		return id;
@@ -246,9 +248,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNpos_tr(Map<String, BabelPOS> posMapping, String pos) {
+	protected static String getBNpos_tr(Map<String, UniversalPOS> posMapping, String pos) {
 		 
-		BabelPOS bnPos = posMapping.get(pos);
+		UniversalPOS bnPos = posMapping.get(pos);
 		if (bnPos == null){
 			return null;
 		} else {
@@ -267,7 +269,7 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_fr(Map<String, BabelPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_fr(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
  
 		String id = "-";
 		boolean ne = false;
@@ -280,7 +282,7 @@ public class BabelNetFiltering4ID {
     		return id;
     	}
     		    	
-		BabelPOS bnPos = posMapping.get(pos.toUpperCase()); 
+		UniversalPOS bnPos = posMapping.get(pos.toUpperCase()); 
     	if (bnPos == null){
     		return id;
     	} else {
@@ -298,9 +300,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNpos_fr(Map<String, BabelPOS> posMapping, String pos) {
+	protected static String getBNpos_fr(Map<String, UniversalPOS> posMapping, String pos) {
 		     	
-		BabelPOS bnPos = posMapping.get(pos.toUpperCase()); 
+		UniversalPOS bnPos = posMapping.get(pos.toUpperCase()); 
 		if (bnPos == null){
 			return null;
 		} else {
@@ -319,7 +321,7 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_de(Map<String, BabelPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_de(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
  
 		String id = "-";
 		boolean ne = false;
@@ -332,7 +334,7 @@ public class BabelNetFiltering4ID {
     		return id;
     	}
 		
-		BabelPOS bnPos = posMapping.get(pos.toUpperCase()); 
+		UniversalPOS bnPos = posMapping.get(pos.toUpperCase()); 
     	if (bnPos == null){
     		return id;
     	} else {
@@ -350,9 +352,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNpos_de(Map<String, BabelPOS> posMapping, String pos) {
+	protected static String getBNpos_de(Map<String, UniversalPOS> posMapping, String pos) {
 		 		
-		BabelPOS bnPos = posMapping.get(pos.toUpperCase()); 
+		UniversalPOS bnPos = posMapping.get(pos.toUpperCase()); 
 		if (bnPos == null){
 			return null;
 		} else {
@@ -370,7 +372,7 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_nl(Map<String, BabelPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_nl(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
  
 		String id = "-";
 		boolean ne = false;
@@ -390,7 +392,7 @@ public class BabelNetFiltering4ID {
     		return id;
     	}
 
-		BabelPOS bnPos = posMapping.get(pos); 
+		UniversalPOS bnPos = posMapping.get(pos); 
 
     	if (bnPos == null){
     		return id;
@@ -407,7 +409,7 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNpos_nl(Map<String, BabelPOS> posMapping, String pos) {
+	protected static String getBNpos_nl(Map<String, UniversalPOS> posMapping, String pos) {
 		 
 		String pos3chars = "";
 		if (pos.length() > 3){
@@ -416,7 +418,7 @@ public class BabelNetFiltering4ID {
 	   		return null;			
 		}
 
-		BabelPOS bnPos = posMapping.get(pos); 
+		UniversalPOS bnPos = posMapping.get(pos); 
 		if (bnPos == null){
 			return null;
 		} else {
@@ -435,7 +437,7 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_it(Map<String, BabelPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_it(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
  
 		String id = "-";
 		boolean ne = false;
@@ -448,7 +450,7 @@ public class BabelNetFiltering4ID {
     		return id;
     	}
 		
-		BabelPOS bnPos = posMapping.get(pos); 
+		UniversalPOS bnPos = posMapping.get(pos); 
     	if (bnPos == null){
     		return id;
     	} else {
@@ -465,9 +467,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNpos_it(Map<String, BabelPOS> posMapping, String pos) {
+	protected static String getBNpos_it(Map<String, UniversalPOS> posMapping, String pos) {
 		 
-		BabelPOS bnPos = posMapping.get(pos); 
+		UniversalPOS bnPos = posMapping.get(pos); 
 		if (bnPos == null){
 			return null;
 		} else {
@@ -485,7 +487,7 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_ro(Map<String, BabelPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_ro(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
  
 		String id = "-";
 		boolean ne = false;
@@ -506,7 +508,7 @@ public class BabelNetFiltering4ID {
     		return id;
     	}
 		
-		BabelPOS bnPos = posMapping.get(pos5chars.toUpperCase()); 
+		UniversalPOS bnPos = posMapping.get(pos5chars.toUpperCase()); 
     	if (bnPos == null){
     		return id;
     	} else {
@@ -522,7 +524,7 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNpos_ro(Map<String, BabelPOS> posMapping, String pos) {
+	protected static String getBNpos_ro(Map<String, UniversalPOS> posMapping, String pos) {
 		 		
 		pos = PoSAccept.COMPUTER_FRIENDLY_ROTAG.get(pos);
 		String pos5chars = "";
@@ -532,7 +534,7 @@ public class BabelNetFiltering4ID {
 	   		return null;			
 		}
 		
-		BabelPOS bnPos = posMapping.get(pos5chars.toUpperCase()); 
+		UniversalPOS bnPos = posMapping.get(pos5chars.toUpperCase()); 
 		if (bnPos == null){
 			return null;
 		} else {

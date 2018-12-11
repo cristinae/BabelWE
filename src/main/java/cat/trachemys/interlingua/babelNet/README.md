@@ -3,7 +3,7 @@
 Include the BabelNet IDs into a file with already annotated data with the cat.trachemys.interlingua.babelNet.DataIDAnnotator class of this project or with TreeTagger:
 
 ```
-java -cp BabelWE-0.0.1-SNAPSHOT-jar-with-dependencies.jar cat.trachemys.interlingua.babelNet.DataIDAnnotator -h
+java -cp BabelWE-0.2-SNAPSHOT-jar-with-dependencies.jar cat.trachemys.interlingua.babelNet.DataIDAnnotator -h
 
 usage: DataIDAnnotator
  -f,--format <arg>     Format of the input file [wpl|conll]
@@ -13,7 +13,7 @@ usage: DataIDAnnotator
                        [ar|en|es|tr|de|fr|ro|nl|it]
                        
 ex:
-java -cp target/BabelWE-0.0.1-SNAPSHOT-jar-with-dependencies.jar cat.trachemys.interlingua.babelNet.DataIDAnnotator -l en -f conll -i file.wpl
+java -cp target/BabelWE-0.2-SNAPSHOT-jar-with-dependencies.jar cat.trachemys.interlingua.babelNet.DataIDAnnotator -l en -f conll -i file.wpl
 ```
 
 ### Data Formats

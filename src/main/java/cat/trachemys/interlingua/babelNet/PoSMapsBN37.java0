@@ -3,145 +3,143 @@ package cat.trachemys.interlingua.babelNet;
 import java.util.HashMap;
 import java.util.Map;
 
-// import it.uniroma1.lcl.babelnet.data.BabelPOS;  // BN 3.7
-import com.babelscape.util.UniversalPOS; // BN 4.0
+import it.uniroma1.lcl.babelnet.data.BabelPOS;  // BN 3.7
+//import com.babelscape.util.UniversalPOS; // BN 4.0
 
 /**
- * Mapping PoS tags for Arabic, English, French, Italian, Romanian, Dutch, Deutsch, Turkish and Spanish 
- * into the Universal Tag set. Due to a change of version of BabelNet API, the change has been done 
- * through the old BabelPOS tag set.
+ * Mapping PoS tags for Arabic, English and Spanish into the BabelNet tag set.
  * 
  * @author cristina
  * @since Dec 27, 2016
  */
-public class PoSMaps {
+public class PoSMapsBN37 {
 
 	/**
 	 * Mapping Arabic Mada 2.1 PoS tags into BabelNet.
 	 * There is a 1-to-1 correspondence with English Penn Tree Bank
 	 */
-	static final Map<String, UniversalPOS> BN_POS_AR= new HashMap<String, UniversalPOS>(){
+	static final Map<String, BabelPOS> BN_POS_AR= new HashMap<String, BabelPOS>(){
 		private static final long serialVersionUID = 1652098132934864030L;
 	    {
-	    	put("noun", UniversalPOS.NOUN);
-	    	put("noun_num", UniversalPOS.NOUN);
-	    	put("noun_quant", UniversalPOS.NOUN);
-	    	put("noun_prop", UniversalPOS.NOUN);
-	    	put("adj", UniversalPOS.ADJ);
-	    	put("adj_comp", UniversalPOS.ADJ);
-	    	put("adj_num", UniversalPOS.ADJ);
-	    	put("adv", UniversalPOS.ADV);
-	    	put("adv_interrog", UniversalPOS.ADV);
-	    	put("adv_rel", UniversalPOS.ADV);
-	    	put("pron", UniversalPOS.PRON);
-	    	put("pron_dem", UniversalPOS.PRON);
-	    	put("pron_exclam", UniversalPOS.PRON);
-	    	put("pron_interrog", UniversalPOS.PRON);
-	    	put("pron_rel", UniversalPOS.PRON);
-	    	put("verb", UniversalPOS.VERB);
-	    	put("verb_pseudo", UniversalPOS.VERB);
-	    	put("part", UniversalPOS.ADP);
-	    	put("part_dem", UniversalPOS.DET);
-	    	put("part_det", UniversalPOS.DET);
-	    	put("part_focus", UniversalPOS.ADP);
-	    	put("part_fut", UniversalPOS.ADP);
-	    	put("part_interrog", UniversalPOS.ADP);
+	    	put("noun", BabelPOS.NOUN);
+	    	put("noun_num", BabelPOS.NOUN);
+	    	put("noun_quant", BabelPOS.NOUN);
+	    	put("noun_prop", BabelPOS.NOUN);
+	    	put("adj", BabelPOS.ADJECTIVE);
+	    	put("adj_comp", BabelPOS.ADJECTIVE);
+	    	put("adj_num", BabelPOS.ADJECTIVE);
+	    	put("adv", BabelPOS.ADVERB);
+	    	put("adv_interrog", BabelPOS.ADVERB);
+	    	put("adv_rel", BabelPOS.ADVERB);
+	    	put("pron", BabelPOS.PRONOUN);
+	    	put("pron_dem", BabelPOS.PRONOUN);
+	    	put("pron_exclam", BabelPOS.PRONOUN);
+	    	put("pron_interrog", BabelPOS.PRONOUN);
+	    	put("pron_rel", BabelPOS.PRONOUN);
+	    	put("verb", BabelPOS.VERB);
+	    	put("verb_pseudo", BabelPOS.VERB);
+	    	put("part", BabelPOS.PREPOSITION);
+	    	put("part_dem", BabelPOS.DETERMINER);
+	    	put("part_det", BabelPOS.DETERMINER);
+	    	put("part_focus", BabelPOS.PREPOSITION);
+	    	put("part_fut", BabelPOS.PREPOSITION);
+	    	put("part_interrog", BabelPOS.PREPOSITION);
 	    	put("part_neg", null); // think (RPs in PTB)
-	    	put("part_restrict", UniversalPOS.ADP);
-	    	put("part_verb", UniversalPOS.ADP);
-	    	put("part_voc", UniversalPOS.ADP);
-	    	put("prep", UniversalPOS.ADP);
-	    	put("abbrev", UniversalPOS.NOUN);
+	    	put("part_restrict", BabelPOS.PREPOSITION);
+	    	put("part_verb", BabelPOS.PREPOSITION);
+	    	put("part_voc", BabelPOS.PREPOSITION);
+	    	put("prep", BabelPOS.PREPOSITION);
+	    	put("abbrev", BabelPOS.NOUN);
 	    	put("punc", null);
-	    	put("conj", UniversalPOS.CCONJ);
-	    	put("conj_sub", UniversalPOS.SCONJ);
-	    	put("interj", UniversalPOS.INTJ);
-	    	put("digit", UniversalPOS.NOUN); //think determiner?
-	    	put("latin", UniversalPOS.NOUN);  //think
-	    	put("joker", UniversalPOS.NOUN); //artificially added
+	    	put("conj", BabelPOS.CONJUNCTION);
+	    	put("conj_sub", BabelPOS.CONJUNCTION);
+	    	put("interj", BabelPOS.INTERJECTION);
+	    	put("digit", BabelPOS.NOUN); //think determiner?
+	    	put("latin", BabelPOS.NOUN);  //think
+	    	put("joker", BabelPOS.NOUN); //artificially added
 		}
 	};
 	
 	/**
 	 * Mapping English Penn Tree Bank PoS into BabelNet
 	 */
-	static final Map<String,UniversalPOS> BN_POS_EN= new HashMap<String,UniversalPOS>(){
+	static final Map<String, BabelPOS> BN_POS_EN= new HashMap<String, BabelPOS>(){
 		private static final long serialVersionUID = 1652098132934864031L;
 	    {
-	    	put("CC", UniversalPOS.CCONJ);
-	    	put("CD", UniversalPOS.NOUN); //think determiner?
-	    	put("DT", UniversalPOS.DET);
+	    	put("CC", BabelPOS.CONJUNCTION);
+	    	put("CD", BabelPOS.NOUN); //think determiner?
+	    	put("DT", BabelPOS.DETERMINER);
 	    	put("EX", null); //think
-	    	put("FW", UniversalPOS.NOUN); //think
-	    	put("IN", UniversalPOS.ADP);
-	    	put("JJ", UniversalPOS.ADJ);
-	    	put("JJR", UniversalPOS.ADJ);
-	    	put("JJS", UniversalPOS.ADJ); 
+	    	put("FW", BabelPOS.NOUN); //think
+	    	put("IN", BabelPOS.PREPOSITION);
+	    	put("JJ", BabelPOS.ADJECTIVE);
+	    	put("JJR", BabelPOS.ADJECTIVE);
+	    	put("JJS", BabelPOS.ADJECTIVE); 
 	    	put("LS", null); //think 
-	    	put("MD", UniversalPOS.VERB); 
-	    	put("NN", UniversalPOS.NOUN); 
-	    	put("NNS", UniversalPOS.NOUN);
-	    	put("NNP", UniversalPOS.NOUN); 
-	    	put("NNPS", UniversalPOS.NOUN);
-	    	put("PDT", UniversalPOS.DET); 
+	    	put("MD", BabelPOS.VERB); 
+	    	put("NN", BabelPOS.NOUN); 
+	    	put("NNS", BabelPOS.NOUN);
+	    	put("NNP", BabelPOS.NOUN); 
+	    	put("NNPS", BabelPOS.NOUN);
+	    	put("PDT", BabelPOS.DETERMINER); 
 	    	put("POS", null); //think 
-	    	put("PRP", UniversalPOS.PRON); 
-	    	put("PRP$", UniversalPOS.PRON);
-	    	put("RB",  UniversalPOS.ADV);
-	    	put("RBR", UniversalPOS.ADV); 
-	    	put("RBS", UniversalPOS.ADV); 
+	    	put("PRP", BabelPOS.PRONOUN); 
+	    	put("PRP$", BabelPOS.PRONOUN);
+	    	put("RB",  BabelPOS.ADVERB);
+	    	put("RBR", BabelPOS.ADVERB); 
+	    	put("RBS", BabelPOS.ADVERB); 
 	    	put("RP", null); //think
 	    	put("SYM", null); //think 
-	    	put("TO", UniversalPOS.ADP); 
-	    	put("UH", UniversalPOS.INTJ); 
-	    	put("VB", UniversalPOS.VERB); 
-	    	put("VBD", UniversalPOS.VERB); 
-	    	put("VBG", UniversalPOS.VERB); 
-	    	put("VBN", UniversalPOS.VERB); 
-	    	put("VBP", UniversalPOS.VERB); 
-	    	put("VBZ", UniversalPOS.VERB); 
-	    	put("WDT", UniversalPOS.DET); 
-	    	put("WP", UniversalPOS.PRON);
-	    	put("WP$", UniversalPOS.PRON); 
-	    	put("WRB", UniversalPOS.ADV); 
+	    	put("TO", BabelPOS.PREPOSITION); 
+	    	put("UH", BabelPOS.INTERJECTION); 
+	    	put("VB", BabelPOS.VERB); 
+	    	put("VBD", BabelPOS.VERB); 
+	    	put("VBG", BabelPOS.VERB); 
+	    	put("VBN", BabelPOS.VERB); 
+	    	put("VBP", BabelPOS.VERB); 
+	    	put("VBZ", BabelPOS.VERB); 
+	    	put("WDT", BabelPOS.DETERMINER); 
+	    	put("WP", BabelPOS.PRONOUN);
+	    	put("WP$", BabelPOS.PRONOUN); 
+	    	put("WRB", BabelPOS.ADVERB); 
 	    	// Lowercased version
-	    	put("cc", UniversalPOS.CCONJ);
-	    	put("cd", UniversalPOS.NOUN); //think determiner?
-	    	put("dt", UniversalPOS.DET);
+	    	put("cc", BabelPOS.CONJUNCTION);
+	    	put("cd", BabelPOS.NOUN); //think determiner?
+	    	put("dt", BabelPOS.DETERMINER);
 	    	put("ex", null); //think
-	    	put("fw", UniversalPOS.NOUN); //think
-	    	put("in", UniversalPOS.ADP);
-	    	put("jj", UniversalPOS.ADJ);
-	    	put("jjr", UniversalPOS.ADJ);
-	    	put("jjs", UniversalPOS.ADJ); 
+	    	put("fw", BabelPOS.NOUN); //think
+	    	put("in", BabelPOS.PREPOSITION);
+	    	put("jj", BabelPOS.ADJECTIVE);
+	    	put("jjr", BabelPOS.ADJECTIVE);
+	    	put("jjs", BabelPOS.ADJECTIVE); 
 	    	put("ls", null); //think 
-	    	put("md", UniversalPOS.VERB); 
-	    	put("nn", UniversalPOS.NOUN); 
-	    	put("nns", UniversalPOS.NOUN);
-	    	put("nnp", UniversalPOS.NOUN); 
-	    	put("nnps", UniversalPOS.NOUN);
-	    	put("pdt", UniversalPOS.DET); 
+	    	put("md", BabelPOS.VERB); 
+	    	put("nn", BabelPOS.NOUN); 
+	    	put("nns", BabelPOS.NOUN);
+	    	put("nnp", BabelPOS.NOUN); 
+	    	put("nnps", BabelPOS.NOUN);
+	    	put("pdt", BabelPOS.DETERMINER); 
 	    	put("pos", null); //think 
-	    	put("prp", UniversalPOS.PRON); 
-	    	put("prp$", UniversalPOS.PRON);
-	    	put("rb",  UniversalPOS.ADV);
-	    	put("rbr", UniversalPOS.ADV); 
-	    	put("rbs", UniversalPOS.ADV); 
+	    	put("prp", BabelPOS.PRONOUN); 
+	    	put("prp$", BabelPOS.PRONOUN);
+	    	put("rb",  BabelPOS.ADVERB);
+	    	put("rbr", BabelPOS.ADVERB); 
+	    	put("rbs", BabelPOS.ADVERB); 
 	    	put("rp", null); //think
 	    	put("sym", null); //think 
-	    	put("to", UniversalPOS.ADP); 
-	    	put("uh", UniversalPOS.INTJ); 
-	    	put("vb", UniversalPOS.VERB); 
-	    	put("vbd", UniversalPOS.VERB); 
-	    	put("vbg", UniversalPOS.VERB); 
-	    	put("vbn", UniversalPOS.VERB); 
-	    	put("vbp", UniversalPOS.VERB); 
-	    	put("vbz", UniversalPOS.VERB); 
-	    	put("wdt", UniversalPOS.DET); 
-	    	put("wp", UniversalPOS.PRON);
-	    	put("wp$", UniversalPOS.PRON); 
-	    	put("wrb", UniversalPOS.ADV); 
-	    	put("joker", UniversalPOS.NOUN); //artificially added
+	    	put("to", BabelPOS.PREPOSITION); 
+	    	put("uh", BabelPOS.INTERJECTION); 
+	    	put("vb", BabelPOS.VERB); 
+	    	put("vbd", BabelPOS.VERB); 
+	    	put("vbg", BabelPOS.VERB); 
+	    	put("vbn", BabelPOS.VERB); 
+	    	put("vbp", BabelPOS.VERB); 
+	    	put("vbz", BabelPOS.VERB); 
+	    	put("wdt", BabelPOS.DETERMINER); 
+	    	put("wp", BabelPOS.PRONOUN);
+	    	put("wp$", BabelPOS.PRONOUN); 
+	    	put("wrb", BabelPOS.ADVERB); 
+	    	put("joker", BabelPOS.NOUN); //artificially added
 		}
 	};
 	
@@ -150,20 +148,20 @@ public class PoSMaps {
 	 * Since the Ancora tagset is much more detailed than Babelnet we only
 	 * consider the first two characters to do the mapping.
 	 */
-	static final Map<String,UniversalPOS> BN_POS_ES= new HashMap<String,UniversalPOS>(){
+	static final Map<String, BabelPOS> BN_POS_ES= new HashMap<String, BabelPOS>(){
 		private static final long serialVersionUID = 1652098132934864032L;
 	    {
-	    	put("ao", UniversalPOS.ADJ);
-	    	put("aq", UniversalPOS.ADJ);
-	    	put("cc", UniversalPOS.CCONJ);
-	    	put("cs", UniversalPOS.SCONJ);
-	    	put("da", UniversalPOS.DET);
-	    	put("dd", UniversalPOS.DET);
-	    	put("de", UniversalPOS.DET);
-	    	put("di", UniversalPOS.DET);
-	    	put("dn", UniversalPOS.DET);
-	    	put("dp", UniversalPOS.DET);
-	    	put("dt", UniversalPOS.DET);
+	    	put("ao", BabelPOS.ADJECTIVE);
+	    	put("aq", BabelPOS.ADJECTIVE);
+	    	put("cc", BabelPOS.CONJUNCTION);
+	    	put("cs", BabelPOS.CONJUNCTION);
+	    	put("da", BabelPOS.ARTICLE);
+	    	put("dd", BabelPOS.DETERMINER);
+	    	put("de", BabelPOS.DETERMINER);
+	    	put("di", BabelPOS.ARTICLE);
+	    	put("dn", BabelPOS.DETERMINER);
+	    	put("dp", BabelPOS.ARTICLE);
+	    	put("dt", BabelPOS.DETERMINER);
 	    	put("f0", null); //punctuations
 	    	put("fa", null);
 	    	put("fc", null);
@@ -177,29 +175,29 @@ public class PoSMaps {
 	    	put("ft", null);
 	    	put("fx", null);
 	    	put("fz", null);
-	    	put("i", UniversalPOS.INTJ);
-	    	put("nc", UniversalPOS.NOUN);
-	    	put("np", UniversalPOS.NOUN);
-	    	put("p0", UniversalPOS.PRON);
-	    	put("pd", UniversalPOS.PRON);
-	    	put("pe", UniversalPOS.PRON);
-	    	put("pi", UniversalPOS.PRON);
-	    	put("pn", UniversalPOS.PRON);
-	    	put("pp", UniversalPOS.PRON);
-	    	put("pr", UniversalPOS.PRON);
-	    	put("pt", UniversalPOS.PRON);
-	    	put("px", UniversalPOS.PRON);
-	    	put("rg", UniversalPOS.ADV);
-	    	put("rn", UniversalPOS.ADV);
-	    	put("sp", UniversalPOS.ADP);
-	    	put("va", UniversalPOS.VERB);
-	    	put("vm", UniversalPOS.VERB);
-	    	put("vs", UniversalPOS.VERB);
+	    	put("i", BabelPOS.INTERJECTION);
+	    	put("nc", BabelPOS.NOUN);
+	    	put("np", BabelPOS.NOUN);
+	    	put("p0", BabelPOS.PRONOUN);
+	    	put("pd", BabelPOS.PRONOUN);
+	    	put("pe", BabelPOS.PRONOUN);
+	    	put("pi", BabelPOS.PRONOUN);
+	    	put("pn", BabelPOS.PRONOUN);
+	    	put("pp", BabelPOS.PRONOUN);
+	    	put("pr", BabelPOS.PRONOUN);
+	    	put("pt", BabelPOS.PRONOUN);
+	    	put("px", BabelPOS.PRONOUN);
+	    	put("rg", BabelPOS.ADVERB);
+	    	put("rn", BabelPOS.ADVERB);
+	    	put("sp", BabelPOS.PREPOSITION);
+	    	put("va", BabelPOS.VERB);
+	    	put("vm", BabelPOS.VERB);
+	    	put("vs", BabelPOS.VERB);
 	    	put("w", null); //dates
-	    	put("z0", UniversalPOS.NOUN); //numerals
-	    	put("zm", UniversalPOS.NOUN);
-	    	put("zu", UniversalPOS.NOUN);
-	    	put("joker", UniversalPOS.NOUN); //artificially added
+	    	put("z0", BabelPOS.NOUN); //numerals
+	    	put("zm", BabelPOS.NOUN);
+	    	put("zu", BabelPOS.NOUN);
+	    	put("joker", BabelPOS.NOUN); //artificially added
 		}
 	};
 
@@ -207,31 +205,31 @@ public class PoSMaps {
 	/**
 	 * Mapping TS Wikipedia Data Set for Turkish which is the one used by the TS tagset
 	 */
-	static final Map<String,UniversalPOS> BN_POS_TR= new HashMap<String,UniversalPOS>(){
+	static final Map<String, BabelPOS> BN_POS_TR= new HashMap<String, BabelPOS>(){
 		private static final long serialVersionUID = 1652098132934864033L;
 	    {
-	    	put("Verb", UniversalPOS.VERB);
-	    	put("Noun", UniversalPOS.NOUN);
-	    	put("Adj", UniversalPOS.ADJ);
-	    	put("Adv", UniversalPOS.ADV);
-	    	put("Det", UniversalPOS.DET);
-	    	put("Conj", UniversalPOS.CCONJ);
-	    	put("Postp", UniversalPOS.ADP);         // Postposition
-	    	put("Interj", UniversalPOS.INTJ); 		// Interjection
-	    	put("Pron", UniversalPOS.PRON);
+	    	put("Verb", BabelPOS.VERB);
+	    	put("Noun", BabelPOS.NOUN);
+	    	put("Adj", BabelPOS.ADJECTIVE);
+	    	put("Adv", BabelPOS.ADVERB);
+	    	put("Det", BabelPOS.DETERMINER);
+	    	put("Conj", BabelPOS.CONJUNCTION);
+	    	put("Postp", BabelPOS.PREPOSITION);         // Postposition
+	    	put("Interj", BabelPOS.INTERJECTION); 		// Interjection
+	    	put("Pron", BabelPOS.PRONOUN);
 	    	put("Dup", null);  	       // Duplication
-	    	put("Num", UniversalPOS.NOUN); //think determiner?       //	Number
+	    	put("Num", BabelPOS.NOUN); //think determiner?       //	Number
 	    	put("Punc", null);
-	    	put("UnDef", UniversalPOS.DET);	 // Undefinite
+	    	put("UnDef", BabelPOS.ARTICLE);	 // Undefinite
 	    	put("Ques", null);     //Question
 	    	put("YY", null);       //	Misspell
-	    	put("Abbr", UniversalPOS.NOUN);     //	Abbreviation
+	    	put("Abbr", BabelPOS.NOUN);     //	Abbreviation
 	    	put("intEmphasis", null);   //	Internet Emphasis
 	    	put("intAbbrEng", null);    //	Internet English Abbreviation
 	    	put("tinglish", null); 	    //	Tinglish
-	    	put("bor", UniversalPOS.NOUN);	//	Borrowed
+	    	put("bor", BabelPOS.NOUN);	//	Borrowed
 	    	put("intSlang", null); 
-	    	put("joker", UniversalPOS.NOUN); //artificially added
+	    	put("joker", BabelPOS.NOUN); //artificially added
 		}
 	};
 		
@@ -245,39 +243,39 @@ public class PoSMaps {
 	 * that is intermediate between categories and subcategories. 
 	 * https://alpage.inria.fr/statgram/frdep/Publications/crabbecandi-taln2008-final.pdf
 	*/
-	static final Map<String,UniversalPOS> BN_POS_FR= new HashMap<String,UniversalPOS>(){
+	static final Map<String, BabelPOS> BN_POS_FR= new HashMap<String, BabelPOS>(){
 		private static final long serialVersionUID = 1652098132934864034L;
 	    {
-	    	put("V", UniversalPOS.VERB);
-	    	put("VIMP", UniversalPOS.VERB);
-	    	put("VINF", UniversalPOS.VERB);
-	    	put("VS", UniversalPOS.VERB);
-	    	put("VPP", UniversalPOS.VERB);
-	    	put("VPR", UniversalPOS.VERB);
-	    	put("NPP", UniversalPOS.NOUN);
-	    	put("NC", UniversalPOS.NOUN);
-	    	put("CS", UniversalPOS.SCONJ);
-	    	put("CC", UniversalPOS.CCONJ);		
-	    	put("CLS", UniversalPOS.PRON);
-	    	put("CLO", UniversalPOS.PRON);
-	    	put("CLR", UniversalPOS.PRON);
-	    	put("P", UniversalPOS.ADP);
-	    	put("P+D", UniversalPOS.ADP);
-	    	put("P+PRO", UniversalPOS.ADP);	
-	    	put("I", UniversalPOS.INTJ); 
+	    	put("V", BabelPOS.VERB);
+	    	put("VIMP", BabelPOS.VERB);
+	    	put("VINF", BabelPOS.VERB);
+	    	put("VS", BabelPOS.VERB);
+	    	put("VPP", BabelPOS.VERB);
+	    	put("VPR", BabelPOS.VERB);
+	    	put("NPP", BabelPOS.NOUN);
+	    	put("NC", BabelPOS.NOUN);
+	    	put("CS", BabelPOS.CONJUNCTION);
+	    	put("CC", BabelPOS.CONJUNCTION);		
+	    	put("CLS", BabelPOS.PRONOUN);
+	    	put("CLO", BabelPOS.PRONOUN);
+	    	put("CLR", BabelPOS.PRONOUN);
+	    	put("P", BabelPOS.PREPOSITION);
+	    	put("P+D", BabelPOS.PREPOSITION);
+	    	put("P+PRO", BabelPOS.PREPOSITION);	
+	    	put("I", BabelPOS.INTERJECTION); 
 	    	put("PONCT", null);	
-	    	put("ET", UniversalPOS.NOUN);	//	Borrowed
-	    	put("ADJWH", UniversalPOS.ADJ);	
-	    	put("ADJ", UniversalPOS.ADJ);
-	    	put("ADVWH", UniversalPOS.ADV);	
-	    	put("ADV", UniversalPOS.ADV);
-	    	put("PROWH", UniversalPOS.PRON);	
-	    	put("PRORE", UniversalPOS.PRON);	
-	    	put("PRO", UniversalPOS.PRON);
-	    	put("DETWH", UniversalPOS.DET);	
-	    	put("DET", UniversalPOS.DET);
-	    	put("joker", UniversalPOS.NOUN); //artificially added
-	    	put("JOKER", UniversalPOS.NOUN); //artificially added
+	    	put("ET", BabelPOS.NOUN);	//	Borrowed
+	    	put("ADJWH", BabelPOS.ADJECTIVE);	
+	    	put("ADJ", BabelPOS.ADJECTIVE);
+	    	put("ADVWH", BabelPOS.ADVERB);	
+	    	put("ADV", BabelPOS.ADVERB);
+	    	put("PROWH", BabelPOS.PRONOUN);	
+	    	put("PRORE", BabelPOS.PRONOUN);	
+	    	put("PRO", BabelPOS.PRONOUN);
+	    	put("DETWH", BabelPOS.DETERMINER);	
+	    	put("DET", BabelPOS.DETERMINER);
+	    	put("joker", BabelPOS.NOUN); //artificially added
+	    	put("JOKER", BabelPOS.NOUN); //artificially added
 	    }
 	};
 		
@@ -286,65 +284,65 @@ public class PoSMaps {
 	 * Mapping from the STTS Stuttgart Tübingen POS tagset for German 
 	 * http://paula.petcu.tm.ro/init/default/post/opennlp-part-of-speech-tags
 	 */
-	static final Map<String,UniversalPOS> BN_POS_DE= new HashMap<String,UniversalPOS>(){
+	static final Map<String, BabelPOS> BN_POS_DE= new HashMap<String, BabelPOS>(){
 		private static final long serialVersionUID = 1652098132934864035L;
 	    {
-	    	put("ADJA", UniversalPOS.ADJ); 	// attributive adjective
-	    	put("ADJD", UniversalPOS.ADJ); 	// adverbial or predicative adjective
-	    	put("ADV", UniversalPOS.ADV); 	// Adverb
-	    	put("APPR", UniversalPOS.ADP); 	// Preposition
-	    	put("APPRART", UniversalPOS.ADP); // Preposition with article folded in
-	    	put("APPO", UniversalPOS.ADP); 	// Postposition
+	    	put("ADJA", BabelPOS.ADJECTIVE); 	// attributive adjective
+	    	put("ADJD", BabelPOS.ADJECTIVE); 	// adverbial or predicative adjective
+	    	put("ADV", BabelPOS.ADVERB); 	// Adverb
+	    	put("APPR", BabelPOS.PREPOSITION); 	// Preposition
+	    	put("APPRART", BabelPOS.PREPOSITION); // Preposition with article folded in
+	    	put("APPO", BabelPOS.PREPOSITION); 	// Postposition
 	    	put("APZR", null);  			// Right part of circumposition
-	    	put("ART", UniversalPOS.DET); 	// definite or indefinite article
-	    	put("CARD", UniversalPOS.NOUN); 		// cardinal number
-	    	put("FM", UniversalPOS.NOUN); 		// foreign word
-	    	put("ITJ", UniversalPOS.INTJ); 	// interjection
-	    	put("KOUI", UniversalPOS.SCONJ); 	// subordinating conjunction with 'zu' and infinitive
-	    	put("KOUS", UniversalPOS.SCONJ); 	// subordinating conjunction with sentence
-	    	put("KON", UniversalPOS.CCONJ); 	// coordinating conjunction
-	    	put("KOKOM", UniversalPOS.CCONJ); 	// comparative conjunction
-	    	put("NN", UniversalPOS.NOUN); 		// common noun
-	    	put("NE", UniversalPOS.NOUN); 		// proper noun
-	    	put("PDS", UniversalPOS.PRON); 	// substituting demonstrative pronoun
-	    	put("PDAT", UniversalPOS.PRON); 	// attributive demonstrative pronoun
-	    	put("PIS", UniversalPOS.PRON); 	// substituting indefinite pronoun
-	    	put("PIAT", UniversalPOS.PRON); 	// attributive indefinite pronoun
-	    	put("PIDAT", UniversalPOS.PRON); 	// attributive indefinite pronoun with a determiner
-	    	put("PPER", UniversalPOS.PRON); 	// non-reflexive personal pronoun
-	    	put("PPOSS", UniversalPOS.PRON); 	// substituting possessive pronoun
-	    	put("PPOSAT", UniversalPOS.PRON); 	// attribute adding posessive pronoun
-	    	put("PRELS", UniversalPOS.PRON); 	// substituting relative pronoun
-	    	put("PRELAT", UniversalPOS.PRON); 	// attribute adding relative pronoun
-	    	put("PRF", UniversalPOS.PRON); 	// reflexive personal pronoun
-	    	put("PWS", UniversalPOS.PRON); 	// substituting interrogative pronoun
-	    	put("PWAT", UniversalPOS.PRON); 	// attribute adding interrogative pronoun
-	    	put("PWAV", UniversalPOS.PRON); 	// adverbial interrogative or relative pronoun
-	    	put("PAV", UniversalPOS.ADV);  	// pronominal adverb
+	    	put("ART", BabelPOS.DETERMINER); 	// definite or indefinite article
+	    	put("CARD", BabelPOS.NOUN); 		// cardinal number
+	    	put("FM", BabelPOS.NOUN); 		// foreign word
+	    	put("ITJ", BabelPOS.INTERJECTION); 	// interjection
+	    	put("KOUI", BabelPOS.CONJUNCTION); 	// subordinating conjunction with 'zu' and infinitive
+	    	put("KOUS", BabelPOS.CONJUNCTION); 	// subordinating conjunction with sentence
+	    	put("KON", BabelPOS.CONJUNCTION); 	// coordinating conjunction
+	    	put("KOKOM", BabelPOS.CONJUNCTION); 	// comparative conjunction
+	    	put("NN", BabelPOS.NOUN); 		// common noun
+	    	put("NE", BabelPOS.NOUN); 		// proper noun
+	    	put("PDS", BabelPOS.PRONOUN); 	// substituting demonstrative pronoun
+	    	put("PDAT", BabelPOS.PRONOUN); 	// attributive demonstrative pronoun
+	    	put("PIS", BabelPOS.PRONOUN); 	// substituting indefinite pronoun
+	    	put("PIAT", BabelPOS.PRONOUN); 	// attributive indefinite pronoun
+	    	put("PIDAT", BabelPOS.PRONOUN); 	// attributive indefinite pronoun with a determiner
+	    	put("PPER", BabelPOS.PRONOUN); 	// non-reflexive personal pronoun
+	    	put("PPOSS", BabelPOS.PRONOUN); 	// substituting possessive pronoun
+	    	put("PPOSAT", BabelPOS.PRONOUN); 	// attribute adding posessive pronoun
+	    	put("PRELS", BabelPOS.PRONOUN); 	// substituting relative pronoun
+	    	put("PRELAT", BabelPOS.PRONOUN); 	// attribute adding relative pronoun
+	    	put("PRF", BabelPOS.PRONOUN); 	// reflexive personal pronoun
+	    	put("PWS", BabelPOS.PRONOUN); 	// substituting interrogative pronoun
+	    	put("PWAT", BabelPOS.PRONOUN); 	// attribute adding interrogative pronoun
+	    	put("PWAV", BabelPOS.PRONOUN); 	// adverbial interrogative or relative pronoun
+	    	put("PAV", BabelPOS.ADVERB);  	// pronominal adverb
 	    	put("PTKZU", null); 			// 'zu' before infinitive
 	    	put("PTKNEG", null); 		// Negation particle
 	    	put("PTKVZ", null); 			// particle part of separable verb
 	    	put("PTKANT", null); 		// answer particle
 	    	put("PTKA", null); 			// particle associated with adverb or adjective
-	    	put("TRUNC", UniversalPOS.NOUN); 	// first member of compound noun
-	    	put("VVFIN", UniversalPOS.VERB); 	// full finite verb
-	    	put("VVIMP", UniversalPOS.VERB); 	// full imperative
-	    	put("VVINF", UniversalPOS.VERB); 	// full infinitive
-	    	put("VVIZU", UniversalPOS.VERB); 	// full infinitive with "zu"
-	    	put("VVPP", UniversalPOS.VERB); 		// full past participle
-	    	put("VAFIN", UniversalPOS.VERB);		// auxilliary finite verb
-	    	put("VAIMP", UniversalPOS.VERB); 	// auxilliary imperative
-	    	put("VAINF", UniversalPOS.VERB); 	// auxilliary infinitive
-	    	put("VAPP", UniversalPOS.VERB); 		// auxilliary past participle
-	    	put("VMFIN", UniversalPOS.VERB); 	// modal finite verb
-	    	put("VMINF", UniversalPOS.VERB); 	// modal infinitive
-	    	put("VMPP", UniversalPOS.VERB); 		// modal past participle
+	    	put("TRUNC", BabelPOS.NOUN); 	// first member of compound noun
+	    	put("VVFIN", BabelPOS.VERB); 	// full finite verb
+	    	put("VVIMP", BabelPOS.VERB); 	// full imperative
+	    	put("VVINF", BabelPOS.VERB); 	// full infinitive
+	    	put("VVIZU", BabelPOS.VERB); 	// full infinitive with "zu"
+	    	put("VVPP", BabelPOS.VERB); 		// full past participle
+	    	put("VAFIN", BabelPOS.VERB);		// auxilliary finite verb
+	    	put("VAIMP", BabelPOS.VERB); 	// auxilliary imperative
+	    	put("VAINF", BabelPOS.VERB); 	// auxilliary infinitive
+	    	put("VAPP", BabelPOS.VERB); 		// auxilliary past participle
+	    	put("VMFIN", BabelPOS.VERB); 	// modal finite verb
+	    	put("VMINF", BabelPOS.VERB); 	// modal infinitive
+	    	put("VMPP", BabelPOS.VERB); 		// modal past participle
 	    	put("XY", null); 			// Non word with special characters
 	    	put("$,", null); 			// comma
 	    	put("$.", null); 			// sentence ending punctuation
 	    	put("$(", null); 			// other sentence internal punctuation		
-	    	put("joker", UniversalPOS.NOUN); //artificially added
-	    	put("JOKER", UniversalPOS.NOUN); //artificially added
+	    	put("joker", BabelPOS.NOUN); //artificially added
+	    	put("JOKER", BabelPOS.NOUN); //artificially added
 	    }
 	};
 
@@ -353,51 +351,51 @@ public class PoSMaps {
 	 * Dutch TreeTagger part-of-speech tagset
 	 * http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/dutch-tagset.txt
 	 */
-	static final Map<String,UniversalPOS> BN_POS_NL= new HashMap<String,UniversalPOS>(){
+	static final Map<String, BabelPOS> BN_POS_NL= new HashMap<String, BabelPOS>(){
 		private static final long serialVersionUID = 1652098132934864036L;
 	    {
 	    	put("$.", null);		// sentence-final punctuation
-	    	put("adj", UniversalPOS.ADJ);	// adjective
-	    	put("adj*kop", UniversalPOS.ADJ);		// truncated adjective
-	    	put("adjabbr", UniversalPOS.ADJ);		// abbreviated adjective
-	    	put("adv", UniversalPOS.ADV);		// adverb
-	    	put("advabbr", UniversalPOS.ADV);		// abbreviated adverb
-	    	put("conjcoord", UniversalPOS.CCONJ);	// coordinating conjunction
-	    	put("conjsubo", UniversalPOS.SCONJ);	// subordinating conjunction
-	    	put("det__art", UniversalPOS.DET);	// article
-	    	put("det__demo", UniversalPOS.DET);	// attributively used demonstrative pronoun
-	    	put("det__indef", UniversalPOS.DET);	// attributively used indefinite pronoun
-	    	put("det__poss", UniversalPOS.DET);	// attributively used possessive pronoun
-	    	put("det__quest", UniversalPOS.PRON);	// attributively used question pronoun
-	    	put("det__rel", UniversalPOS.PRON);	// attributively used relative pronoun
-	    	put("int", UniversalPOS.INTJ);		// interjection
-	    	put("noun*kop", UniversalPOS.NOUN);	// truncated noun
-	    	put("nounabbr", UniversalPOS.NOUN);		// abbreviated noun
-	    	put("nounpl", UniversalPOS.NOUN);			// plural noun
-	    	put("nounprop", UniversalPOS.NOUN);		// proper name
-	    	put("nounsg", UniversalPOS.NOUN);			// singular noun
-	    	put("num__card", UniversalPOS.NOUN);	// cardinal number
-	    	put("num__ord", UniversalPOS.NOUN);	// ordinal number
+	    	put("adj", BabelPOS.ADJECTIVE);	// adjective
+	    	put("adj*kop", BabelPOS.ADJECTIVE);		// truncated adjective
+	    	put("adjabbr", BabelPOS.ADJECTIVE);		// abbreviated adjective
+	    	put("adv", BabelPOS.ADVERB);		// adverb
+	    	put("advabbr", BabelPOS.ADVERB);		// abbreviated adverb
+	    	put("conjcoord", BabelPOS.CONJUNCTION);	// coordinating conjunction
+	    	put("conjsubo", BabelPOS.CONJUNCTION);	// subordinating conjunction
+	    	put("det__art", BabelPOS.ARTICLE);	// article
+	    	put("det__demo", BabelPOS.DETERMINER);	// attributively used demonstrative pronoun
+	    	put("det__indef", BabelPOS.DETERMINER);	// attributively used indefinite pronoun
+	    	put("det__poss", BabelPOS.DETERMINER);	// attributively used possessive pronoun
+	    	put("det__quest", BabelPOS.PRONOUN);	// attributively used question pronoun
+	    	put("det__rel", BabelPOS.PRONOUN);	// attributively used relative pronoun
+	    	put("int", BabelPOS.INTERJECTION);		// interjection
+	    	put("noun*kop", BabelPOS.NOUN);	// truncated noun
+	    	put("nounabbr", BabelPOS.NOUN);		// abbreviated noun
+	    	put("nounpl", BabelPOS.NOUN);			// plural noun
+	    	put("nounprop", BabelPOS.NOUN);		// proper name
+	    	put("nounsg", BabelPOS.NOUN);			// singular noun
+	    	put("num__card", BabelPOS.NOUN);	// cardinal number
+	    	put("num__ord", BabelPOS.NOUN);	// ordinal number
 	    	put("partte", null);		// particle "te"
-	    	put("prep", UniversalPOS.ADP);		// preposition
-	    	put("prepabbr", UniversalPOS.ADP);	// abbreviated preposition
-	    	put("pronadv", UniversalPOS.ADV);		// pronomial adverb
-	    	put("prondemo", UniversalPOS.PRON);		// demonstrative pronoun (used substitutively)
-	    	put("pronindef", UniversalPOS.PRON);	// indefined pronoun
-	    	put("pronpers", UniversalPOS.PRON);		// personal pronoun
-	    	put("pronposs", UniversalPOS.PRON);		// possessive pronoun
-	    	put("pronquest", UniversalPOS.PRON);		// question pronoun
-	    	put("pronrefl", UniversalPOS.PRON);		// reflexive pronoun
-	    	put("pronrel", UniversalPOS.PRON);			// relative pronoun
+	    	put("prep", BabelPOS.PREPOSITION);		// preposition
+	    	put("prepabbr", BabelPOS.PREPOSITION);	// abbreviated preposition
+	    	put("pronadv", BabelPOS.ADVERB);		// pronomial adverb
+	    	put("prondemo", BabelPOS.PRONOUN);		// demonstrative pronoun (used substitutively)
+	    	put("pronindef", BabelPOS.PRONOUN);	// indefined pronoun
+	    	put("pronpers", BabelPOS.PRONOUN);		// personal pronoun
+	    	put("pronposs", BabelPOS.PRONOUN);		// possessive pronoun
+	    	put("pronquest", BabelPOS.PRONOUN);		// question pronoun
+	    	put("pronrefl", BabelPOS.PRONOUN);		// reflexive pronoun
+	    	put("pronrel", BabelPOS.PRONOUN);			// relative pronoun
 	    	put("punc", null);		// (non-sentential) punctuation
-	    	put("verbinf", UniversalPOS.VERB);		// infinitival verb
-	    	put("verbpapa", UniversalPOS.VERB);	// past participle verb
-	    	put("verbpastpl", UniversalPOS.VERB);	// plural past tense verb
-	    	put("verbpastsg", UniversalPOS.VERB);	// singular past tense verb
-	    	put("verbpresp", UniversalPOS.VERB);	// present participle verb
-	    	put("verbprespl", UniversalPOS.VERB);	// plural present tense verb
-	    	put("verbpressg", UniversalPOS.VERB);	// singular present tense verb
-	    	put("joker", UniversalPOS.NOUN); //artificially added
+	    	put("verbinf", BabelPOS.VERB);		// infinitival verb
+	    	put("verbpapa", BabelPOS.VERB);	// past participle verb
+	    	put("verbpastpl", BabelPOS.VERB);	// plural past tense verb
+	    	put("verbpastsg", BabelPOS.VERB);	// singular past tense verb
+	    	put("verbpresp", BabelPOS.VERB);	// present participle verb
+	    	put("verbprespl", BabelPOS.VERB);	// plural present tense verb
+	    	put("verbpressg", BabelPOS.VERB);	// singular present tense verb
+	    	put("joker", BabelPOS.NOUN); //artificially added
 	    }
 	};
 
@@ -407,49 +405,49 @@ public class PoSMaps {
 	 * http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/italian-tagset.txt
 	 * (Copyright Prof. Achim Stein, University of Stuttgart)
 	 */
-	static final Map<String,UniversalPOS> BN_POS_IT= new HashMap<String,UniversalPOS>(){
+	static final Map<String, BabelPOS> BN_POS_IT= new HashMap<String, BabelPOS>(){
 		private static final long serialVersionUID = 1652098132934864037L;
 	    {
 	    	put("ABR", null);		//abbreviation
-	    	put("ADJ", UniversalPOS.ADJ);		//adjective
-	    	put("ADV", UniversalPOS.ADV);		//adverb
-	    	put("CON", UniversalPOS.CCONJ);		//conjunction
-	    	put("DET:def", UniversalPOS.DET);	//definite article
-	    	put("DET:indef", UniversalPOS.DET);	//indefinite article
-	    	put("FW", UniversalPOS.NOUN);		//foreign word
-	    	put("INT", UniversalPOS.INTJ);		//interjection
+	    	put("ADJ", BabelPOS.ADJECTIVE);		//adjective
+	    	put("ADV", BabelPOS.ADVERB);		//adverb
+	    	put("CON", BabelPOS.CONJUNCTION);		//conjunction
+	    	put("DET:def", BabelPOS.DETERMINER);	//definite article
+	    	put("DET:indef", BabelPOS.DETERMINER);	//indefinite article
+	    	put("FW", BabelPOS.NOUN);		//foreign word
+	    	put("INT", BabelPOS.INTERJECTION);		//interjection
 	    	put("LS", null);		//list symbol
-	    	put("NOM", UniversalPOS.NOUN);		//noun
-	    	put("NPR", UniversalPOS.NOUN);		//name
-	    	put("NUM", UniversalPOS.NOUN);		//numeral
+	    	put("NOM", BabelPOS.NOUN);		//noun
+	    	put("NPR", BabelPOS.NOUN);		//name
+	    	put("NUM", BabelPOS.NOUN);		//numeral
 	    	put("PON", null);		//punctuation
-	    	put("PRE", UniversalPOS.ADP);	//preposition
-	    	put("PRE:det", UniversalPOS.ADP);		//preposition+article
-	    	put("PRO", UniversalPOS.PRON);		//pronoun
-	    	put("PRO:demo", UniversalPOS.PRON);		//demonstrative pronoun
-	    	put("PRO:indef", UniversalPOS.PRON);		//indefinite pronoun
-	    	put("PRO:inter", UniversalPOS.PRON);		//interrogative pronoun
-	    	put("PRO:pers", UniversalPOS.PRON);		//personal pronoun
-	    	put("PRO:poss", UniversalPOS.PRON);		//possessive pronoun
-	    	put("PRO:refl", UniversalPOS.PRON);		//reflexive pronoun
-	    	put("PRO:rela", UniversalPOS.PRON);		//relative pronoun
+	    	put("PRE", BabelPOS.PREPOSITION);	//preposition
+	    	put("PRE:det", BabelPOS.PREPOSITION);		//preposition+article
+	    	put("PRO", BabelPOS.PRONOUN);		//pronoun
+	    	put("PRO:demo", BabelPOS.PRONOUN);		//demonstrative pronoun
+	    	put("PRO:indef", BabelPOS.PRONOUN);		//indefinite pronoun
+	    	put("PRO:inter", BabelPOS.PRONOUN);		//interrogative pronoun
+	    	put("PRO:pers", BabelPOS.PRONOUN);		//personal pronoun
+	    	put("PRO:poss", BabelPOS.PRONOUN);		//possessive pronoun
+	    	put("PRO:refl", BabelPOS.PRONOUN);		//reflexive pronoun
+	    	put("PRO:rela", BabelPOS.PRONOUN);		//relative pronoun
 	    	put("SENT", null);		//sentence marker
 	    	put("SYM", null);		//symbol
-	    	put("VER:cimp", UniversalPOS.VERB);		//verb conjunctive imperfect
-	    	put("VER:cond", UniversalPOS.VERB);		//verb conditional
-	    	put("VER:cpre", UniversalPOS.VERB);		//verb conjunctive present
-	    	put("VER:futu", UniversalPOS.VERB);		//verb future tense
-	    	put("VER:geru", UniversalPOS.VERB);		//verb gerund
-	    	put("VER:impe", UniversalPOS.VERB);		//verb imperative
-	    	put("VER:impf", UniversalPOS.VERB);		//verb imperfect
-	    	put("VER:infi", UniversalPOS.VERB);		//verb infinitive
-	    	put("VER:pper", UniversalPOS.VERB);		//verb participle perfect
-	    	put("VER:ppre", UniversalPOS.VERB);		//verb participle present
-	    	put("VER:pres", UniversalPOS.VERB);		//verb present
-	    	put("VER:refl:infi", UniversalPOS.VERB);		//verb reflexive infinitive
-	    	put("VER:remo", UniversalPOS.VERB);		//verb simple past
-	    	put("joker", UniversalPOS.NOUN); //artificially added
-	    	put("JOKER", UniversalPOS.NOUN); //artificially added
+	    	put("VER:cimp", BabelPOS.VERB);		//verb conjunctive imperfect
+	    	put("VER:cond", BabelPOS.VERB);		//verb conditional
+	    	put("VER:cpre", BabelPOS.VERB);		//verb conjunctive present
+	    	put("VER:futu", BabelPOS.VERB);		//verb future tense
+	    	put("VER:geru", BabelPOS.VERB);		//verb gerund
+	    	put("VER:impe", BabelPOS.VERB);		//verb imperative
+	    	put("VER:impf", BabelPOS.VERB);		//verb imperfect
+	    	put("VER:infi", BabelPOS.VERB);		//verb infinitive
+	    	put("VER:pper", BabelPOS.VERB);		//verb participle perfect
+	    	put("VER:ppre", BabelPOS.VERB);		//verb participle present
+	    	put("VER:pres", BabelPOS.VERB);		//verb present
+	    	put("VER:refl:infi", BabelPOS.VERB);		//verb reflexive infinitive
+	    	put("VER:remo", BabelPOS.VERB);		//verb simple past
+	    	put("joker", BabelPOS.NOUN); //artificially added
+	    	put("JOKER", BabelPOS.NOUN); //artificially added
 	    }   
 	};      
                 
@@ -460,56 +458,56 @@ public class PoSMaps {
 	 * Only the first three characters are relevant for the Babelnet mapping, we use five
 	 * http://nl.ijs.si/ME/V4/msd/tables/msd-human-ro.tbl
 	 */
-	static final Map<String,UniversalPOS> BN_POS_RO= new HashMap<String,UniversalPOS>(){
+	static final Map<String, BabelPOS> BN_POS_RO= new HashMap<String, BabelPOS>(){
 		private static final long serialVersionUID = 1652098132934864038L;
 	    {
-	    	put("01N01", UniversalPOS.NOUN);	//Noun common -Definiteness
-	    	put("01N02", UniversalPOS.NOUN);	//Noun proper
-	    	put("02V01", UniversalPOS.VERB);	//Vmip1s	Verb main 
-	    	put("02V02", UniversalPOS.VERB);	//Vmip1s	Verb auxiliary
-	    	put("03A01", UniversalPOS.ADJ);	//Adjective qualificative positive
-	    	put("04P01", UniversalPOS.PRON);	//Pp1-sn--------s	Pronoun personal 
-	    	put("04P02", UniversalPOS.PRON);	//Pd3-po	Pronoun demonstrative t
-	    	put("04P03", UniversalPOS.PRON);	//Pi3	Pronoun indefinite 
-	    	put("04P04", UniversalPOS.PRON);	//Ps1ms-s	Pronoun possessive 
-	    	put("04P05", UniversalPOS.PRON);	//Px3--d--------s	Pronoun reflexive
-	    	put("04P06", UniversalPOS.PRON);	//Pz3-sr	Pronoun negative
-	    	put("04P07", UniversalPOS.PRON);	//Pw3--r	Pronoun int-rel 
-	    	put("05D01", UniversalPOS.DET);	//Dd3-po---e	Determiner demonstrative 
-	    	put("05D02", UniversalPOS.DET);	//Di3	Determiner indefinite 
-	    	put("05D03", UniversalPOS.DET);	//Ds1ms-s	Determiner possessive first masculine singular singular
-	    	put("05D04", UniversalPOS.DET);	//Dw3--r---e	Determiner int-rel third direct prenomin
-	    	put("05D05", UniversalPOS.DET);	//Dz3-po---e	Determiner negative third plural oblique prenomin
-	    	put("05D06", UniversalPOS.DET);	//Dh1ms	Determiner emphatic first masculine singular
-	    	put("06T01", UniversalPOS.DET);	//Article definite singular oblique
-	    	put("06T02", UniversalPOS.DET);	//Article indefinite plural oblique
-	    	put("06T03", UniversalPOS.DET);	//Article possessive plural oblique
-	    	put("06T04", UniversalPOS.DET);	//Article demonstrative plural oblique
-	    	put("07R01", UniversalPOS.ADV);	//Adverb general positive
-	    	put("07R02", UniversalPOS.ADV);	//Adverb particle
-	    	put("07R03", UniversalPOS.ADV);	//Adverb negative
-	    	put("07R05", UniversalPOS.ADV);	//Adverb int-rel +Clitic
-	    	put("07R06", UniversalPOS.ADV);	//Adverb portmanteau08S01010100	Spsg	Adposition preposition simple genitive
-	    	put("09C01", UniversalPOS.CCONJ);	//Conjunction coordinating simple simple positive
-	    	put("09C02", UniversalPOS.SCONJ);	//Conjunction subordinating simple simple positive
-	    	put("09C03", UniversalPOS.CCONJ);	//Conjunction portmanteau simple simple positive
-	    	put("10M01", UniversalPOS.NOUN);	//Numeral cardinal singular digit
-	    	put("10M02", UniversalPOS.NOUN);	//Numeral ordinal letter
-	    	put("10M03", UniversalPOS.NOUN);	//Numeral fractal feminine singular direct letter -Definiteness
-	    	put("10M04", UniversalPOS.NOUN);	//Numeral multiple masculine singular direct -Definiteness
-	    	put("10M05", UniversalPOS.NOUN);	//Numeral collect plural direct
+	    	put("01N01", BabelPOS.NOUN);	//Noun common -Definiteness
+	    	put("01N02", BabelPOS.NOUN);	//Noun proper
+	    	put("02V01", BabelPOS.VERB);	//Vmip1s	Verb main 
+	    	put("02V02", BabelPOS.VERB);	//Vmip1s	Verb auxiliary
+	    	put("03A01", BabelPOS.ADJECTIVE);	//Adjective qualificative positive
+	    	put("04P01", BabelPOS.PRONOUN);	//Pp1-sn--------s	Pronoun personal 
+	    	put("04P02", BabelPOS.PRONOUN);	//Pd3-po	Pronoun demonstrative t
+	    	put("04P03", BabelPOS.PRONOUN);	//Pi3	Pronoun indefinite 
+	    	put("04P04", BabelPOS.PRONOUN);	//Ps1ms-s	Pronoun possessive 
+	    	put("04P05", BabelPOS.PRONOUN);	//Px3--d--------s	Pronoun reflexive
+	    	put("04P06", BabelPOS.PRONOUN);	//Pz3-sr	Pronoun negative
+	    	put("04P07", BabelPOS.PRONOUN);	//Pw3--r	Pronoun int-rel 
+	    	put("05D01", BabelPOS.DETERMINER);	//Dd3-po---e	Determiner demonstrative 
+	    	put("05D02", BabelPOS.DETERMINER);	//Di3	Determiner indefinite 
+	    	put("05D03", BabelPOS.DETERMINER);	//Ds1ms-s	Determiner possessive first masculine singular singular
+	    	put("05D04", BabelPOS.DETERMINER);	//Dw3--r---e	Determiner int-rel third direct prenomin
+	    	put("05D05", BabelPOS.DETERMINER);	//Dz3-po---e	Determiner negative third plural oblique prenomin
+	    	put("05D06", BabelPOS.DETERMINER);	//Dh1ms	Determiner emphatic first masculine singular
+	    	put("06T01", BabelPOS.ARTICLE);	//Article definite singular oblique
+	    	put("06T02", BabelPOS.ARTICLE);	//Article indefinite plural oblique
+	    	put("06T03", BabelPOS.ARTICLE);	//Article possessive plural oblique
+	    	put("06T04", BabelPOS.ARTICLE);	//Article demonstrative plural oblique
+	    	put("07R01", BabelPOS.ADVERB);	//Adverb general positive
+	    	put("07R02", BabelPOS.ADVERB);	//Adverb particle
+	    	put("07R03", BabelPOS.ADVERB);	//Adverb negative
+	    	put("07R05", BabelPOS.ADVERB);	//Adverb int-rel +Clitic
+	    	put("07R06", BabelPOS.ADVERB);	//Adverb portmanteau08S01010100	Spsg	Adposition preposition simple genitive
+	    	put("09C01", BabelPOS.CONJUNCTION);	//Conjunction coordinating simple simple positive
+	    	put("09C02", BabelPOS.CONJUNCTION);	//Conjunction subordinating simple simple positive
+	    	put("09C03", BabelPOS.CONJUNCTION);	//Conjunction portmanteau simple simple positive
+	    	put("10M01", BabelPOS.NOUN);	//Numeral cardinal singular digit
+	    	put("10M02", BabelPOS.NOUN);	//Numeral ordinal letter
+	    	put("10M03", BabelPOS.NOUN);	//Numeral fractal feminine singular direct letter -Definiteness
+	    	put("10M04", BabelPOS.NOUN);	//Numeral multiple masculine singular direct -Definiteness
+	    	put("10M05", BabelPOS.NOUN);	//Numeral collect plural direct
 	    	put("11Q01", null);	//Particle negative
 	    	put("11Q02", null);	//Particle infinitive
 	    	put("11Q03", null);	//Particle subjunctive
 	    	put("11Q05", null);	//Particle future
-	    	put("12I", UniversalPOS.INTJ);		//Iterjection
+	    	put("12I", BabelPOS.INTERJECTION);		//Iterjection
 	    	put("13Y00", null);	//Abbreviation
 	    	put("13Y01", null);	//Abbreviation nominal
 	    	put("13Y02", null);	//Abbreviation verbal
 	    	put("13Y03", null);	//Abbreviation adjectival
 	    	put("13Y04", null);	//Abbreviation adverbial
 	    	put("13Y05", null);	//Abbreviation pronominal
-	    	put("JOKER", UniversalPOS.NOUN); //artificially added
+	    	put("JOKER", BabelPOS.NOUN); //artificially added
 	    }           
 	};              
                         

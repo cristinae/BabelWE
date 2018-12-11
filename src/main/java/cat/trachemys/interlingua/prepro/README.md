@@ -5,7 +5,7 @@ ar/en/es/fr/de. External lemmatisation with TreeTagger is expected for the other
 
 
 ```
-java -cp BabelWE-0.0.1-SNAPSHOT-jar-with-dependencies.jar cat.trachemys.interlingua.prepro.Annotator -h
+java -cp BabelWE-0.2-SNAPSHOT-jar-with-dependencies.jar cat.trachemys.interlingua.prepro.Annotator -h
 
 usage: Annotator
  -a,--annotation <arg>   Annotation layer (tok, lem)

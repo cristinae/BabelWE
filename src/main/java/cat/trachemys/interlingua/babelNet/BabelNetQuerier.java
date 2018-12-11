@@ -1,6 +1,5 @@
 package cat.trachemys.interlingua.babelNet;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -8,12 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-//import cat.lump.aq.basics.log.LumpLogger;
 import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.BabelSynset;
 import it.uniroma1.lcl.babelnet.BabelSynsetComparator;
-import it.uniroma1.lcl.babelnet.BabelSynsetType;
-import it.uniroma1.lcl.babelnet.data.BabelPOS;
+import it.uniroma1.lcl.kb.SynsetType;
+//import it.uniroma1.lcl.babelnet.data.UniversalPOS;   // BabelNet v3.7
+import com.babelscape.util.UniversalPOS;  // BabelNet v4.0
+import com.babelscape.util.POS;
 import it.uniroma1.lcl.jlt.util.Language;
 
 
@@ -38,37 +38,33 @@ public class BabelNetQuerier {
 	 * (3) sorts Wikipedia synsets lexicographically based on their main sense.
 	 * 
 	 * @param bn
-	 * @param pos
+	 * @param bnPos2
 	 * @param lemma
 	 * @param lang
 	 * @return String
 	 */
-	public static String retrieveID(BabelNet bn, BabelPOS pos, String lemma, Language lang) {
+	public static String retrieveID(BabelNet bn, UniversalPOS bnPos2, String lemma, Language lang) {
 		
 		String bnID = "-";
 		List<BabelSynset> synsets = null;
-		try {
-			synsets = bn.getSynsets(lemma, lang);
-			if(synsets.size()==0){
-				//System.out.println("No synsets for this lemma");
-				return bnID;				
-			}
-		} catch (IOException e2) {
-			e2.printStackTrace();
+		synsets = bn.getSynsets(lemma, lang);
+		if(synsets.size()==0){
+			//System.out.println("No synsets for this lemma");
+			return bnID;				
 		}
 		// lemma whose sense numbers are used to sort the BabelSynsets corresponding to WordNet synsets
 		Collections.sort(synsets, new BabelSynsetComparator(lemma, lang));
 
 		// We keep the top result with a matching PoS
         for (BabelSynset synset : synsets) {			
-			BabelPOS bnpos = synset.getPOS();
-			if (pos.equals(bnpos)){
-				return synset.getId().toString();
+			POS bnpos = synset.getPOS();
+			if (bnPos2.equals(bnpos)){
+				return synset.getID().toString();
 			}
 		}
         
         // If no sense with matching PoS has been found we return the top1 sense irrespective of the PoS
-        bnID = synsets.get(0).getId().toString();	
+        bnID = synsets.get(0).getID().toString();	
 		return bnID;
 	}
 
@@ -77,7 +73,7 @@ public class BabelNetQuerier {
 	/**
 	 * Looks for the synset with more relations for a given lemma with pos. If it's a NE, tries
 	 * to give preference to NEs.
-	 * Not working properly, use {@code retrieveID(BabelNet bn, BabelPOS pos, String lemma, Language lang)}
+	 * Not working properly, use {@code retrieveID(BabelNet bn, UniversalPOS pos, String lemma, Language lang)}
 	 * instead.
 	 * 
 	 * @param bn
@@ -87,17 +83,13 @@ public class BabelNetQuerier {
 	 * @param NE
 	 * @return String
 	 */
-	public static String retrieveID(BabelNet bn, BabelPOS pos, String lemma, Language lang, boolean NE) {
+	public static String retrieveID(BabelNet bn, UniversalPOS pos, String lemma, Language lang, boolean NE) {
 		
 		String bnID = "-";
 		Map<String, Integer> idChoices = new HashMap<String, Integer>();
 		
 		List<BabelSynset> synsets = null;
-		try {
-			synsets = bn.getSynsets(lemma, lang);
-		} catch (IOException e2) {
-			e2.printStackTrace();
-		}
+		synsets = bn.getSynsets(lemma, lang);
 		// lemma whose sense numbers are used to sort the BabelSynsets corresponding to WordNet synsets
 		Collections.sort(synsets, new BabelSynsetComparator(lemma, lang));
 
@@ -109,18 +101,18 @@ public class BabelNetQuerier {
 		BabelSynset synsetNE = null;
         for (BabelSynset synset : synsets) {
 			
-			BabelPOS bnpos = synset.getPOS();
+			UniversalPOS bnpos = synset.getPOS();
 			if (pos.equals(bnpos)){
 				// If it is not a NE we keep the top result with a matching PoS
 				if (!NE) {
-					return synset.getId().toString();
+					return synset.getID().toString();
 					// If it is a NE we wait for the first NE
 				} else {
-					BabelSynsetType type = synset.getSynsetType();
+					SynsetType type = synset.getSynsetType();
 					//Integer relacions = synset.getEdges().size();
-					if(type.equals(BabelSynsetType.NAMED_ENTITY)){
+					if(type.equals(SynsetType.NAMED_ENTITY)){
 						//Integer weight = 100;
-						//idChoices.put(synset.getId().toString(), weight);
+						//idChoices.put(synset.getID().toString(), weight);
 						existNE = true;
 						synsetNE = synset;
 						break;
@@ -149,26 +141,26 @@ public class BabelNetQuerier {
 		// System.out.println("# OUTGOING EDGES: " + successorsEdges.size());
 		// But not working (pointer error) for some synsets, probably those without WN??
         for (BabelSynset synset : synsets) {
-			Integer relacions = synset.getEdges().size();
+			Integer relacions = synset.getOutgoingEdges().size();
 			if (NE){                      // If it's tagged as a NE we expect BN to have the tag also
-				BabelSynsetType type = synset.getSynsetType();
-				if(type.equals(BabelSynsetType.NAMED_ENTITY)){
-					//BabelPOS bnpos = synset.getPOS();  
+				SynsetType type = synset.getType();
+				if(type.equals(SynsetType.NAMED_ENTITY)){
+					//UniversalPOS bnpos = synset.getPOS();  
 					//if (pos.equals(bnpos)){           // and we don't mind the PoS (which is a noun)
 					//Extra weight to NEs in case there are nonNEs that also match
 					Integer relacionsAugment = relacions+100;
-					idChoices.put(synset.getId().toString(), relacionsAugment);
+					idChoices.put(synset.getID().toString(), relacionsAugment);
 					//}
 				} else {
-					idChoices.put(synset.getId().toString(), relacions);
+					idChoices.put(synset.getID().toString(), relacions);
 				}
 			} else {					  // It it's not a NE we want the sense with more relations
-				BabelPOS bnpos = synset.getPOS();
+				POS bnpos = synset.getPOS();
 				if (pos.equals(bnpos)){
-					idChoices.put(synset.getId().toString(), relacions);
+					idChoices.put(synset.getID().toString(), relacions);
 				}
 			}
-			//System.out.println("Synset ID: " + synset.getId() + lemma + relacions);
+			//System.out.println("Synset ID: " + synset.getID() + lemma + relacions);
        
 
         }

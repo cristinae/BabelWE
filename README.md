@@ -1,25 +1,30 @@
 # BabelWE
 ### Collection of utilities to work with BabelNet synsets
 
+Current implemented languages:
+
+Complete pipeline available for Arabic, German, English, French, Spanish, Turkish (no lemmatisation done for tk). A previous lemmatisation with Tree tagger is expected for Italian, Romanian and Dutch.
+
 ___
 ### Set-up and installation
 
 1. Download and install the BabelNet API and its dependencies <br />
-[API download] (http://babelnet.org/data/3.7/BabelNet-API-3.7.zip) <br />
-`unzip BabelNet-API-3.7.zip` <br />
-`mvn install:install-file -Dfile=lib/jltutils-2.2.jar -DgroupId=it.uniroma1.lcl.jlt -DartifactId=jltutils -Dversion=2.2 -Dpackaging=jar` <br />
-`unzip -p babelnet-api-3.7.jar META-INF/maven/it.uniroma1.lcl.babelnet/babelnet-api/pom.xml | grep -vP '<(scope|systemPath)>' >babelnet-api-3.7.pom` <br />
+[API download] (http://babelnet.org/data/4.0/BabelNet-API-4.0.1.zip) <br />
+`unzip BabelNet-API-4.0.1.zip` <br />
+`mvn install:install-file -Dfile=lib/lcl-jlt-2.4.jar -DgroupId=it.uniroma1.lcl.jlt -DartifactId=lcl-jlt -Dversion=2.4 -Dpackaging=jar` <br />
+`mvn install:install-file -Dfile=lib/babelscape-data-commons-1.0.jar -DgroupId=com.babelscape -DartifactId=babelscape-data-commons -Dversion=1.0 -Dpackaging=jar` <br />
+`unzip -p babelnet-api-4.0.1.jar META-INF/maven/it.uniroma1.lcl.babelnet/babelnet-api/pom.xml | grep -vP '<(scope|systemPath)>' >babelnet-api-4.0.1.pom` <br />
 (consider using homebrew's ggrep if on OsX)<br />
-`mvn install:install-file -Dfile=babelnet-api-3.7.jar -DpomFile=babelnet-api-3.7.pom` <br />
+`mvn install:install-file -Dfile=babelnet-api-4.0.1.jar -DpomFile=babelnet-api-4.0.1.pom` <br />
 
 2. Download BabelNet indices and make the API aware of them <br />
 [Indices download] (http://babelnet.org/login) <br />
-`tar xjvf babelnet-3.7-index.tar.bz2` <br />
-- In `./BabelNet-API-3.7/config/babelnet.var.properties` include the path to the index:  <br />
- `babelnet.dir=/home/usr/BabelNet-3.7` <br />
-- In `./BabelNet-API-3.7/config/jlt.var.properties` include the path to WordNet:  <br />
+`tar xjvf babelnet-4.0.1-index.tar.bz2` <br />
+- In `./BabelNet-API-4.0.1/config/babelnet.var.properties` include the path to the index:  <br />
+ `babelnet.dir=/home/usr/BabelNet-4.0.1` <br />
+- In `./BabelNet-API-4.0.1/config/jlt.var.properties` include the path to WordNet:  <br />
  `jlt.wordnetPrefix=/usr/local/share/wordnet` <br />
-- Move the `./BabelNet-API-3.7/config` folder to your ${basedir}  <br />
+- Move the `./BabelNet-API-4.0.1/config` folder to your ${basedir}  <br />
 
 
 If you need to annotate Arabic corpora: <br />
@@ -59,3 +64,4 @@ lemEn=/home/cristinae/soft/processors/ixa/morph-models-1.5.0/en/en-lemma-percept
 mosesTok=/home/cristinae/soft/processors/moses/tokenizerNO2html.perl
 ```
 
+3. For Italian, Romanian and Dutch we expect input to be already lemmatised using Treetagger, but the lemmatisation pipeline with TreeTagger is not included yet.
