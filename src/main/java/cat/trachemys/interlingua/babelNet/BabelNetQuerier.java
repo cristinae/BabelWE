@@ -31,7 +31,7 @@ public class BabelNetQuerier {
 
 	
 	/**
-	 * Looks for the synset for a specific lemma with PoS pos. The ranking is done as in BabelNet
+	 * Looks for the synset for a specific lemma with PoS pos. The ranking is done as in BabelNet.
 	 * (sense numbers are used to sort the BabelSynsets corresponding to WordNet synsets)
 	 * (1) puts WordNet synsets first; 
 	 * (2) sorts WordNet synsets based on the sense number of a specific input word; 
@@ -54,6 +54,7 @@ public class BabelNetQuerier {
 			return bnID;				
 		}
 		// lemma whose sense numbers are used to sort the BabelSynsets corresponding to WordNet synsets
+		// CHOOSE THE SORTING!
 		Collections.sort(synsets, new BabelSynsetComparator(lemma, lang));
 
 		// We keep the top result with a matching PoS
@@ -71,6 +72,9 @@ public class BabelNetQuerier {
 
 	/**
 	 * Looks for the top k synsets for a specific lemma with PoS pos. The ranking is done as in BabelNet
+	 * If no sense with matching PoS is found, the topk senses irrespective of the PoS are returned.
+	 * 
+	 * PREVIOUS SORTING
 	 * (sense numbers are used to sort the BabelSynsets corresponding to WordNet synsets)
 	 * (1) puts WordNet synsets first; 
 	 * (2) sorts WordNet synsets based on the sense number of a specific input word; 
@@ -98,7 +102,7 @@ public class BabelNetQuerier {
 			return bnIDs;				
 		}
 		// lemma whose sense numbers are used to sort the BabelSynsets corresponding to WordNet synsets
-		Collections.sort(synsets, new BabelSynsetComparator(lemma, lang));
+		// Collections.sort(synsets, new BabelSynsetComparator(lemma, lang));
 
 		// We keep the top k results with a matching PoS,
 		int i=0;
