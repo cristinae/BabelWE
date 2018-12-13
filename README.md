@@ -3,7 +3,7 @@
 
 Current implemented languages:
 
-Complete pipeline available for Arabic, German, English, French, Spanish, Turkish (no lemmatisation done for tk). A previous lemmatisation with TreeTagger is expected for Italian, Romanian and Dutch.
+Complete pipeline available for Arabic, German, English, French, Spanish, Turkish (no lemmatisation done for tr). A previous lemmatisation with TreeTagger is expected for Italian, Romanian and Dutch.
 
 ___
 ### Set-up and installation

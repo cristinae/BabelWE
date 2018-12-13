@@ -28,12 +28,12 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_en(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_en(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos, int k) {
  
-		String id = "-";
 		boolean ne = false;
 		String NEG = "NEG";
-		Language lang = Language.EN;    	
+		Language lang = Language.EN;  
+		String id = initialiseID(k);
     	
     	if(pos.equalsIgnoreCase("NNP") || pos.equalsIgnoreCase("NNPS")){ //NEs
     		ne = true;
@@ -50,12 +50,13 @@ public class BabelNetFiltering4ID {
     	} else {
     	   // NE are adding too much noise
     	   //id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang, ne);
-    	   id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang);
+    	   id = BabelNetQuerier.retrieveTopkIDs(bn, bnPos, lemma, lang, k);
     	}
 		return id;
 	}
 
 	
+
 	/**
 	 * Given a PoS (PTB tagset) the method retrieves the BN PoS reduced tagset 
 	 * 
@@ -84,9 +85,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static  String getBNID_es(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static  String getBNID_es(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos, int k) {
  
-		String id = "-";
+		String id = initialiseID(k);
 		boolean ne = false;
 		String NEG = "NEG";
 		Language lang = Language.ES;
@@ -113,7 +114,7 @@ public class BabelNetFiltering4ID {
     	} else {
      	   // NE are adding too much noise
      	   //id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang, ne);
-     	   id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang);
+     	   id = BabelNetQuerier.retrieveTopkIDs(bn, bnPos, lemma, lang, k);
     	}
 		return id;
 	}
@@ -154,9 +155,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_ar(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_ar(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos, int k) {
  
-		String id = "-";
+		String id = initialiseID(k);
 		boolean ne = false;
 		String NEG = "NEG";
 		Language lang = Language.AR;
@@ -216,9 +217,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_tr(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_tr(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos, int k) {
  
-		String id = "-";
+		String id = initialiseID(k);
 		boolean ne = false;
 		String NEG = "NEG";
 		Language lang = Language.TR;    	
@@ -236,7 +237,7 @@ public class BabelNetFiltering4ID {
     	} else {
     	   // NE are adding too much noise
     	   //id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang, ne);
-    	   id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang);
+    	   id = BabelNetQuerier.retrieveTopkIDs(bn, bnPos, lemma, lang, k);
     	}
 		return id;
 	}
@@ -269,9 +270,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_fr(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_fr(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos, int k) {
  
-		String id = "-";
+		String id = initialiseID(k);
 		boolean ne = false;
 		String NEG = "NEG";
 		Language lang = Language.FR;
@@ -288,7 +289,7 @@ public class BabelNetFiltering4ID {
     	} else {
      	    // NE are adding too much noise
      	    //id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang, ne);
-    	    id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang);
+    	    id = BabelNetQuerier.retrieveTopkIDs(bn, bnPos, lemma, lang, k);
     	}
 		return id;
 	}
@@ -321,9 +322,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_de(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_de(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos, int k) {
  
-		String id = "-";
+		String id = initialiseID(k);
 		boolean ne = false;
 		String NEG = "NEG";
 		Language lang = Language.DE;
@@ -340,7 +341,7 @@ public class BabelNetFiltering4ID {
     	} else {
      	    // NE are adding too much noise
      	    //id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang, ne);
-    	    id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang);
+    	    id = BabelNetQuerier.retrieveTopkIDs(bn, bnPos, lemma, lang, k);
     	}
 		return id;
 	}
@@ -372,9 +373,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_nl(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_nl(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos, int k) {
  
-		String id = "-";
+		String id = initialiseID(k);
 		boolean ne = false;
 		String NEG = "NEG";
 		Language lang = Language.NL;
@@ -397,7 +398,7 @@ public class BabelNetFiltering4ID {
     	if (bnPos == null){
     		return id;
     	} else {
-    	    id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang);
+    	    id = BabelNetQuerier.retrieveTopkIDs(bn, bnPos, lemma, lang, k);
     	}
 		return id;
 	}
@@ -437,9 +438,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_it(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_it(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos, int k) {
  
-		String id = "-";
+		String id = initialiseID(k);
 		boolean ne = false;
 		String NEG = "NEG";
 		Language lang = Language.IT;
@@ -454,7 +455,7 @@ public class BabelNetFiltering4ID {
     	if (bnPos == null){
     		return id;
     	} else {
-    	    id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang);
+    	    id = BabelNetQuerier.retrieveTopkIDs(bn, bnPos, lemma, lang, k);
     	}
 		return id;
 	}
@@ -487,9 +488,9 @@ public class BabelNetFiltering4ID {
 	 * @param pos
 	 * @return
 	 */
-	protected static String getBNID_ro(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos) {
+	protected static String getBNID_ro(Map<String, UniversalPOS> posMapping, BabelNet bn, String lemma, String pos, int k) {
  
-		String id = "-";
+		String id = initialiseID(k);
 		boolean ne = false;
 		String NEG = "NEG";
 		Language lang = Language.RO;
@@ -512,7 +513,7 @@ public class BabelNetFiltering4ID {
     	if (bnPos == null){
     		return id;
     	} else {
-     	    id = BabelNetQuerier.retrieveID(bn, bnPos, lemma, lang);
+     	    id = BabelNetQuerier.retrieveTopkIDs(bn, bnPos, lemma, lang, k);
     	}
 		return id;
 	}
@@ -541,5 +542,21 @@ public class BabelNetFiltering4ID {
 			return bnPos.toString();			
 		}
 	}
+	
+	/**
+	 * Creates and string with empty (-) senses
+	 * @param k
+	 * @return
+	 */
+	private static String initialiseID(int k) {
+		String id = "";
+     	for(int j=1; j<=k; j++){
+    		id = id.concat("-|");
+        }
+    	id = id.substring(0, id.length() - 1);	
+
+		return id;
+	}
+
 
 }

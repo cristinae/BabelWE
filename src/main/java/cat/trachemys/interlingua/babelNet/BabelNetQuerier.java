@@ -36,6 +36,7 @@ public class BabelNetQuerier {
 	 * (1) puts WordNet synsets first; 
 	 * (2) sorts WordNet synsets based on the sense number of a specific input word; 
 	 * (3) sorts Wikipedia synsets lexicographically based on their main sense.
+	 * If no sense with matching PoS id found, the top1 sense irrespective of the PoS is returned
 	 * 
 	 * @param bn
 	 * @param bnPos2
@@ -68,6 +69,79 @@ public class BabelNetQuerier {
 		return bnID;
 	}
 
+	/**
+	 * Looks for the top k synsets for a specific lemma with PoS pos. The ranking is done as in BabelNet
+	 * (sense numbers are used to sort the BabelSynsets corresponding to WordNet synsets)
+	 * (1) puts WordNet synsets first; 
+	 * (2) sorts WordNet synsets based on the sense number of a specific input word; 
+	 * (3) sorts Wikipedia synsets lexicographically based on their main sense.
+	 * 
+	 * @param bn
+	 * @param bnPos2
+	 * @param lemma
+	 * @param lang
+	 * @param k
+	 * @return
+	 */
+	public static String retrieveTopkIDs(BabelNet bn, UniversalPOS bnPos2, String lemma, Language lang, int k) {
+		
+		// Let's leave it as a string for the moment -no array. This will just reuse all the remaining code
+		String bnIDs = "-";
+		List<BabelSynset> synsets = null;
+		synsets = bn.getSynsets(lemma, lang);
+		if(synsets.size()==0){
+			//System.out.println("No synsets for this lemma");
+        	for(int j=1; j<=k; j++){
+        		bnIDs = bnIDs.concat("-|");
+            }
+        	bnIDs = bnIDs.substring(0, bnIDs.length() - 1);	
+			return bnIDs;				
+		}
+		// lemma whose sense numbers are used to sort the BabelSynsets corresponding to WordNet synsets
+		Collections.sort(synsets, new BabelSynsetComparator(lemma, lang));
+
+		// We keep the top k results with a matching PoS,
+		int i=0;
+		bnIDs = "";
+        for (BabelSynset synset : synsets) {			
+			POS bnpos = synset.getPOS();
+			if (bnPos2.equals(bnpos) && i < k){
+				i++;
+				String newID = synset.getID().toString();
+				bnIDs = bnIDs.concat(newID).concat("|");
+			}
+			if (i == k){
+				return bnIDs.substring(0, bnIDs.length() - 1);	
+			}
+		}
+        // If not enough senses with the correct PoS have been found we use other PoS as well
+        if (i < k){
+            for (BabelSynset synset : synsets) {			
+    			POS bnpos = synset.getPOS();
+    			if (!bnPos2.equals(bnpos) && i < k){
+    				i++;
+    				String newID = synset.getID().toString();
+    				bnIDs = bnIDs.concat(newID).concat("|");
+    			}
+    			if (i == k){
+    				return bnIDs.substring(0, bnIDs.length() - 1);	
+    			}
+    		}        	
+        }
+        // If not enough senses are found yet, we return empty senses
+        if (i < k){
+        	for(int j=i; j<k; j++){
+        		bnIDs = bnIDs.concat("-|");
+            }
+        	bnIDs = bnIDs.substring(0, bnIDs.length() - 1);	
+        }
+      
+        
+        // If no sense with matching PoS has been found we return the top sense irrespective of the PoS
+        // NO NEED NOW
+        // bnIDs = synsets.get(0).getID().toString();	
+		return bnIDs;
+	}
 	
 	
 	/**

@@ -9,11 +9,12 @@ usage: DataIDAnnotator
  -f,--format <arg>     Format of the input file [wpl|conll]
  -h,--help             This help
  -i,--input <arg>      Input file to annotate
+ -k,-- senses <arg>    Number of synsets per token
  -l,--language <arg>   Language of the input text
                        [ar|en|es|tr|de|fr|ro|nl|it]
                        
 ex:
-java -cp target/BabelWE-0.2-SNAPSHOT-jar-with-dependencies.jar cat.trachemys.interlingua.babelNet.DataIDAnnotator -l en -f conll -i file.wpl
+java -cp target/BabelWE-2.1-SNAPSHOT-jar-with-dependencies.jar cat.trachemys.interlingua.babelNet.DataIDAnnotator -l en -f conll -i file.wpl
 ```
 
 ### Data Formats

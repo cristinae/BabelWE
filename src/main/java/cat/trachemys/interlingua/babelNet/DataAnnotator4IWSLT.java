@@ -68,6 +68,8 @@ public class DataAnnotator4IWSLT {
 					+ "[ar|en|es|tr|de|fr|ro|nl|it]");		
 		options.addOption("i", "input", true, 
 					"Input file to annotate");		
+		options.addOption("k", "senses", true, 
+				    "Number of senses per token (default 1)");		
 		options.addOption("h", "help", false, "This help");
 		//options.addOption("c", "config", true,
 		//        	"Configuration file for the lumpSTS project");
@@ -98,6 +100,7 @@ public class DataAnnotator4IWSLT {
 	 * 		-l Language of the input text 
 	 * 			(Arabic, English, Spanish, Turkish, French, German, Dutch, Italian, Romanian)
 	 *      -i Input file 
+	 *      -k Number of synsets to be extracted
 	 *      -f Format of the input file 
 	 *      	(wpl|conll)
 	 */
@@ -111,9 +114,15 @@ public class DataAnnotator4IWSLT {
 		// Input file
 		File input = new File(cLine.getOptionValue("i"));
 	
+		// Number of synsets to be extracted
+		int k=1;
+		if (cLine.hasOption("k")) {
+  		   k = Integer.valueOf(cLine.getOptionValue("k"));
+		}
+		
 		// Run
 		DataAnnotator4IWSLT ann = new DataAnnotator4IWSLT (language);
-		ann.annotate(input, language);
+		ann.annotate(input, language, k);
 
 	}
 
@@ -124,7 +133,7 @@ public class DataAnnotator4IWSLT {
 	 * 			input file to annotate
 	 * 
 	 */
-	public void annotate(File input, String language) {
+	public void annotate(File input, String language, int k) {
 
 		BabelNet bn = BabelNet.getInstance();
 
@@ -150,7 +159,7 @@ public class DataAnnotator4IWSLT {
 		    int i = 1;
 		    while (sc.hasNext()) {
 		        String line = sc.nextLine();
-			    annotateLineBufferWPL(line, language, bn);		        			        		        
+			    annotateLineBufferWPL(line, language, bn, k);		        			        		        
 		        // Write every 10000 lines
 		        if (i%10000==0){
 		        	bw.flush();
@@ -198,7 +207,7 @@ public class DataAnnotator4IWSLT {
 	 * @return
 	 * @throws IOException
 	 */
-	private void annotateLineBufferWPL(String line, String language, BabelNet bn) throws IOException {
+	private void annotateLineBufferWPL(String line, String language, BabelNet bn, int k) throws IOException {
         String[] tokens = line.split("\\s+");
         for (String token:tokens) {  
         	String noResult = "-";
@@ -237,7 +246,7 @@ public class DataAnnotator4IWSLT {
            	if (posBN == null){
            		posBN = noResult;
            	}
-        	String idBN = getBNID(language, bn, lemma, pos);
+        	String idBN = getBNID(language, bn, lemma, pos, k);
            	if (idBN == null){
            		idBN = noResult;
            	}
@@ -260,27 +269,27 @@ public class DataAnnotator4IWSLT {
 	 * @param pos
 	 * @return
 	 */
-	private String getBNID(String language, BabelNet bn, String lemma, String pos) {
+	private String getBNID(String language, BabelNet bn, String lemma, String pos, int k) {
 
 		String id = "-";
 		if (language.equalsIgnoreCase("en")) {
-		    id = BabelNetFiltering4ID.getBNID_en(posMapping, bn, lemma, pos);	
+		    id = BabelNetFiltering4ID.getBNID_en(posMapping, bn, lemma, pos, k);	
 		} else if (language.equalsIgnoreCase("es")) {
-		    id = BabelNetFiltering4ID.getBNID_es(posMapping, bn, lemma, pos);	
+		    id = BabelNetFiltering4ID.getBNID_es(posMapping, bn, lemma, pos, k);	
 		} else if (language.equalsIgnoreCase("ar")) {
-		    id = BabelNetFiltering4ID.getBNID_ar(posMapping, bn, lemma, pos);	
+		    id = BabelNetFiltering4ID.getBNID_ar(posMapping, bn, lemma, pos, k);	
 		} else if (language.equalsIgnoreCase("tr")) {
-		    id = BabelNetFiltering4ID.getBNID_tr(posMapping, bn, lemma, pos);	 
+		    id = BabelNetFiltering4ID.getBNID_tr(posMapping, bn, lemma, pos, k);	 
 		} else if (language.equalsIgnoreCase("fr")) {
-			id = BabelNetFiltering4ID.getBNID_fr(posMapping, bn, lemma, pos);	
+			id = BabelNetFiltering4ID.getBNID_fr(posMapping, bn, lemma, pos, k);	
 		} else if (language.equalsIgnoreCase("de")) {
-			id = BabelNetFiltering4ID.getBNID_de(posMapping, bn, lemma, pos);	
+			id = BabelNetFiltering4ID.getBNID_de(posMapping, bn, lemma, pos, k);	
 		} else if (language.equalsIgnoreCase("nl")) {
-			id = BabelNetFiltering4ID.getBNID_nl(posMapping, bn, lemma, pos);	
+			id = BabelNetFiltering4ID.getBNID_nl(posMapping, bn, lemma, pos, k);	
 		} else if (language.equalsIgnoreCase("it")) {
-			id = BabelNetFiltering4ID.getBNID_it(posMapping, bn, lemma, pos);	
+			id = BabelNetFiltering4ID.getBNID_it(posMapping, bn, lemma, pos, k);	
 		} else if (language.equalsIgnoreCase("ro")) {
-			id = BabelNetFiltering4ID.getBNID_ro(posMapping, bn, lemma, pos);	
+			id = BabelNetFiltering4ID.getBNID_ro(posMapping, bn, lemma, pos, k);	
 		}  
 		return id;
 	}
